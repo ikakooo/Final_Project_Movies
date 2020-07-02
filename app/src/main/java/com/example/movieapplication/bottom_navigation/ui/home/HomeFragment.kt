@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+           ///irakli
         //adapter= Adapter(ItemsList)
         //topTodayRecyclerView.layoutManager= LinearLayoutManager(context)
         //topTodayRecyclerView.adapter=adapter
