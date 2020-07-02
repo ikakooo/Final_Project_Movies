@@ -6,7 +6,7 @@
     tools:context=".bottom_navigation.ui.search.SearchFragment">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/text_searchID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
