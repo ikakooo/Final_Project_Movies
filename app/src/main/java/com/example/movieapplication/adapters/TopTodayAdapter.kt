@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapplication.R
+import com.example.movieapplication.network_https.movie
 import com.example.movieapplication.splash_screen.ModelItem
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class TopTodayAdapter(val ItemsList: MutableList<ModelItem>) :
+class TopTodayAdapter(val ItemsList: MutableList<movie>) :
     RecyclerView.Adapter<TopTodayAdapter.ViewHolder>() {
 
 
@@ -32,11 +33,11 @@ class TopTodayAdapter(val ItemsList: MutableList<ModelItem>) :
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private lateinit var model: ModelItem
+        private lateinit var model: movie
 
         fun onBind() {
             model = ItemsList[adapterPosition]
-            itemView.title.text = model.title
+            itemView.title.text = model.original_title
 
 
         }
