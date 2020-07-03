@@ -39,8 +39,30 @@ object DateLoader {
 
     val service=retrofit.create(APIService::class.java)
 
+    fun getRequestTopToday(
+        key: String,
+        page: String,
+        callback: FutureCallbackCountryBridge
+    ) {
+        val call = service.getTopToday(key, page)
+        call.enqueue(object : Callback<MainMovieModel> {
+            override fun onFailure(call: Call<MainMovieModel>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
 
-    fun getRequest(
+            override fun onResponse(
+                call: Call<MainMovieModel>,
+                response: Response<MainMovieModel>
+            ) {
+                response.body()?.let { callback.onResponse(it) }
+                Log.d("topToday", response.body().toString())
+            }
+
+        })
+    }
+
+
+    fun getRequestPopular(
         key: String,
         page: String,
         callback: FutureCallbackCountryBridge
@@ -56,16 +78,24 @@ object DateLoader {
                 response: Response<MainMovieModel>
             ) {
                 response.body()?.let { callback.onResponse(it) }
-                Log.d("sdkjdjvs", response.body().toString())
+                Log.d("Popular", response.body().toString())
             }
 
         })
     }
 
+
+
     interface APIService {
         @GET("3/movie/popular")
         fun getPopular(
             @Query("api_key") key : String,
+            @Query("page") page : String
+        ) : Call<MainMovieModel>
+
+        @GET("3/movie/top_rated")
+        fun getTopToday(
+            @Query("api_key") key:String,
             @Query("page") page : String
         ) : Call<MainMovieModel>
     }

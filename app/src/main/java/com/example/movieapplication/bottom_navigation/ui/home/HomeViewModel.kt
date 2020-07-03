@@ -12,45 +12,60 @@ import com.example.movieapplication.network_https.movie
 class HomeViewModel : ViewModel() {
 
 
+
     private val _topTodayMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
-        getPosts("1")
-
-
+        getPostsTopToday("1")
+    }
+    private val _popularMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
+        getPostsPopular("1")
     }
 
     val topTodayMoviesLiveData: LiveData<MutableList<movie>> = _topTodayMoviesLiveData
 
+    val popularMoviesLiveData: LiveData<MutableList<movie>> = _popularMoviesLiveData
 
-    private fun getPosts(page: String){
 
-        DateLoader.getRequest(
-            HomeFragment.API_KEY,page,
+    private fun getPostsTopToday(page: String) {
+
+        DateLoader.getRequestTopToday(
+            HomeFragment.API_KEY, page,
+
+            object : FutureCallbackCountryBridge {
+                override fun onResponse(response: MainMovieModel) {
+                    Log.d("dsfdfsdf", response.results[0].original_title)
+
+
+                    _popularMoviesLiveData.value = response.results.toMutableList()
+                    (0 until response.results.size).forEach { it ->
+
+                    }
+                }
+                override fun onFailure(error: String) {
+                }
+            }
+        )
+    }
+
+
+    private fun getPostsPopular(page: String) {
+
+        DateLoader.getRequestPopular(
+            HomeFragment.API_KEY, page,
 
             object : FutureCallbackCountryBridge {
                 override fun onResponse(response: MainMovieModel) {
                     Log.d("dsfdfsdf", response.results[0].original_title.toString())
 
 
-                    _topTodayMoviesLiveData.value = response.results.toMutableList()
-                    (0 until response.results.size).forEach{ it ->
+                    _popularMoviesLiveData.value = response.results.toMutableList()
+                    (0 until response.results.size).forEach { it ->
 
                     }
-
                 }
-
 
                 override fun onFailure(error: String) {
-//                    Toast.makeText(context,"this is toast message", Toast.LENGTH_SHORT).show()
-//                    val toast = Toast.makeText(context, "Hello Javatpoint", Toast.LENGTH_LONG)
-//                    toast.show()
-//                    val myToast = Toast.makeText(context,"No Internet", Toast.LENGTH_SHORT)
-//                    myToast.setGravity(Gravity.TOP,200,200)
-//                    myToast.show()
                 }
-
-
             }
         )
-
     }
 }

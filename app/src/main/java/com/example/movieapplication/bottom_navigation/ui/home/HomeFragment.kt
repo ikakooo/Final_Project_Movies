@@ -17,12 +17,15 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
     private var popularMoviesList = mutableListOf<movie>()
+    private var topTodayMoviesList = mutableListOf<movie>()
     private lateinit var topTodayAdapter: TopTodayAdapter
     private lateinit var popularAdapter: PopularAdapter
     private lateinit var homeViewModel: HomeViewModel
+
     companion object {
         const val API_KEY = "22c64b1eb2954257036c84ed667c4109"
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,30 +36,38 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         init(root)
-        //httpsRequest("1",root)
-        //Handler().postDelayed({httpsRequest("2",root)},6000)
+
+
         homeViewModel.topTodayMoviesLiveData.observe(viewLifecycleOwner, Observer {
+
+            topTodayMoviesList.addAll(it)
+            topTodayAdapter.notifyDataSetChanged()
+        })
+
+        homeViewModel.popularMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
             popularMoviesList.addAll(it)
             popularAdapter.notifyDataSetChanged()
         })
 
-          return root
+
+
+        return root
     }
 
-   private fun init(root:View){
-//       topTodayAdapter = TopTodayAdapter(popularMoviesList)
-//       root.topTodayRecyclerView.layoutManager =
-//           LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-//       root.topTodayRecyclerView.adapter = topTodayAdapter
+    private fun init(root: View) {
+        topTodayAdapter = TopTodayAdapter(topTodayMoviesList)
+        root.topTodayRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.topTodayRecyclerView.adapter = topTodayAdapter
 
-       popularAdapter = PopularAdapter(popularMoviesList)
-       root.popularRecyclerView.layoutManager =
-           LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-       root.popularRecyclerView.adapter = popularAdapter
+        popularAdapter = PopularAdapter(popularMoviesList)
+        root.popularRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.popularRecyclerView.adapter = popularAdapter
 
 
-   }
+    }
 
 //    private fun httpsRequest(page: String,root:View) {
 //        DateLoader.getRequest(
@@ -89,12 +100,6 @@ class HomeFragment : Fragment() {
 //            }
 //        )
 //    }
-
-
-
-
-
-
 
 
 }
