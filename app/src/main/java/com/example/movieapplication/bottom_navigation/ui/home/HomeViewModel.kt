@@ -35,7 +35,7 @@ class HomeViewModel : ViewModel() {
                     Log.d("dsfdfsdf", response.results[0].original_title)
 
 
-                    _popularMoviesLiveData.value = response.results.toMutableList()
+                    _topTodayMoviesLiveData.value = response.results.toMutableList()
                     (0 until response.results.size).forEach { it ->
 
                     }

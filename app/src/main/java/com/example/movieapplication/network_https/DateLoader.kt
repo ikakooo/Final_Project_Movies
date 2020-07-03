@@ -1,6 +1,6 @@
 package com.example.movieapplication.network_https
 
-import android.graphics.ColorSpace
+
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,9 +30,10 @@ object DateLoader {
 //    //3/movie/550?api_key=22c64b1eb2954257036c84ed667c4109
 //    const val MOVIE_API_AUTOCOMPLETE = "3/movie/550?"
 //    const val API_AUTOCOMPLETE = "3/movie/popular"
+//    val api_key:String="0e03d86efe00ea1a1e1dd7d2a4717ba1"
+//    var maxLimit : Int =996
 
-    val api_key:String="0e03d86efe00ea1a1e1dd7d2a4717ba1"
-    var maxLimit : Int =996
+
     val retrofit= Retrofit.Builder().baseUrl("https://api.themoviedb.org/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()

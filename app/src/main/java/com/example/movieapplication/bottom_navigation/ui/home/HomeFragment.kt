@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
-import com.example.movieapplication.adapters.PopularAdapter
-import com.example.movieapplication.adapters.TopTodayAdapter
+import com.example.movieapplication.bottom_navigation.ui.home.adapters.PopularAdapter
+import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayAdapter
 import com.example.movieapplication.network_https.movie
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -57,13 +57,11 @@ class HomeFragment : Fragment() {
 
     private fun init(root: View) {
         topTodayAdapter = TopTodayAdapter(topTodayMoviesList)
-        root.topTodayRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.topTodayRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.adapter = topTodayAdapter
 
         popularAdapter = PopularAdapter(popularMoviesList)
-        root.popularRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.popularRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.popularRecyclerView.adapter = popularAdapter
 
 

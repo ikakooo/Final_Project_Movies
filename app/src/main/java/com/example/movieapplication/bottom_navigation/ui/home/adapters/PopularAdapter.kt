@@ -1,20 +1,20 @@
-package com.example.movieapplication.adapters
+package com.example.movieapplication.bottom_navigation.ui.home.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.network_https.movie
-import com.example.movieapplication.splash_screen.ModelItem
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class TopTodayAdapter(val ItemsList: MutableList<movie>) :
-    RecyclerView.Adapter<TopTodayAdapter.ViewHolder>() {
-
+class PopularAdapter(val popularMoviesList: MutableList<movie>) :
+    RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+    val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
     override fun getItemCount(): Int {
-        return ItemsList.size
+        return popularMoviesList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,9 +36,9 @@ class TopTodayAdapter(val ItemsList: MutableList<movie>) :
         private lateinit var model: movie
 
         fun onBind() {
-            model = ItemsList[adapterPosition]
+            model = popularMoviesList[adapterPosition]
             itemView.title.text = model.original_title
-
+            Glide.with(itemView.context).load(imgBaseURL + model.poster_path).into(itemView.moviesImageViewID)
 
         }
 
