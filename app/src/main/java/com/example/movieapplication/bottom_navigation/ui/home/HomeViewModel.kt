@@ -14,7 +14,7 @@ class HomeViewModel : ViewModel() {
 
     private val _topTodayMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
         getPosts("1")
-        getPosts("2")
+
 
     }
 

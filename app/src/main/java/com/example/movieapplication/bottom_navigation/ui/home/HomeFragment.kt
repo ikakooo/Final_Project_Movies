@@ -1,12 +1,9 @@
 package com.example.movieapplication.bottom_navigation.ui.home
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,14 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
 import com.example.movieapplication.adapters.PopularAdapter
 import com.example.movieapplication.adapters.TopTodayAdapter
-import com.example.movieapplication.network_https.DateLoader
-import com.example.movieapplication.network_https.FutureCallbackCountryBridge
-import com.example.movieapplication.network_https.MainMovieModel
 import com.example.movieapplication.network_https.movie
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
-    private var topTodayMoviesList = mutableListOf<movie>()
+    private var popularMoviesList = mutableListOf<movie>()
     private lateinit var topTodayAdapter: TopTodayAdapter
     private lateinit var popularAdapter: PopularAdapter
     private lateinit var homeViewModel: HomeViewModel
@@ -43,24 +37,23 @@ class HomeFragment : Fragment() {
         //Handler().postDelayed({httpsRequest("2",root)},6000)
         homeViewModel.topTodayMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
-            topTodayMoviesList.addAll(it)
-            topTodayAdapter.notifyDataSetChanged()
+            popularMoviesList.addAll(it)
+            popularAdapter.notifyDataSetChanged()
         })
 
           return root
     }
 
    private fun init(root:View){
-       topTodayAdapter =
-           TopTodayAdapter(topTodayMoviesList)
-       root.topTodayRecyclerView.layoutManager =
-           LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-       root.topTodayRecyclerView.adapter = topTodayAdapter
-
-//       popularAdapter = PopularAdapter(ItemsList)
-//       root.popularRecyclerView.layoutManager =
+//       topTodayAdapter = TopTodayAdapter(popularMoviesList)
+//       root.topTodayRecyclerView.layoutManager =
 //           LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-//       root.popularRecyclerView.adapter = popularAdapter
+//       root.topTodayRecyclerView.adapter = topTodayAdapter
+
+       popularAdapter = PopularAdapter(popularMoviesList)
+       root.popularRecyclerView.layoutManager =
+           LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+       root.popularRecyclerView.adapter = popularAdapter
 
 
    }
