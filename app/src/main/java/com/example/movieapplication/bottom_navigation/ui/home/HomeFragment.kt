@@ -14,17 +14,23 @@ import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.PopularAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopRatedAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayAdapter
+import com.example.movieapplication.bottom_navigation.ui.home.adapters.UpcomingAdapter
 import com.example.movieapplication.network_https.movie
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
+    private var topTodayMoviesList = mutableListOf<movie>()
+    private lateinit var topTodayAdapter: TopTodayAdapter
 
     private var popularMoviesList = mutableListOf<movie>()
     private lateinit var popularAdapter: PopularAdapter
-    private var topTodayMoviesList = mutableListOf<movie>()
-    private lateinit var topTodayAdapter: TopTodayAdapter
+
     private var topRatedMoviesList = mutableListOf<movie>()
     private lateinit var topRatedAdapter: TopRatedAdapter
+
+    private var upComingMoviesList = mutableListOf<movie>()
+    private lateinit var upComingAdapter: UpcomingAdapter
+
     private lateinit var homeViewModel: HomeViewModel
 
     companion object {
@@ -44,14 +50,9 @@ class HomeFragment : Fragment() {
 
 
         homeViewModel.topTodayMoviesLiveData.observe(viewLifecycleOwner, Observer {
-
             topTodayMoviesList.addAll(it)
             topTodayAdapter.notifyDataSetChanged()
         })
-
-        homeViewModel.topTodayMoviesLiveData
-
-
 
         homeViewModel.popularMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
@@ -61,8 +62,14 @@ class HomeFragment : Fragment() {
 
         homeViewModel.topRatedMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
-            topTodayMoviesList.addAll(it)
-            topTodayAdapter.notifyDataSetChanged()
+            topRatedMoviesList.addAll(it)
+            topRatedAdapter.notifyDataSetChanged()
+        })
+
+        homeViewModel.upComingMoviesLiveData.observe(viewLifecycleOwner, Observer {
+
+            upComingMoviesList.addAll(it)
+            upComingAdapter.notifyDataSetChanged()
         })
 
 
@@ -71,32 +78,30 @@ class HomeFragment : Fragment() {
     }
 
     private fun init(root: View) {
+        /////////////////////////////////////////////////////////
         topTodayAdapter = TopTodayAdapter(topTodayMoviesList)
-        root.topTodayRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.topTodayRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.isNestedScrollingEnabled = true
         root.topTodayRecyclerView.setHasFixedSize(false)
         root.topTodayRecyclerView.adapter = topTodayAdapter
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
         topRatedAdapter = TopRatedAdapter(topRatedMoviesList)
-        root.topRatedRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.topRatedRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topRatedRecyclerView.isNestedScrollingEnabled = true
         root.topRatedRecyclerView.setHasFixedSize(false)
         root.topRatedRecyclerView.adapter = topRatedAdapter
-
+///////////////////////////////////////////////////////////////////////////////////////////
         popularAdapter = PopularAdapter(popularMoviesList)
-        root.popularRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
+        root.popularRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.popularRecyclerView.isNestedScrollingEnabled = false
         root.popularRecyclerView.setHasFixedSize(false)
         root.popularRecyclerView.adapter = popularAdapter
-
-        root.popularRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-
-        })
+////////////////////////////////////////////////////////////////////////////
+        upComingAdapter = UpcomingAdapter(upComingMoviesList)
+        root.upcomingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.upcomingRecyclerView.isNestedScrollingEnabled = false
+        root.upcomingRecyclerView.setHasFixedSize(false)
+        root.upcomingRecyclerView.adapter = upComingAdapter
 
 
     }

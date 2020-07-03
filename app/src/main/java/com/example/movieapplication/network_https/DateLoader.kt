@@ -12,13 +12,12 @@ import retrofit2.http.Query
 
 object DateLoader {
 
-    const val api_key:String="0e03d86efe00ea1a1e1dd7d2a4717ba1"
-    var maxLimit : Int =996
-    val retrofit= Retrofit.Builder().baseUrl("https://api.themoviedb.org/")
+    const val api_key: String = "0e03d86efe00ea1a1e1dd7d2a4717ba1"
+    var maxLimit: Int = 996
+    val retrofit = Retrofit.Builder().baseUrl("https://api.themoviedb.org/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-
-    val service=retrofit.create(APIService::class.java)
+    val service = retrofit.create(APIService::class.java)
 
     fun getRequestTopToday(
         key: String,
@@ -65,12 +64,13 @@ object DateLoader {
         })
     }
 
+
     fun getRequestTopRated(
         key: String,
         page: String,
         callback: FutureCallbackCountryBridge
     ) {
-        val call = service.getTopToday(key, page)
+        val call = service.getTopRated(key, page)
         call.enqueue(object : Callback<MainMovieModel> {
             override fun onFailure(call: Call<MainMovieModel>, t: Throwable) {
                 callback.onFailure(t.message.toString())
@@ -87,22 +87,54 @@ object DateLoader {
         })
     }
 
+    fun getRequestUpComing(
+        key: String,
+        page: String,
+        callback: FutureCallbackCountryBridge
+    ) {
+        val call = service.getUpcoming(key, page)
+        call.enqueue(object : Callback<MainMovieModel> {
+            override fun onFailure(call: Call<MainMovieModel>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
 
+            override fun onResponse(
+                call: Call<MainMovieModel>,
+                response: Response<MainMovieModel>
+            ) {
+                response.body()?.let { callback.onResponse(it) }
+                Log.d("topRated", response.body().toString())
+            }
+
+        })
+    }
 
     interface APIService {
         @GET("3/movie/popular")
         fun getPopular(
-            @Query("api_key") key : String,
-            @Query("page") page : String
-        ) : Call<MainMovieModel>
+            @Query("api_key") key: String,
+            @Query("page") page: String
+        ): Call<MainMovieModel>
 
         @GET("3/movie/top_rated")
+        fun getTopRated(
+            @Query("api_key") key: String,
+            @Query("page") page: String
+        ): Call<MainMovieModel>
+
+        @GET("3/movie/now_playing")
         fun getTopToday(
-            @Query("api_key") key:String,
-            @Query("page") page : String
-        ) : Call<MainMovieModel>
 
+            @Query("api_key") key: String,
+            @Query("page") page: String
+        ): Call<MainMovieModel>
 
+        @GET("3/movie/upcoming")
+        fun getUpcoming(
+
+            @Query("api_key") key: String,
+            @Query("page") page: String
+        ): Call<MainMovieModel>
     }
 
 }
