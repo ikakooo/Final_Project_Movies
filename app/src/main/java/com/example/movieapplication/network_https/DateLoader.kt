@@ -1,6 +1,6 @@
 package com.example.movieapplication.network_https
 
-import android.graphics.ColorSpace
+
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,6 +65,28 @@ object DateLoader {
         })
     }
 
+    fun getRequestTopRated(
+        key: String,
+        page: String,
+        callback: FutureCallbackCountryBridge
+    ) {
+        val call = service.getTopToday(key, page)
+        call.enqueue(object : Callback<MainMovieModel> {
+            override fun onFailure(call: Call<MainMovieModel>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<MainMovieModel>,
+                response: Response<MainMovieModel>
+            ) {
+                response.body()?.let { callback.onResponse(it) }
+                Log.d("topRated", response.body().toString())
+            }
+
+        })
+    }
+
 
 
     interface APIService {
@@ -79,6 +101,8 @@ object DateLoader {
             @Query("api_key") key:String,
             @Query("page") page : String
         ) : Call<MainMovieModel>
+
+
     }
 
 }

@@ -5,9 +5,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_search">Search</string>
-    <string name="top_today">Top Today</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="upcoming">Upcoming</string>
     <string name="todo">TODO</string>
+    <string name="top_today">Top Today</string>
 </resources>

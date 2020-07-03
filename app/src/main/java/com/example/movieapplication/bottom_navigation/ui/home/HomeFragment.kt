@@ -12,15 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.PopularAdapter
+import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopRatedAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayAdapter
 import com.example.movieapplication.network_https.movie
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
+
     private var popularMoviesList = mutableListOf<movie>()
+    private lateinit var popularAdapter: PopularAdapter
     private var topTodayMoviesList = mutableListOf<movie>()
     private lateinit var topTodayAdapter: TopTodayAdapter
-    private lateinit var popularAdapter: PopularAdapter
+    private var topRatedMoviesList = mutableListOf<movie>()
+    private lateinit var topRatedAdapter: TopRatedAdapter
     private lateinit var homeViewModel: HomeViewModel
 
     companion object {
@@ -45,10 +49,20 @@ class HomeFragment : Fragment() {
             topTodayAdapter.notifyDataSetChanged()
         })
 
+        homeViewModel.topTodayMoviesLiveData
+
+
+
         homeViewModel.popularMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
             popularMoviesList.addAll(it)
             popularAdapter.notifyDataSetChanged()
+        })
+
+        homeViewModel.topRatedMoviesLiveData.observe(viewLifecycleOwner, Observer {
+
+            topTodayMoviesList.addAll(it)
+            topTodayAdapter.notifyDataSetChanged()
         })
 
 
@@ -58,20 +72,28 @@ class HomeFragment : Fragment() {
 
     private fun init(root: View) {
         topTodayAdapter = TopTodayAdapter(topTodayMoviesList)
-        root.topTodayRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
+        root.topTodayRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.isNestedScrollingEnabled = true
         root.topTodayRecyclerView.setHasFixedSize(false)
         root.topTodayRecyclerView.adapter = topTodayAdapter
 
+        topRatedAdapter = TopRatedAdapter(topRatedMoviesList)
+        root.topRatedRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.topRatedRecyclerView.isNestedScrollingEnabled = true
+        root.topRatedRecyclerView.setHasFixedSize(false)
+        root.topRatedRecyclerView.adapter = topRatedAdapter
+
         popularAdapter = PopularAdapter(popularMoviesList)
-        root.popularRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.popularRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         root.popularRecyclerView.isNestedScrollingEnabled = false
         root.popularRecyclerView.setHasFixedSize(false)
         root.popularRecyclerView.adapter = popularAdapter
 
-        root.popularRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        root.popularRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
 
         })

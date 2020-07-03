@@ -19,9 +19,12 @@ class HomeViewModel : ViewModel() {
     private val _popularMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
         getPostsPopular("1")
     }
+    private val _topRatedMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
+        getPostsTopRated("1")
+    }
 
     val topTodayMoviesLiveData: LiveData<MutableList<movie>> = _topTodayMoviesLiveData
-
+    val topRatedMoviesLiveData: LiveData<MutableList<movie>> = _topRatedMoviesLiveData
     val popularMoviesLiveData: LiveData<MutableList<movie>> = _popularMoviesLiveData
 
 
@@ -63,6 +66,27 @@ class HomeViewModel : ViewModel() {
                     }
                 }
 
+                override fun onFailure(error: String) {
+                }
+            }
+        )
+    }
+
+    private fun getPostsTopRated (page: String) {
+
+        DateLoader.getRequestTopToday(
+            HomeFragment.API_KEY, page,
+
+            object : FutureCallbackCountryBridge {
+                override fun onResponse(response: MainMovieModel) {
+                    Log.d("dsfdfsdf", response.results[0].original_title)
+
+
+                    _topRatedMoviesLiveData.value = response.results.toMutableList()
+                    (0 until response.results.size).forEach { it ->
+
+                    }
+                }
                 override fun onFailure(error: String) {
                 }
             }
