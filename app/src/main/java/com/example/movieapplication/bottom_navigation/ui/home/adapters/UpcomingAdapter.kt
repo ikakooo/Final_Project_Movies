@@ -10,12 +10,12 @@ import com.example.movieapplication.network_https.movie
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 
-class UpcomingAdapter(val topTodayMoviesList: MutableList<movie>) :
+class UpcomingAdapter(val upComingMoviesList: MutableList<movie>) :
     RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
     override fun getItemCount(): Int {
-        return topTodayMoviesList.size
+        return upComingMoviesList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,7 +37,7 @@ class UpcomingAdapter(val topTodayMoviesList: MutableList<movie>) :
         private lateinit var model: movie
 
         fun onBind() {
-            model = topTodayMoviesList[adapterPosition]
+            model = upComingMoviesList[adapterPosition]
             itemView.title.text = model.original_title
             Glide.with(itemView.context).load(imgBaseURL + model.poster_path).into(itemView.moviesImageViewID)
 
