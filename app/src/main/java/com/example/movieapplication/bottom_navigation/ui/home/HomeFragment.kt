@@ -107,6 +107,7 @@ class HomeFragment : Fragment() {
                 val popularMovie = popularMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
                 intent.putExtra("name", popularMovie.original_title)
+                intent.putExtra("movieID", popularMovie.id)
                 startActivity(intent)
             }
 
