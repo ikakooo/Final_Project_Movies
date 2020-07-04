@@ -7,12 +7,10 @@ import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
 import com.example.movieapplication.network_https.DateLoader
-import com.example.movieapplication.network_https.FutureCallbackMoviesBridge
 import com.example.movieapplication.network_https.FutureCallbackMoviesSearchBridge
-import com.example.movieapplication.network_https.models.MainMovieModel
 import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
-import kotlinx.android.synthetic.main.items_layout.view.*
+
 
 class DetailedMovieActivity : AppCompatActivity() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
@@ -37,7 +35,7 @@ class DetailedMovieActivity : AppCompatActivity() {
             object : FutureCallbackMoviesSearchBridge {
                 override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
                     d("fsfesefesfsf", response.toString())
-                    titleDetailedTextViewID.text = response.original_title.toString()
+                    titleDetailedTextViewID.text = response.original_title
                     Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
 
                 }
