@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
+import com.example.movieapplication.detailed_view.DetailedMovieListener
 import com.example.movieapplication.network_https.movie
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class PopularAdapter(val popularMoviesList: MutableList<movie>) :
+class PopularAdapter(val popularMoviesList: MutableList<movie>, val detailedMovieListener: DetailedMovieListener) :
     RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
@@ -39,6 +40,9 @@ class PopularAdapter(val popularMoviesList: MutableList<movie>) :
             model = popularMoviesList[adapterPosition]
             itemView.title.text = model.original_title
             Glide.with(itemView.context).load(imgBaseURL + model.poster_path).into(itemView.moviesImageViewID)
+            itemView.setOnClickListener {
+                detailedMovieListener.detailedViewClick(adapterPosition)
+            }
 
         }
 

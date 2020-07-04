@@ -26,6 +26,7 @@ class SearchFragment : Fragment() {
         searchViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
         return root
     }
 }
