@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
+import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment.Companion.API_KEY
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackMoviesBridge
 import com.example.movieapplication.network_https.models.MainMovieModel
@@ -13,14 +14,14 @@ import com.example.movieapplication.network_https.models.movie
 class SearchViewModel : ViewModel() {
 
     private val _searchResultMoviesLiveData = MutableLiveData<MutableList<MovieSearchResultModelByID>>().apply {
-
+        getPostsTopToday(1)
     }
     val searchResultMoviesLiveData: LiveData<MutableList<MovieSearchResultModelByID>> = _searchResultMoviesLiveData
 
 
-    private fun getPostsTopToday(page: String) {
-        DateLoader.getRequestTopToday(
-            HomeFragment.API_KEY, page,
+    private fun getPostsTopToday(page: Int) {
+        DateLoader.getRequestedMovieByID(
+            1,API_KEY,
             object : FutureCallbackMoviesBridge {
                 override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
 
