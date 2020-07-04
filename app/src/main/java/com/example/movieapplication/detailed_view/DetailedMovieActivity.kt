@@ -1,5 +1,6 @@
 package com.example.movieapplication.detailed_view
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
@@ -33,14 +34,23 @@ class DetailedMovieActivity : AppCompatActivity() {
         DateLoader.getRequestedMovieByID(
             id, HomeFragment.API_KEY,
             object : FutureCallbackMoviesSearchBridge {
+                @SuppressLint("SetTextI18n")
                 override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
                     d("fsfesefesfsf", response.toString())
-                    titleDetailedTextViewID.text = response.original_title
-                    Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
+                    titleDetailedTextViewID.text = response.overview
+                    titleTV.text = response.original_title
+                    ratingTV.text = response.vote_average+"/10"
+                    (0 until response.genres.size).forEach{
+                        val text = genreTVID.text.toString()
+                        genreTVID.text = text + " " + response.genres[it].name
+                    }
 
+                    Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
+                    Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path).into(detailedBackground)
                 }
                 override fun onFailure(error: String) {
                     d("detailedResponse", error)
+
                 }
             }
         )

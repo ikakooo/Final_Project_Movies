@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".detailed_view.DetailedMovieActivity">
 
@@ -10,7 +11,7 @@
         android:id="@+id/detailedBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.5"
+        android:alpha="0.4"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
 
@@ -20,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -32,15 +33,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:weightSum="3">
-
-                    <ImageView
-                        android:id="@+id/moviesDetailedImageViewID"
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="2dp"
                         android:layout_width="0dp"
                         android:layout_height="154dp"
                         android:layout_margin="20dp"
-                        android:layout_weight="1"
-                        android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_weight="1">
+                        <ImageView
+                            android:id="@+id/moviesDetailedImageViewID"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/ic_launcher" />
+                    </androidx.cardview.widget.CardView>
+
+
 
                     <ImageView
                         android:id="@+id/favouriteImageView"
@@ -62,30 +70,19 @@
                 </LinearLayout>
 
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/genreTVID"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textStyle="bold"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="@string/overview"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/titleDetailedTextViewID"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Overview
-Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bilbo, must leave his home in order to keep it from falling into the hands of its evil creator. Along the way, a fellowship is formed to protect the ringbearer and make sure that the ring arrives at its final destination: Mt. Doom, the only place where it can be destroyed."
-                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/titleTV"
@@ -93,8 +90,26 @@ Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bi
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:text="@string/app_name"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="@string/overview"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/titleDetailedTextViewID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="20sp" />
+
+
 
                 <VideoView
                     android:id="@+id/video"
