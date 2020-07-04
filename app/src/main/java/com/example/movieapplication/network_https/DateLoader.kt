@@ -115,7 +115,7 @@ object DateLoader {
         id: Int,
         key: String,
 
-        callback: FutureCallbackMoviesBridge
+        callback: FutureCallbackMoviesSearchBridge
     ) {
         val call = service.getMoviesByID(id,key)
         call.enqueue(object : Callback<MovieSearchResultModelByID> {
@@ -127,8 +127,10 @@ object DateLoader {
                 call: Call<MovieSearchResultModelByID>,
                 response: Response<MovieSearchResultModelByID>
             ) {
+               // //response.body()?.let { callback.onResponseSearchedByID(it) }
+
                 response.body()?.let { callback.onResponseSearchedByID(it) }
-                Log.d("topRated", response.body().toString())
+                Log.d("topRatedfbdfdava", response.body().toString())
             }
         })
     }

@@ -35,10 +35,6 @@ class HomeViewModel : ViewModel() {
         DateLoader.getRequestTopToday(
             HomeFragment.API_KEY, page,
             object : FutureCallbackMoviesBridge {
-                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
-                    /////////////////ცაარიელი უნდა იყოს
-                }
-
                 override fun onResponse(response: MainMovieModel) {
                     _topTodayMoviesLiveData.value = response.results.toMutableList()
                 }
@@ -55,9 +51,6 @@ class HomeViewModel : ViewModel() {
             HomeFragment.API_KEY, page,
 
             object : FutureCallbackMoviesBridge {
-                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
-                    /////////////////ცაარიელი უნდა იყოს
-                }
 
                 override fun onResponse(response: MainMovieModel) {
                     _popularMoviesLiveData.value = response.results.toMutableList()
@@ -72,10 +65,6 @@ class HomeViewModel : ViewModel() {
         DateLoader.getRequestTopRated(
             HomeFragment.API_KEY, page,
             object : FutureCallbackMoviesBridge {
-                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
-                    /////////////////ცაარიელი უნდა იყოს
-                }
-
                 override fun onResponse(response: MainMovieModel) {
                     _topRatedMoviesLiveData.value = response.results.toMutableList()
                 }
@@ -90,10 +79,6 @@ class HomeViewModel : ViewModel() {
         DateLoader.getRequestUpComing(
             HomeFragment.API_KEY, page,
             object : FutureCallbackMoviesBridge {
-                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
-                    /////////////////ცაარიელი უნდა იყოს
-                }
-
                 override fun onResponse(response: MainMovieModel) {
                     _upComingMoviesLiveData.value = response.results.toMutableList()
                 }

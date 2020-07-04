@@ -1,7 +1,7 @@
 package com.example.movieapplication.network_https.models
 
 
-abstract class MovieSearchResultModelByID(
+data class MovieSearchResultModelByID(
     val id : String,
     val genres : ArrayList<Genre>,
     val poster_path: String,
@@ -13,7 +13,7 @@ abstract class MovieSearchResultModelByID(
     val vote_average : String
 
 
-) : MutableList<MovieSearchResultModelByID> {
+)  {
 
     data class Genre(
         val name : String

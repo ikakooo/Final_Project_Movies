@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
-import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 
