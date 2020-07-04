@@ -10,4 +10,6 @@
     <string name="upcoming">Upcoming</string>
     <string name="todo">TODO</string>
     <string name="top_today">Top Today</string>
+    <string name="overview">Overview</string>
+    <string name="cast">Cast</string>
 </resources>
