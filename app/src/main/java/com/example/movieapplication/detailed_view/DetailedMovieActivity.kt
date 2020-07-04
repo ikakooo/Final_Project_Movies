@@ -44,7 +44,6 @@ class DetailedMovieActivity : AppCompatActivity() {
                         val text = genreTVID.text.toString()
                         genreTVID.text = text + " " + response.genres[it].name
                     }
-
                     Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
                     Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path).into(detailedBackground)
                 }

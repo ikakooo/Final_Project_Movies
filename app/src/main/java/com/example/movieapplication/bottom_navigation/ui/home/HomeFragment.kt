@@ -81,7 +81,16 @@ class HomeFragment : Fragment() {
 
     private fun init(root: View) {
         /////////////////////////////////////////////////////////
-        topTodayAdapter = TopTodayAdapter(topTodayMoviesList)
+        topTodayAdapter = TopTodayAdapter(topTodayMoviesList, object :DetailedMovieListener{
+            override fun detailedViewClick(position: Int) {
+                val topTodayMovie = topTodayMoviesList[position]
+                val intent = Intent(context, DetailedMovieActivity::class.java)
+                intent.putExtra("name", topTodayMovie.original_title)
+                intent.putExtra("movieID", topTodayMovie.id)
+                startActivity(intent)
+            }
+
+        })
         root.topTodayRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.isNestedScrollingEnabled = true
         root.topTodayRecyclerView.setHasFixedSize(false)
@@ -92,6 +101,7 @@ class HomeFragment : Fragment() {
                 val topRatedMovie = topRatedMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
                 intent.putExtra("name", topRatedMovie.original_title)
+                intent.putExtra("movieID", topRatedMovie.id)
                 startActivity(intent)
             }
 
@@ -118,7 +128,16 @@ class HomeFragment : Fragment() {
         root.popularRecyclerView.setHasFixedSize(false)
         root.popularRecyclerView.adapter = popularAdapter
 ////////////////////////////////////////////////////////////////////////////
-        upComingAdapter = UpcomingAdapter(upComingMoviesList)
+        upComingAdapter = UpcomingAdapter(upComingMoviesList, object : DetailedMovieListener{
+            override fun detailedViewClick(position: Int) {
+                val upcomingMovie = upComingMoviesList[position]
+                val intent = Intent(context, DetailedMovieActivity::class.java)
+                intent.putExtra("name", upcomingMovie.original_title)
+                intent.putExtra("movieID", upcomingMovie.id)
+                startActivity(intent)
+            }
+
+        })
         root.upcomingRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.upcomingRecyclerView.isNestedScrollingEnabled = false
