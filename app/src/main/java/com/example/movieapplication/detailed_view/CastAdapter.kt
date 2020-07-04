@@ -1,4 +1,4 @@
-package com.example.movieapplication.bottom_navigation.ui.home.adapters
+package com.example.movieapplication.detailed_view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,17 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.detailed_view.DetailedMovieListener
 import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-
-class UpcomingAdapter(val upComingMoviesList: MutableList<movie>, val detailedMovieListener: DetailedMovieListener) :
-    RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
+class CastAdapter(val castList: MutableList<movie>) :
+    RecyclerView.Adapter<CastAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
     override fun getItemCount(): Int {
-        return upComingMoviesList.size
+        return castList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,13 +36,10 @@ class UpcomingAdapter(val upComingMoviesList: MutableList<movie>, val detailedMo
         private lateinit var model: movie
 
         fun onBind() {
-            model = upComingMoviesList[adapterPosition]
+            model = castList[adapterPosition]
             itemView.title.text = model.original_title
             Glide.with(itemView.context).load(imgBaseURL + model.poster_path)
                 .into(itemView.moviesImageViewID)
-            itemView.setOnClickListener{
-                detailedMovieListener.detailedViewClick(adapterPosition)
-            }
         }
 
     }

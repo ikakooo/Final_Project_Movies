@@ -81,16 +81,19 @@ class HomeFragment : Fragment() {
 
     private fun init(root: View) {
         /////////////////////////////////////////////////////////
-        topTodayAdapter = TopTodayAdapter(topTodayMoviesList, object :DetailedMovieListener{
-            override fun detailedViewClick(position: Int) {
-                val topTodayMovie = topTodayMoviesList[position]
-                val intent = Intent(context, DetailedMovieActivity::class.java)
-                intent.putExtra("name", topTodayMovie.original_title)
-                intent.putExtra("movieID", topTodayMovie.id)
-                startActivity(intent)
-            }
+        topTodayAdapter =
+            TopTodayAdapter(
+                topTodayMoviesList,
+                object : DetailedMovieListener {
+                    override fun detailedViewClick(position: Int) {
+                        val topTodayMovie = topTodayMoviesList[position]
+                        val intent = Intent(context, DetailedMovieActivity::class.java)
+                        intent.putExtra("name", topTodayMovie.original_title)
+                        intent.putExtra("movieID", topTodayMovie.id)
+                        startActivity(intent)
+                    }
 
-        })
+                })
         root.topTodayRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.isNestedScrollingEnabled = true
         root.topTodayRecyclerView.setHasFixedSize(false)
