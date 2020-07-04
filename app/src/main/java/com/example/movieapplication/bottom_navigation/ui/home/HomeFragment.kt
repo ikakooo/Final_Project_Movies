@@ -16,7 +16,7 @@ import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayA
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.UpcomingAdapter
 import com.example.movieapplication.detailed_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_view.DetailedMovieListener
-import com.example.movieapplication.network_https.movie
+import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -82,8 +82,7 @@ class HomeFragment : Fragment() {
     private fun init(root: View) {
         /////////////////////////////////////////////////////////
         topTodayAdapter = TopTodayAdapter(topTodayMoviesList)
-        root.topTodayRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.topTodayRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.isNestedScrollingEnabled = true
         root.topTodayRecyclerView.setHasFixedSize(false)
         root.topTodayRecyclerView.adapter = topTodayAdapter

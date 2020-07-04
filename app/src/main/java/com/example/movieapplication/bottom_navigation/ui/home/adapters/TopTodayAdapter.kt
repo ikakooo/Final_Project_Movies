@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.network_https.movie
-import com.example.movieapplication.splash_screen.ModelItem
+import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 class TopTodayAdapter(val topTodayMoviesList: MutableList<movie>) :

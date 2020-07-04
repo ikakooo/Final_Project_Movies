@@ -2,12 +2,15 @@ package com.example.movieapplication.network_https
 
 
 import android.util.Log
+import com.example.movieapplication.network_https.models.MainMovieModel
+import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 object DateLoader {
@@ -22,7 +25,7 @@ object DateLoader {
     fun getRequestTopToday(
         key: String,
         page: String,
-        callback: FutureCallbackCountryBridge
+        callback: FutureCallbackMoviesBridge
     ) {
         val call = service.getTopToday(key, page)
         call.enqueue(object : Callback<MainMovieModel> {
@@ -45,7 +48,7 @@ object DateLoader {
     fun getRequestPopular(
         key: String,
         page: String,
-        callback: FutureCallbackCountryBridge
+        callback: FutureCallbackMoviesBridge
     ) {
         val call = service.getPopular(key, page)
         call.enqueue(object : Callback<MainMovieModel> {
@@ -68,7 +71,7 @@ object DateLoader {
     fun getRequestTopRated(
         key: String,
         page: String,
-        callback: FutureCallbackCountryBridge
+        callback: FutureCallbackMoviesBridge
     ) {
         val call = service.getTopRated(key, page)
         call.enqueue(object : Callback<MainMovieModel> {
@@ -90,7 +93,7 @@ object DateLoader {
     fun getRequestUpComing(
         key: String,
         page: String,
-        callback: FutureCallbackCountryBridge
+        callback: FutureCallbackMoviesBridge
     ) {
         val call = service.getUpcoming(key, page)
         call.enqueue(object : Callback<MainMovieModel> {
@@ -105,9 +108,32 @@ object DateLoader {
                 response.body()?.let { callback.onResponse(it) }
                 Log.d("topRated", response.body().toString())
             }
-
         })
     }
+
+    fun getRequestedMovieByID(
+        id: Int,
+        key: String,
+
+        callback: FutureCallbackMoviesBridge
+    ) {
+        val call = service.getMoviesByID(id,key)
+        call.enqueue(object : Callback<MovieSearchResultModelByID> {
+            override fun onFailure(call: Call<MovieSearchResultModelByID>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<MovieSearchResultModelByID>,
+                response: Response<MovieSearchResultModelByID>
+            ) {
+                response.body()?.let { callback.onResponseSearchedByID(it) }
+                Log.d("topRated", response.body().toString())
+            }
+        })
+    }
+
+
 
     interface APIService {
         @GET("3/movie/popular")
@@ -135,6 +161,13 @@ object DateLoader {
             @Query("api_key") key: String,
             @Query("page") page: String
         ): Call<MainMovieModel>
+
+
+        @GET("3/movie/{id}")
+        fun getMoviesByID(
+            @Path("id") id: Int,
+            @Query("api_key") key: String
+        ): Call<MovieSearchResultModelByID>
     }
 
 }

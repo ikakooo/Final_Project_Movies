@@ -1,4 +1,4 @@
-package com.example.movieapplication.bottom_navigation.ui.home.adapters
+package com.example.movieapplication.bottom_navigation.ui.search
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,20 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.detailed_view.DetailedMovieListener
+import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
 import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class TopRatedAdapter(
-    private val topRatedMoviesList: MutableList<movie>,
-    val detailedMovieListener: DetailedMovieListener
 
-) :
-    RecyclerView.Adapter<TopRatedAdapter.ViewHolder>() {
+class SearchResultRecyclerViewAdapter(val searchResultMoviesList: MutableList<MovieSearchResultModelByID>) :
+    RecyclerView.Adapter<SearchResultRecyclerViewAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
     override fun getItemCount(): Int {
-        return topRatedMoviesList.size
+        return searchResultMoviesList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,19 +35,15 @@ class TopRatedAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private lateinit var model: movie
+        private lateinit var model: MovieSearchResultModelByID
 
         fun onBind() {
-            model = topRatedMoviesList[adapterPosition]
+            model = searchResultMoviesList[adapterPosition]
             itemView.title.text = model.original_title
-            Glide.with(itemView.context).load(imgBaseURL + model.poster_path)
-                .into(itemView.moviesImageViewID)
-            itemView.setOnClickListener {
-                detailedMovieListener.detailedViewClick(adapterPosition)
-            }
-
+            Glide.with(itemView.context).load(imgBaseURL + model.poster_path).into(itemView.moviesImageViewID)
 
         }
 
     }
+
 }

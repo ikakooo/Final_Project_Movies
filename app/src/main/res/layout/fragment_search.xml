@@ -5,17 +5,28 @@
     android:layout_height="match_parent"
     tools:context=".bottom_navigation.ui.search.SearchFragment">
 
-    <TextView
-        android:id="@+id/text_searchID"
+    <EditText
+        android:id="@+id/moviesSearchEditTextID"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="0dp"
         android:textAlignment="center"
+
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0.1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchResultRecyclerViewID"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/moviesSearchEditTextID"
+        app:layout_constraintVertical_weight="1" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

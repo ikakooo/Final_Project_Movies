@@ -1,13 +1,13 @@
 package com.example.movieapplication.bottom_navigation.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapplication.network_https.DateLoader
-import com.example.movieapplication.network_https.FutureCallbackCountryBridge
-import com.example.movieapplication.network_https.MainMovieModel
-import com.example.movieapplication.network_https.movie
+import com.example.movieapplication.network_https.FutureCallbackMoviesBridge
+import com.example.movieapplication.network_https.models.MainMovieModel
+import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
+import com.example.movieapplication.network_https.models.movie
 
 class HomeViewModel : ViewModel() {
 
@@ -34,7 +34,11 @@ class HomeViewModel : ViewModel() {
     private fun getPostsTopToday(page: String) {
         DateLoader.getRequestTopToday(
             HomeFragment.API_KEY, page,
-            object : FutureCallbackCountryBridge {
+            object : FutureCallbackMoviesBridge {
+                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
+                    /////////////////ცაარიელი უნდა იყოს
+                }
+
                 override fun onResponse(response: MainMovieModel) {
                     _topTodayMoviesLiveData.value = response.results.toMutableList()
                 }
@@ -50,7 +54,11 @@ class HomeViewModel : ViewModel() {
         DateLoader.getRequestPopular(
             HomeFragment.API_KEY, page,
 
-            object : FutureCallbackCountryBridge {
+            object : FutureCallbackMoviesBridge {
+                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
+                    /////////////////ცაარიელი უნდა იყოს
+                }
+
                 override fun onResponse(response: MainMovieModel) {
                     _popularMoviesLiveData.value = response.results.toMutableList()
                 }
@@ -63,7 +71,11 @@ class HomeViewModel : ViewModel() {
     private fun getPostsTopRated(page: String) {
         DateLoader.getRequestTopRated(
             HomeFragment.API_KEY, page,
-            object : FutureCallbackCountryBridge {
+            object : FutureCallbackMoviesBridge {
+                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
+                    /////////////////ცაარიელი უნდა იყოს
+                }
+
                 override fun onResponse(response: MainMovieModel) {
                     _topRatedMoviesLiveData.value = response.results.toMutableList()
                 }
@@ -77,7 +89,11 @@ class HomeViewModel : ViewModel() {
     private fun getPostsUpComing(page: String) {
         DateLoader.getRequestUpComing(
             HomeFragment.API_KEY, page,
-            object : FutureCallbackCountryBridge {
+            object : FutureCallbackMoviesBridge {
+                override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
+                    /////////////////ცაარიელი უნდა იყოს
+                }
+
                 override fun onResponse(response: MainMovieModel) {
                     _upComingMoviesLiveData.value = response.results.toMutableList()
                 }
