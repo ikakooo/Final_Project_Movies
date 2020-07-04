@@ -7,7 +7,9 @@ import android.util.Log.d
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
+import com.example.movieapplication.detailed_view.model.MovieCastResponse
 import com.example.movieapplication.network_https.DateLoader
+import com.example.movieapplication.network_https.FutureCallbackCastBridge
 import com.example.movieapplication.network_https.FutureCallbackMoviesSearchBridge
 import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
@@ -28,6 +30,7 @@ class DetailedMovieActivity : AppCompatActivity() {
         if (movieID == null) { movieID="531454" }
 
         getPostsDetailedMovie(movieID.toInt())
+        getPostsDetailedCast(movieID.toInt())
     }
 
     private fun getPostsDetailedMovie(id: Int) {
@@ -49,9 +52,24 @@ class DetailedMovieActivity : AppCompatActivity() {
                 }
                 override fun onFailure(error: String) {
                     d("detailedResponse", error)
-
                 }
             }
         )
     }
+
+    private  fun getPostsDetailedCast(id: Int){
+        DateLoader.getRequestedCastByID(id,HomeFragment.API_KEY,object : FutureCallbackCastBridge{
+            override fun onResponseCastByID(response: MovieCastResponse) {
+
+            }
+
+            override fun onFailure(error: String) {
+
+            }
+
+
+        })
+
+    }
+
 }

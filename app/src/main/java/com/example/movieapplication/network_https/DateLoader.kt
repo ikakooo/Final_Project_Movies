@@ -2,6 +2,7 @@ package com.example.movieapplication.network_https
 
 
 import android.util.Log
+import com.example.movieapplication.detailed_view.model.MovieCastResponse
 import com.example.movieapplication.network_https.models.MainMovieModel
 import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
 import retrofit2.Call
@@ -135,6 +136,27 @@ object DateLoader {
         })
     }
 
+    fun getRequestedCastByID(
+        id: Int,
+        key: String,
+        callback: FutureCallbackCastBridge
+    ) {
+        val call = service.getCastByID(id,key)
+        call.enqueue(object : Callback<MovieCastResponse> {
+            override fun onFailure(call: Call<MovieCastResponse>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<MovieCastResponse>,
+                response: Response<MovieCastResponse>
+            ) {
+                response.body()?.let { callback.onResponseCastByID(it) }
+                Log.d("topRsffeatedfbdfdava", response.body().toString())
+            }
+        })
+    }
+
 
 
     interface APIService {
@@ -170,6 +192,14 @@ object DateLoader {
             @Path("id") id: Int,
             @Query("api_key") key: String
         ): Call<MovieSearchResultModelByID>
+
+
+        @GET("3/movie/{movie_id}/credits")
+        fun getCastByID(
+
+            @Path("movie_id") movieid:Int,
+            @Query("api_key") key: String
+        ):Call<MovieCastResponse>
     }
 
 }
