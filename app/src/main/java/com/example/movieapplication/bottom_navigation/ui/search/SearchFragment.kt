@@ -13,8 +13,8 @@ import com.example.movieapplication.bottom_navigation.ui.search.models.SearchRes
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment() {
-    private var searchResultMoviesList = mutableListOf<SearchResultModelResultList>()
-    private lateinit var  searchResultAdapter: SearchResultRecyclerViewAdapter
+    private var searchResultByNameMoviesList = mutableListOf<SearchResultModelResultList>()
+    private lateinit var  searchResultByNameAdapter: SearchResultRecyclerViewAdapter
 
     private lateinit var searchViewModel: SearchViewModel
 
@@ -30,10 +30,10 @@ class SearchFragment : Fragment() {
 
 
 
-        searchViewModel.searchResultMoviesLiveData.observe(viewLifecycleOwner, Observer {
+        searchViewModel.searchResultByNameMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
-            searchResultMoviesList.addAll(it)
-            searchResultAdapter.notifyDataSetChanged()
+            searchResultByNameMoviesList.addAll(it)
+            searchResultByNameAdapter.notifyDataSetChanged()
 
         })
 
@@ -43,10 +43,14 @@ class SearchFragment : Fragment() {
 
 
     private fun init(root: View){
-        searchResultAdapter = SearchResultRecyclerViewAdapter(searchResultMoviesList)
+        searchResultByNameAdapter = SearchResultRecyclerViewAdapter(searchResultByNameMoviesList)
         root.searchResultRecyclerViewID.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        root.searchResultRecyclerViewID.adapter = searchResultAdapter
-
+        root.searchResultRecyclerViewID.adapter = searchResultByNameAdapter
 
     }
+
+
+
+
+
 }

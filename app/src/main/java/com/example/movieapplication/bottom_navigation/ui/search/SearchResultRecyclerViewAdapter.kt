@@ -10,12 +10,12 @@ import com.example.movieapplication.bottom_navigation.ui.search.models.SearchRes
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 
-class SearchResultRecyclerViewAdapter(val searchResultMoviesList: MutableList<SearchResultModelResultList>) :
+class SearchResultRecyclerViewAdapter(val searchResultByNameMoviesList: MutableList<SearchResultModelResultList>) :
     RecyclerView.Adapter<SearchResultRecyclerViewAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
     override fun getItemCount(): Int {
-        return searchResultMoviesList.size
+        return searchResultByNameMoviesList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,8 +37,8 @@ class SearchResultRecyclerViewAdapter(val searchResultMoviesList: MutableList<Se
         private lateinit var model: SearchResultModelResultList
 
         fun onBind() {
-            model = searchResultMoviesList[adapterPosition]
-            itemView.title.text = model.poster_path
+            model = searchResultByNameMoviesList[adapterPosition]
+            itemView.title.text = model.original_title
             Glide.with(itemView.context).load(imgBaseURL + model.poster_path).into(itemView.moviesImageViewID)
 
         }

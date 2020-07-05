@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    android:background="#F80202"
     tools:context=".bottom_navigation.ui.search.SearchFragment">
 
     <EditText
@@ -14,13 +13,6 @@
 
         android:layout_gravity="top"
         android:textSize="20sp" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TexwfeeeeeeeeeeeeeetView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultRecyclerViewID"
