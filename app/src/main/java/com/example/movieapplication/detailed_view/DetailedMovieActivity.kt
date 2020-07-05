@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
@@ -12,10 +13,13 @@ import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackCastBridge
 import com.example.movieapplication.network_https.FutureCallbackMoviesSearchBridge
 import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
+import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
 
 
 class DetailedMovieActivity : AppCompatActivity() {
+    private val castList = mutableListOf<movie>()
+    lateinit var castAdapter: CastAdapter
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +32,13 @@ class DetailedMovieActivity : AppCompatActivity() {
         val originalTitle = intent.getStringExtra("name")
         titleTV.text = originalTitle
         if (movieID == null) { movieID="531454" }
-
         getPostsDetailedMovie(movieID.toInt())
         getPostsDetailedCast(movieID.toInt())
+        castAdapter = CastAdapter(castList)
+        castRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        castRecyclerView.adapter = castAdapter
+        castAdapter.notifyDataSetChanged()
+        d("jakja", castList.size.toString())
     }
 
     private fun getPostsDetailedMovie(id: Int) {
