@@ -73,7 +73,7 @@ class DetailedMovieActivity : AppCompatActivity() {
                         response.cast?.get(it)?.cast_id.toString().toInt(),
                         response.cast?.get(it)?.name.toString(),
                         response.cast?.get(it)?.profile_path.toString(), response.cast?.get(it)?.id.toString()))
-                    // castList.add(MovieCastResponse(response.id,response.cast))
+
                 }
 
 
