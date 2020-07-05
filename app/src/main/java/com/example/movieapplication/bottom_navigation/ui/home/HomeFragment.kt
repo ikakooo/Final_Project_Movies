@@ -20,6 +20,7 @@ import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
+
     private var topTodayMoviesList = mutableListOf<movie>()
     private lateinit var topTodayAdapter: TopTodayAdapter
 
@@ -47,6 +48,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+
         init(root)
 
 
