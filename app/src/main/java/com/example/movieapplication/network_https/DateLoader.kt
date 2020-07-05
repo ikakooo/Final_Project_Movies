@@ -2,9 +2,10 @@ package com.example.movieapplication.network_https
 
 
 import android.util.Log
+import com.example.movieapplication.bottom_navigation.ui.search.models.ByNameSearchResultModel
 import com.example.movieapplication.detailed_view.model.MovieCastResponse
 import com.example.movieapplication.network_https.models.MainMovieModel
-import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
+import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -116,12 +117,12 @@ object DateLoader {
         id: Int,
         key: String,
 
-        callback: FutureCallbackMoviesSearchBridge
+        callbackByID: FutureCallbackMoviesSearchByIDBridge
     ) {
         val call = service.getMoviesByID(id,key)
         call.enqueue(object : Callback<MovieSearchResultModelByID> {
             override fun onFailure(call: Call<MovieSearchResultModelByID>, t: Throwable) {
-                callback.onFailure(t.message.toString())
+                callbackByID.onFailure(t.message.toString())
             }
 
             override fun onResponse(
@@ -130,7 +131,7 @@ object DateLoader {
             ) {
                // //response.body()?.let { callback.onResponseSearchedByID(it) }
 
-                response.body()?.let { callback.onResponseSearchedByID(it) }
+                response.body()?.let { callbackByID.onResponseSearchedByID(it) }
                 Log.d("topRatedfbdfdava", response.body().toString())
             }
         })
@@ -153,6 +154,28 @@ object DateLoader {
             ) {
                 response.body()?.let { callback.onResponseCastByID(it) }
                 Log.d("topRsffeatedfbdfdava", response.body().toString())
+            }
+        })
+    }
+
+
+    fun getRequestSearchedMoviesByName(
+        key: String,
+        movieNameString: String,
+        callback: FutureCallbackMoviesSearchByNameBridge
+    ) {
+        val call = service.getSearchedMoviesByName(key, movieNameString)
+        call.enqueue(object : Callback<ByNameSearchResultModel> {
+            override fun onFailure(call: Call<ByNameSearchResultModel>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<ByNameSearchResultModel>,
+                response: Response<ByNameSearchResultModel>
+            ) {
+                response.body()?.let { callback.onResponseSearchedByName(it) }
+                Log.d("topRated", response.body().toString())
             }
         })
     }
@@ -200,6 +223,12 @@ object DateLoader {
             @Path("movie_id") movieid:Int,
             @Query("api_key") key: String
         ):Call<MovieCastResponse>
+
+        @GET("3/search/movie")
+        fun getSearchedMoviesByName(
+            @Query("api_key") key : String,
+            @Query("query") query : String
+        ) : Call<ByNameSearchResultModel>
     }
 
 }

@@ -9,11 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
-import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
+import com.example.movieapplication.bottom_navigation.ui.search.models.SearchResultModelResultList
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment() {
-    private var searchResultMoviesList = mutableListOf<MovieSearchResultModelByID>()
+    private var searchResultMoviesList = mutableListOf<SearchResultModelResultList>()
     private lateinit var  searchResultAdapter: SearchResultRecyclerViewAdapter
 
     private lateinit var searchViewModel: SearchViewModel

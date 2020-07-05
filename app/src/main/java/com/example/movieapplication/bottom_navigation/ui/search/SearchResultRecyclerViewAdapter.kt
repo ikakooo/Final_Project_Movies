@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
+import com.example.movieapplication.bottom_navigation.ui.search.models.SearchResultModelResultList
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 
-class SearchResultRecyclerViewAdapter(val searchResultMoviesList: MutableList<MovieSearchResultModelByID>) :
+class SearchResultRecyclerViewAdapter(val searchResultMoviesList: MutableList<SearchResultModelResultList>) :
     RecyclerView.Adapter<SearchResultRecyclerViewAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
@@ -34,11 +34,11 @@ class SearchResultRecyclerViewAdapter(val searchResultMoviesList: MutableList<Mo
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private lateinit var model: MovieSearchResultModelByID
+        private lateinit var model: SearchResultModelResultList
 
         fun onBind() {
             model = searchResultMoviesList[adapterPosition]
-            itemView.title.text = model.original_title
+            itemView.title.text = model.poster_path
             Glide.with(itemView.context).load(imgBaseURL + model.poster_path).into(itemView.moviesImageViewID)
 
         }

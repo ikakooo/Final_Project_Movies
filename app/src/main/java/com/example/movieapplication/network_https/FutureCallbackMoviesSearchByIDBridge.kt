@@ -1,9 +1,9 @@
 package com.example.movieapplication.network_https
 
 
-import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
+import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
 
-interface FutureCallbackMoviesSearchBridge {
+interface FutureCallbackMoviesSearchByIDBridge {
     fun onResponseSearchedByID(response: MovieSearchResultModelByID)
     fun onFailure(error: String)
 }

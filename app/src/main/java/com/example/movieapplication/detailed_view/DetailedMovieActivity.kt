@@ -11,9 +11,8 @@ import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
 import com.example.movieapplication.detailed_view.model.MovieCastResponse
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackCastBridge
-import com.example.movieapplication.network_https.FutureCallbackMoviesSearchBridge
-import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
-import com.example.movieapplication.network_https.models.movie
+import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByIDBridge
+import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
 
 
@@ -43,7 +42,7 @@ class DetailedMovieActivity : AppCompatActivity() {
     private fun getPostsDetailedMovie(id: Int) {
         DateLoader.getRequestedMovieByID(
             id, HomeFragment.API_KEY,
-            object : FutureCallbackMoviesSearchBridge {
+            object : FutureCallbackMoviesSearchByIDBridge {
                 @SuppressLint("SetTextI18n")
                 override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
                     d("fsfesefesfsf", response.toString())

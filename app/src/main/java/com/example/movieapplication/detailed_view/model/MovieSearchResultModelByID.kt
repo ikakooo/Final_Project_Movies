@@ -1,4 +1,4 @@
-package com.example.movieapplication.network_https.models
+package com.example.movieapplication.detailed_view.model
 
 
 data class MovieSearchResultModelByID(

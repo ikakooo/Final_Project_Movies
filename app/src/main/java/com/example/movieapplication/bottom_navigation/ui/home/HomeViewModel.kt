@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackMoviesBridge
 import com.example.movieapplication.network_https.models.MainMovieModel
-import com.example.movieapplication.network_https.models.MovieSearchResultModelByID
 import com.example.movieapplication.network_https.models.movie
 
 class HomeViewModel : ViewModel() {
