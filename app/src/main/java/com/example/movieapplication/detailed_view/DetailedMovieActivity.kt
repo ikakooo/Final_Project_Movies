@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_detailed_movie.*
 
 
 class DetailedMovieActivity : AppCompatActivity() {
-    private val castList = mutableListOf<movie>()
+    private var castList = mutableListOf<MovieCastResponse.MovieCast>()
     lateinit var castAdapter: CastAdapter
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +37,7 @@ class DetailedMovieActivity : AppCompatActivity() {
         castAdapter = CastAdapter(castList)
         castRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         castRecyclerView.adapter = castAdapter
-        castAdapter.notifyDataSetChanged()
-        d("jakja", castList.size.toString())
+
     }
 
     private fun getPostsDetailedMovie(id: Int) {
@@ -68,7 +67,19 @@ class DetailedMovieActivity : AppCompatActivity() {
     private  fun getPostsDetailedCast(id: Int){
         DateLoader.getRequestedCastByID(id,HomeFragment.API_KEY,object : FutureCallbackCastBridge{
             override fun onResponseCastByID(response: MovieCastResponse) {
+                  d("dfsdfsdf",response.toString())
+                val size = response.cast?.size.toString().toInt()
+                (0 until size).forEach{ it->
+                    castList.add(MovieCastResponse.MovieCast(
+                        response.cast?.get(it)?.cast_id.toString().toInt(),
+                        response.cast?.get(it)?.name.toString(),
+                        response.cast?.get(it)?.profile_path.toString(), response.cast?.get(it)?.id.toString()))
+                    // castList.add(MovieCastResponse(response.id,response.cast))
+                }
 
+
+                castAdapter.notifyDataSetChanged()
+                d("jakja", castList.size.toString())
             }
 
             override fun onFailure(error: String) {

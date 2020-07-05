@@ -3,7 +3,7 @@ package com.example.movieapplication.detailed_view.model
 
 data class MovieCastResponse(
     val id:Int=0,
-    val cast:ArrayList<MovieCast>
+    val cast:ArrayList<MovieCast>?
 
 ){
     data class MovieCast(
