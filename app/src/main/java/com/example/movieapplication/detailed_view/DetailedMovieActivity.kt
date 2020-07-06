@@ -2,6 +2,7 @@ package com.example.movieapplication.detailed_view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log.d
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,15 +46,18 @@ class DetailedMovieActivity : AppCompatActivity() {
         castRecyclerView.adapter = castAdapter
 
         //Player
-        val youTubePlayerView = findViewById<YouTubePlayerView>(R.id.youtube_player_view)
-        lifecycle.addObserver(youTubePlayerView)
-        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = "ou7KSmfC3lA"
-                d("fjsdfksdf",youtubeVideoID.toString())
-                youTubePlayer.loadVideo(youtubeVideoID, 0f)
-            }
-        })
+       Handler().postDelayed({
+           lifecycle.addObserver(youtube_player_view)
+           youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+               override fun onReady(youTubePlayer: YouTubePlayer) {
+                   val videoId = "ou7KSmfC3lA"
+                   d("fjsdfksdf",youtubeVideoID.toString())
+                   youTubePlayer.loadVideo(youtubeVideoID, 0f)
+               }
+           })
+
+
+       },3000)
 
 
 
@@ -110,7 +114,8 @@ class DetailedMovieActivity : AppCompatActivity() {
 
                 (0 until response.results.size).forEach{
                     youtubeVideoID = if (response.results[it].size==1080) response.results[it].key
-                    else "hfhsd"
+                    else response.results[it].key
+
                 }
 
 
