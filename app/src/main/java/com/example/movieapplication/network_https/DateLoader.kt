@@ -6,6 +6,7 @@ import com.example.movieapplication.bottom_navigation.ui.search.models.ByNameSea
 import com.example.movieapplication.detailed_view.model.MovieCastResponse
 import com.example.movieapplication.network_https.models.MainMovieModel
 import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
+import com.example.movieapplication.detailed_view.model.MovieTrailerModeByID
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -182,6 +183,28 @@ object DateLoader {
 
 
 
+    fun getRequestedMovieTrailerByID(
+        id: Int,
+        key: String,
+        callback: FutureCallbackMovieTrailerByIDBridge
+    ) {
+        val call = service.getMovieTrailerByID(id,key)
+        call.enqueue(object : Callback<MovieTrailerModeByID> {
+            override fun onFailure(call: Call<MovieTrailerModeByID>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<MovieTrailerModeByID>,
+                response: Response<MovieTrailerModeByID>
+            ) {
+                response.body()?.let { callback.onResponseMovieTrailerByID(it) }
+                Log.d("topRsffeatedfbdfdava", response.body().toString())
+            }
+        })
+    }
+
+
     interface APIService {
         @GET("3/movie/popular")
         fun getPopular(
@@ -229,6 +252,13 @@ object DateLoader {
             @Query("api_key") key : String,
             @Query("query") query : String
         ) : Call<ByNameSearchResultModel>
+
+        @GET("3/movie/{id}/videos")
+        fun getMovieTrailerByID(
+            @Path("id") id:Int,
+            @Query("api_key") key: String
+
+        ):Call<MovieTrailerModeByID>
     }
 
 }

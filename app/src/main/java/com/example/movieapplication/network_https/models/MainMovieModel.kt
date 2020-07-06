@@ -29,12 +29,3 @@ data class similar(
     val original_title: String,
     val poster_path:String
 )
-data class videoresponse(
-    val results : ArrayList<video>
-)
-
-data class video(
-    val id: String,
-    val key : String,
-    val name : String
-)
