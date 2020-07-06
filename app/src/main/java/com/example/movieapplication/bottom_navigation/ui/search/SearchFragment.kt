@@ -4,13 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapplication.R
@@ -21,7 +19,6 @@ import com.example.movieapplication.detailed_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByNameBridge
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment() {
@@ -66,11 +63,9 @@ class SearchFragment : Fragment() {
 
         root.moviesSearchEditTextID.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
-
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -78,8 +73,6 @@ class SearchFragment : Fragment() {
             }
 
         })
-
-
     }
 
 
@@ -90,9 +83,9 @@ class SearchFragment : Fragment() {
             HomeFragment.API_KEY, movieNameString,
             object : FutureCallbackMoviesSearchByNameBridge {
                 override fun onResponseSearchedByName(response: ByNameSearchResultModel) {
-                    Log.d("sffdjsdsdfdfgfsdfs", response.toString())
+                    d("sffdjsdsdfdfgfsdfs", response.toString())
                     searchResultByNameMoviesList.clear()
-                    (0 until (response.results?.size ?: 1)-1).forEach{ it->
+                    (0 until (response.results?.size ?: 1)-1).forEach{
                         searchResultByNameMoviesList.add(
                             SearchResultModelResultList(
                                 response.results?.get(it)?.backdrop_path.toString(),
@@ -107,11 +100,12 @@ class SearchFragment : Fragment() {
                                 response.results?.get(it)?.vote_average.toString().toDouble(),
                                 response.results?.get(it)?.vote_count.toString().toInt()
                             ))}
-                    Log.d("eewffwee", searchResultByNameMoviesList.toString())
+                    d("eewffwee", searchResultByNameMoviesList.toString())
                     searchResultByNameAdapter.notifyDataSetChanged()
                 }
 
-                override fun onFailure(error: String) { Log.d("dfgfgdfgdfg", error.toString())}
+                override fun onFailure(error: String) { d("dfgfgdfgdfg", error)
+                }
             })
     }
 

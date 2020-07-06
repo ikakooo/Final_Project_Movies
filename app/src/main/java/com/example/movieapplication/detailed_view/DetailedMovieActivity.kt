@@ -28,16 +28,20 @@ class DetailedMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detailed_movie)
         init()
     }
-    private fun init(){
+
+    private fun init() {
         var movieID = intent.getStringExtra("movieID")
         d("sdfdfdsf", movieID.toString())
         val originalTitle = intent.getStringExtra("name")
         titleTV.text = originalTitle
-        if (movieID == null) { movieID="531454" }
+        if (movieID == null) {
+            movieID = "531454"
+        }
         getPostsDetailedMovie(movieID.toInt())
         getPostsDetailedCast(movieID.toInt())
         castAdapter = CastAdapter(castList)
-        castRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        castRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         castRecyclerView.adapter = castAdapter
 
         //Player
@@ -49,9 +53,6 @@ class DetailedMovieActivity : AppCompatActivity() {
                 youTubePlayer.loadVideo(videoId, 0f)
             }
         })
-
-
-
     }
 
     private fun getPostsDetailedMovie(id: Int) {
@@ -63,14 +64,17 @@ class DetailedMovieActivity : AppCompatActivity() {
                     d("fsfesefesfsf", response.toString())
                     titleDetailedTextViewID.text = response.overview
                     titleTV.text = response.original_title
-                    ratingTV.text = response.vote_average+"/10"
-                    (0 until response.genres.size).forEach{
+                    ratingTV.text = response.vote_average + "/10"
+                    (0 until response.genres.size).forEach {
                         val text = genreTVID.text.toString()
                         genreTVID.text = text + " " + response.genres[it].name
                     }
-                    Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
-                    Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path).into(detailedBackground)
+                    Glide.with(applicationContext).load(imgBaseURL + response.poster_path)
+                        .into(moviesDetailedImageViewID)
+                    Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path)
+                        .into(detailedBackground)
                 }
+
                 override fun onFailure(error: String) {
                     d("detailedResponse", error)
                 }
@@ -78,31 +82,31 @@ class DetailedMovieActivity : AppCompatActivity() {
         )
     }
 
-    private  fun getPostsDetailedCast(id: Int){
-        DateLoader.getRequestedCastByID(id,HomeFragment.API_KEY,object : FutureCallbackCastBridge{
-            override fun onResponseCastByID(response: MovieCastResponse) {
-                  d("dfsdfsdf",response.toString())
-                val size = response.cast?.size.toString().toInt()
-                (0 until size).forEach{ it->
-                    castList.add(MovieCastResponse.MovieCast(
-                        response.cast?.get(it)?.cast_id.toString().toInt(),
-                        response.cast?.get(it)?.name.toString(),
-                        response.cast?.get(it)?.profile_path.toString(), response.cast?.get(it)?.id.toString()))
-
+    private fun getPostsDetailedCast(id: Int) {
+        DateLoader.getRequestedCastByID(
+            id,
+            HomeFragment.API_KEY,
+            object : FutureCallbackCastBridge {
+                override fun onResponseCastByID(response: MovieCastResponse) {
+                    d("dfsdfsdf", response.toString())
+                    val size = response.cast?.size.toString().toInt()
+                    (0 until size).forEach {
+                        castList.add(
+                            MovieCastResponse.MovieCast(
+                                response.cast?.get(it)?.cast_id.toString().toInt(),
+                                response.cast?.get(it)?.name.toString(),
+                                response.cast?.get(it)?.profile_path.toString(),
+                                response.cast?.get(it)?.id.toString()
+                            )
+                        )
+                    }
+                    castAdapter.notifyDataSetChanged()
+                    d("jakja", castList.size.toString())
                 }
 
+                override fun onFailure(error: String) {
 
-                castAdapter.notifyDataSetChanged()
-                d("jakja", castList.size.toString())
-            }
-
-            override fun onFailure(error: String) {
-
-            }
-
-
-        })
-
+                }
+            })
     }
-
 }

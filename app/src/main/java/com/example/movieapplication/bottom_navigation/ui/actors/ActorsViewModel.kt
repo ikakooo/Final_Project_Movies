@@ -1,13 +1,13 @@
-package com.example.movieapplication.bottom_navigation.ui.dashboard
+package com.example.movieapplication.bottom_navigation.ui.actors
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class ActorsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "Actors"
     }
     val text: LiveData<String> = _text
 }
