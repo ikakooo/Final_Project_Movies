@@ -1,6 +1,8 @@
 package com.example.movieapplication.bottom_navigation.ui.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +50,22 @@ class SearchFragment : Fragment() {
         searchResultByNameAdapter = SearchResultRecyclerViewAdapter(searchResultByNameMoviesList)
         root.searchResultRecyclerViewID.layoutManager = GridLayoutManager(context, 2)
         root.searchResultRecyclerViewID.adapter = searchResultByNameAdapter
-        getPostsMoviesSearchByName("mad")
+        val textWatcher = object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                p0.toString()
+            }
+
+        }
+
+        root.moviesSearchEditTextID.addTextChangedListener(textWatcher)
 
 
     }
@@ -62,7 +79,7 @@ class SearchFragment : Fragment() {
             object : FutureCallbackMoviesSearchByNameBridge {
                 override fun onResponseSearchedByName(response: ByNameSearchResultModel) {
                     Log.d("sffdjsdsdfdfgfsdfs", response.toString())
-                    (0 until (response.results?.size ?: 1)-1)?.forEach{ it->
+                    (0 until (response.results?.size ?: 1)-1).forEach{ it->
                         searchResultByNameMoviesList.add(
                             SearchResultModelResultList(
                                 response.results?.get(it)?.backdrop_path.toString(),
