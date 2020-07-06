@@ -50,7 +50,8 @@ class SearchFragment : Fragment() {
         searchResultByNameAdapter = SearchResultRecyclerViewAdapter(searchResultByNameMoviesList)
         root.searchResultRecyclerViewID.layoutManager = GridLayoutManager(context, 2)
         root.searchResultRecyclerViewID.adapter = searchResultByNameAdapter
-        val textWatcher = object : TextWatcher{
+
+        root.moviesSearchEditTextID.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
 
             }
@@ -60,12 +61,10 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                p0.toString()
+                getPostsMoviesSearchByName(p0.toString())
             }
 
-        }
-
-        root.moviesSearchEditTextID.addTextChangedListener(textWatcher)
+        })
 
 
     }
@@ -79,6 +78,7 @@ class SearchFragment : Fragment() {
             object : FutureCallbackMoviesSearchByNameBridge {
                 override fun onResponseSearchedByName(response: ByNameSearchResultModel) {
                     Log.d("sffdjsdsdfdfgfsdfs", response.toString())
+                    searchResultByNameMoviesList.clear()
                     (0 until (response.results?.size ?: 1)-1).forEach{ it->
                         searchResultByNameMoviesList.add(
                             SearchResultModelResultList(
