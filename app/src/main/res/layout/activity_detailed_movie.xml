@@ -129,6 +129,16 @@
                     android:id="@+id/castRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:padding="20dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/youtube_player_view"
+                    android:layout_width="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="200dp"
+                    app:videoId=""
+                    app:autoPlay="true"
+                    app:showFullScreenButton="false" />
             </LinearLayout>
 
         </LinearLayout>

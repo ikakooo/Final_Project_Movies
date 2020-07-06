@@ -1,18 +1,21 @@
 package com.example.movieapplication.detailed_view
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
 import com.example.movieapplication.detailed_view.model.MovieCastResponse
+import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackCastBridge
 import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByIDBridge
-import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
 
 
@@ -36,6 +39,17 @@ class DetailedMovieActivity : AppCompatActivity() {
         castAdapter = CastAdapter(castList)
         castRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         castRecyclerView.adapter = castAdapter
+        val youTubePlayerView = findViewById<YouTubePlayerView>(R.id.youtube_player_view)
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = "ou7KSmfC3lA"
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+        })
+
+
 
     }
 
