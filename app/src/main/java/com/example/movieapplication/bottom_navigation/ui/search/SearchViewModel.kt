@@ -1,6 +1,8 @@
 package com.example.movieapplication.bottom_navigation.ui.search
 
 import android.util.Log.d
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,30 +16,32 @@ import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByNa
 
 class SearchViewModel : ViewModel() {
 
-    private val _searchResultByNameMoviesLiveData = MutableLiveData<MutableList<SearchResultModelResultList>>().apply {
-        getPostsMoviesSearchByName("room")
+//    private val _searchResultByNameMoviesLiveData = MutableLiveData<MutableList<SearchResultModelResultList>>().apply {
+//
+//
+//
+//    }
+//    val searchResultByNameMoviesLiveData: LiveData<MutableList<SearchResultModelResultList>> = _searchResultByNameMoviesLiveData
+//
+//
+//
+//
+//    private fun getPostsMoviesSearchByName(movieNameString: String) {
+//
+//
+//        DateLoader.getRequestSearchedMoviesByName(
+//            HomeFragment.API_KEY, movieNameString,
+//            object : FutureCallbackMoviesSearchByNameBridge {
+//                override fun onResponseSearchedByName(response: ByNameSearchResultModel) {
+//                    //_upComingMoviesLiveData.value = response.results.toMutableList()
+//                    d("sffdjsdfsdfs",response.toString())
+//                    _searchResultByNameMoviesLiveData.value = response.results.toMutableList()
+//
+//                }
+//
+//                override fun onFailure(error: String) {}
+//            })
+//    }
+//
 
-
-    }
-    val searchResultByNameMoviesLiveData: LiveData<MutableList<SearchResultModelResultList>> = _searchResultByNameMoviesLiveData
-
-
-
-
-    private fun getPostsMoviesSearchByName(movieNameString: String) {
-
-
-        DateLoader.getRequestSearchedMoviesByName(
-            HomeFragment.API_KEY, movieNameString,
-            object : FutureCallbackMoviesSearchByNameBridge {
-                override fun onResponseSearchedByName(response: ByNameSearchResultModel) {
-                    //_upComingMoviesLiveData.value = response.results.toMutableList()
-                    d("sffdjsdfsdfs",response.toString())
-                    _searchResultByNameMoviesLiveData.value = response.results.toMutableList()
-
-                }
-
-                override fun onFailure(error: String) {}
-            })
-    }
 }
