@@ -7,7 +7,8 @@ data class MovieTrailerModeByID(
     data class TrailerVideo(
         val id: String,
         val key : String,
-        val name : String
+        val name : String,
+        val size : Int
     )
 
 }

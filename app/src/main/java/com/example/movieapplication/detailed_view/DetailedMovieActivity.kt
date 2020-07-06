@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_detailed_movie.*
 class DetailedMovieActivity : AppCompatActivity() {
     private var castList = mutableListOf<MovieCastResponse.MovieCast>()
     lateinit var castAdapter: CastAdapter
+    lateinit var youtubeVideoID: String
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,8 @@ class DetailedMovieActivity : AppCompatActivity() {
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = "ou7KSmfC3lA"
-                youTubePlayer.loadVideo(videoId, 0f)
+                d("fjsdfksdf",youtubeVideoID.toString())
+                youTubePlayer.loadVideo(youtubeVideoID, 0f)
             }
         })
 
@@ -105,8 +107,10 @@ class DetailedMovieActivity : AppCompatActivity() {
         DateLoader.getRequestedMovieTrailerByID(id,HomeFragment.API_KEY,object : FutureCallbackMovieTrailerByIDBridge{
             override fun onResponseMovieTrailerByID(response: MovieTrailerModeByID) {
                 d("dfsdfhghffsdf",response.toString())
-                (0 until response.results.size).forEach{
 
+                (0 until response.results.size).forEach{
+                    youtubeVideoID = if (response.results[it].size==1080) response.results[it].key
+                    else "hfhsd"
                 }
 
 
