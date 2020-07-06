@@ -39,9 +39,10 @@ class DetailedMovieActivity : AppCompatActivity() {
         castAdapter = CastAdapter(castList)
         castRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         castRecyclerView.adapter = castAdapter
+
+        //Player
         val youTubePlayerView = findViewById<YouTubePlayerView>(R.id.youtube_player_view)
         lifecycle.addObserver(youTubePlayerView)
-
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = "ou7KSmfC3lA"
