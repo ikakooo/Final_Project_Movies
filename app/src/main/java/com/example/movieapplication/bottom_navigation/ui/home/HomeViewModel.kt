@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapplication.network_https.DateLoader
-import com.example.movieapplication.network_https.FutureCallbackMoviesBridge
-import com.example.movieapplication.network_https.models.MainMovieModel
-import com.example.movieapplication.network_https.models.Movies
+import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
+import com.example.movieapplication.bottom_navigation.ui.home.models.MainMovieModel
+import com.example.movieapplication.bottom_navigation.ui.home.models.Movies
 
 class HomeViewModel : ViewModel() {
 
@@ -33,7 +33,8 @@ class HomeViewModel : ViewModel() {
     private fun getPostsTopToday(page: String) {
         DateLoader.getRequestTopToday(
             HomeFragment.API_KEY, page,
-            object : FutureCallbackMoviesBridge {
+            object :
+                FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _topTodayMoviesLiveData.value = response.results.toMutableList()
                 }
@@ -49,7 +50,8 @@ class HomeViewModel : ViewModel() {
         DateLoader.getRequestPopular(
             HomeFragment.API_KEY, page,
 
-            object : FutureCallbackMoviesBridge {
+            object :
+                FutureCallbackMoviesBridge {
 
                 override fun onResponse(response: MainMovieModel) {
                     _popularMoviesLiveData.value = response.results.toMutableList()
@@ -63,7 +65,8 @@ class HomeViewModel : ViewModel() {
     private fun getPostsTopRated(page: String) {
         DateLoader.getRequestTopRated(
             HomeFragment.API_KEY, page,
-            object : FutureCallbackMoviesBridge {
+            object :
+                FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _topRatedMoviesLiveData.value = response.results.toMutableList()
                 }
@@ -77,7 +80,8 @@ class HomeViewModel : ViewModel() {
     private fun getPostsUpComing(page: String) {
         DateLoader.getRequestUpComing(
             HomeFragment.API_KEY, page,
-            object : FutureCallbackMoviesBridge {
+            object :
+                FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _upComingMoviesLiveData.value = response.results.toMutableList()
                 }

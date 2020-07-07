@@ -12,9 +12,9 @@ import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
 import com.example.movieapplication.network_https.DateLoader
-import com.example.movieapplication.network_https.FutureCallbackCastBridge
-import com.example.movieapplication.network_https.FutureCallbackMovieTrailerByIDBridge
-import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByIDBridge
+import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackCastBridge
+import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMovieTrailerByIDBridge
+import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesSearchByIDBridge
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
@@ -75,7 +75,8 @@ class DetailedMovieActivity : AppCompatActivity() {
     private fun getPostsDetailedMovie(id: Int) {
         DateLoader.getRequestedMovieByID(
             id, HomeFragment.API_KEY,
-            object : FutureCallbackMoviesSearchByIDBridge {
+            object :
+                FutureCallbackMoviesSearchByIDBridge {
                 @SuppressLint("SetTextI18n")
                 override fun onResponseSearchedByID(response: MovieSearchResultModelByID) {
                     d("fsfesefesfsf", response.toString())
@@ -97,7 +98,8 @@ class DetailedMovieActivity : AppCompatActivity() {
     }
 
     private  fun getPostsDetailedCast(id: Int){
-        DateLoader.getRequestedCastByID(id,HomeFragment.API_KEY,object : FutureCallbackCastBridge{
+        DateLoader.getRequestedCastByID(id,HomeFragment.API_KEY,object :
+            FutureCallbackCastBridge {
             override fun onResponseCastByID(response: MovieCastResponse) {
                   d("dfsdfsdf",response.toString())
                 val size = response.cast?.size.toString().toInt()
@@ -117,7 +119,8 @@ class DetailedMovieActivity : AppCompatActivity() {
     }
 
     private  fun getPostsDetailedTrailer(id: Int){
-        DateLoader.getRequestedMovieTrailerByID(id,HomeFragment.API_KEY,object : FutureCallbackMovieTrailerByIDBridge{
+        DateLoader.getRequestedMovieTrailerByID(id,HomeFragment.API_KEY,object :
+            FutureCallbackMovieTrailerByIDBridge {
             override fun onResponseMovieTrailerByID(response: MovieTrailerModeByID) {
                 d("dfsdfhghffsdf",response.toString())
 

@@ -16,7 +16,7 @@ import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayA
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.UpcomingAdapter
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
-import com.example.movieapplication.network_https.models.Movies
+import com.example.movieapplication.bottom_navigation.ui.home.models.Movies
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {

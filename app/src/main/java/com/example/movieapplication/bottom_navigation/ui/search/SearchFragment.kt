@@ -18,7 +18,7 @@ import com.example.movieapplication.bottom_navigation.ui.search.models.SearchRes
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
-import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByNameBridge
+import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesSearchByNameBridge
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment() {
@@ -81,7 +81,8 @@ class SearchFragment : Fragment() {
 
         DateLoader.getRequestSearchedMoviesByName(
             HomeFragment.API_KEY, movieNameString,
-            object : FutureCallbackMoviesSearchByNameBridge {
+            object :
+                FutureCallbackMoviesSearchByNameBridge {
                 override fun onResponseSearchedByName(response: ByNameSearchResultModel) {
                     d("sffdjsdsdfdfgfsdfs", response.toString())
                     searchResultByNameMoviesList.clear()

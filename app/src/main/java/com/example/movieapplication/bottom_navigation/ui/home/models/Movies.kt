@@ -1,4 +1,4 @@
-package com.example.movieapplication.network_https.models
+package com.example.movieapplication.bottom_navigation.ui.home.models
 
 
 data class Movies(

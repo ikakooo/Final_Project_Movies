@@ -1,17 +1,6 @@
 package com.example.movieapplication.bottom_navigation.ui.search
 
-import android.util.Log.d
-import android.widget.Button
-import android.widget.EditText
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
-import com.example.movieapplication.bottom_navigation.ui.search.models.ByNameSearchResultModel
-import com.example.movieapplication.bottom_navigation.ui.search.models.SearchResultModelResultList
-import com.example.movieapplication.network_https.DateLoader
-import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByNameBridge
 
 
 class SearchViewModel : ViewModel() {
