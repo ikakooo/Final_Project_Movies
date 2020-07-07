@@ -182,19 +182,19 @@ object DateLoader {
         })
     }
 
-    fun getPopularActors(page: String, key: String, callback:ActorsCallback){
+    fun getPopularActors(page: String, key: String, callbackFutureCallback:FutureCallbackActorsCallbackBridge){
         val call = service.getPopularActors(key, page)
         call.enqueue(object : Callback<ActorsResponse>{
 
             override fun onFailure(call: Call<ActorsResponse>, t: Throwable) {
-                callback.onFailure(t.message.toString())
+                callbackFutureCallback.onFailure(t.message.toString())
             }
 
             override fun onResponse(
                 call: Call<ActorsResponse>,
                 response: Response<ActorsResponse>
             ) {
-                response.body()?.let { callback.onResponseActor(it) }
+                response.body()?.let { callbackFutureCallback.onResponseActor(it) }
             }
 
         })
