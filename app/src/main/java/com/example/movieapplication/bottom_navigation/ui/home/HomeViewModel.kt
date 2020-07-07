@@ -6,28 +6,28 @@ import androidx.lifecycle.ViewModel
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackMoviesBridge
 import com.example.movieapplication.network_https.models.MainMovieModel
-import com.example.movieapplication.network_https.models.movie
+import com.example.movieapplication.network_https.models.Movies
 
 class HomeViewModel : ViewModel() {
 
 
-    private val _topTodayMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
+    private val _topTodayMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
         getPostsTopToday("1")
     }
-    private val _popularMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
+    private val _popularMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
         getPostsPopular("1")
     }
-    private val _topRatedMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
+    private val _topRatedMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
         getPostsTopRated("1")
     }
-    private val _upComingMoviesLiveData = MutableLiveData<MutableList<movie>>().apply {
+    private val _upComingMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
         getPostsUpComing("1")
     }
 
-    val topTodayMoviesLiveData: LiveData<MutableList<movie>> = _topTodayMoviesLiveData
-    val topRatedMoviesLiveData: LiveData<MutableList<movie>> = _topRatedMoviesLiveData
-    val popularMoviesLiveData: LiveData<MutableList<movie>> = _popularMoviesLiveData
-    val upComingMoviesLiveData: LiveData<MutableList<movie>> = _upComingMoviesLiveData
+    val topTodayMoviesLiveData: LiveData<MutableList<Movies>> = _topTodayMoviesLiveData
+    val topRatedMoviesLiveData: LiveData<MutableList<Movies>> = _topRatedMoviesLiveData
+    val popularMoviesLiveData: LiveData<MutableList<Movies>> = _popularMoviesLiveData
+    val upComingMoviesLiveData: LiveData<MutableList<Movies>> = _upComingMoviesLiveData
 
 
     private fun getPostsTopToday(page: String) {

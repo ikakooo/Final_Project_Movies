@@ -16,21 +16,21 @@ import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayA
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.UpcomingAdapter
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
-import com.example.movieapplication.network_https.models.movie
+import com.example.movieapplication.network_https.models.Movies
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
-    private var topTodayMoviesList = mutableListOf<movie>()
+    private var topTodayMoviesList = mutableListOf<Movies>()
     private lateinit var topTodayAdapter: TopTodayAdapter
 
-    private var popularMoviesList = mutableListOf<movie>()
+    private var popularMoviesList = mutableListOf<Movies>()
     private lateinit var popularAdapter: PopularAdapter
 
-    private var topRatedMoviesList = mutableListOf<movie>()
+    private var topRatedMoviesList = mutableListOf<Movies>()
     private lateinit var topRatedAdapter: TopRatedAdapter
 
-    private var upComingMoviesList = mutableListOf<movie>()
+    private var upComingMoviesList = mutableListOf<Movies>()
     private lateinit var upComingAdapter: UpcomingAdapter
 
     private lateinit var homeViewModel: HomeViewModel

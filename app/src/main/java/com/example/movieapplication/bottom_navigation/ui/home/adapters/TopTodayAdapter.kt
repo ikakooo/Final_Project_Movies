@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
-import com.example.movieapplication.network_https.models.movie
+import com.example.movieapplication.network_https.models.Movies
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class TopTodayAdapter(val topTodayMoviesList: MutableList<movie>, val detailedMovieListener: DetailedMovieListener) :
+class TopTodayAdapter(val topTodayMoviesList: MutableList<Movies>, val detailedMovieListener: DetailedMovieListener) :
     RecyclerView.Adapter<TopTodayAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
@@ -34,7 +34,7 @@ class TopTodayAdapter(val topTodayMoviesList: MutableList<movie>, val detailedMo
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private lateinit var model: movie
+        private lateinit var model: Movies
 
         fun onBind() {
             model = topTodayMoviesList[adapterPosition]
