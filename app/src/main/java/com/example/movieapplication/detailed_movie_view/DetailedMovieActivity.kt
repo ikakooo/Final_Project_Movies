@@ -1,4 +1,4 @@
-package com.example.movieapplication.detailed_view
+package com.example.movieapplication.detailed_movie_view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
-import com.example.movieapplication.detailed_view.model.MovieCastResponse
-import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
-import com.example.movieapplication.detailed_view.model.MovieTrailerModeByID
+import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
+import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
+import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackCastBridge
 import com.example.movieapplication.network_https.FutureCallbackMovieTrailerByIDBridge

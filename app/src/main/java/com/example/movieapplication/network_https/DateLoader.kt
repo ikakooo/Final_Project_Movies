@@ -2,11 +2,12 @@ package com.example.movieapplication.network_https
 
 
 import android.util.Log
+import com.example.movieapplication.bottom_navigation.ui.actors.ActorsResponse
 import com.example.movieapplication.bottom_navigation.ui.search.models.ByNameSearchResultModel
-import com.example.movieapplication.detailed_view.model.MovieCastResponse
+import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.network_https.models.MainMovieModel
-import com.example.movieapplication.detailed_view.model.MovieSearchResultModelByID
-import com.example.movieapplication.detailed_view.model.MovieTrailerModeByID
+import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
+import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -181,6 +182,24 @@ object DateLoader {
         })
     }
 
+    fun getPopularActors(page: String, key: String, callback:ActorsCallback){
+        val call = service.getPopularActors(key, page)
+        call.enqueue(object : Callback<ActorsResponse>{
+
+            override fun onFailure(call: Call<ActorsResponse>, t: Throwable) {
+                callback.onFailure(t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<ActorsResponse>,
+                response: Response<ActorsResponse>
+            ) {
+                response.body()?.let { callback.onResponseActor(it) }
+            }
+
+        })
+    }
+
 
 
     fun getRequestedMovieTrailerByID(
@@ -259,6 +278,12 @@ object DateLoader {
             @Query("api_key") key: String
 
         ):Call<MovieTrailerModeByID>
+
+        @GET("3/person/popular")
+        fun getPopularActors(
+            @Query("api_key") key : String,
+            @Query("page") page : String
+        ) : Call<ActorsResponse>
     }
 
 }

@@ -10,12 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
-import com.example.movieapplication.detailed_view.DetailedMovieListener
-import com.example.movieapplication.network_https.models.movie
+import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import kotlinx.android.synthetic.main.fragment_actors.view.*
 
 class ActorsFragment : Fragment() {
-    private var actorsList = mutableListOf<movie>()
+    private var actorsList = mutableListOf<ActorsResponse.Actor>()
     private lateinit var actorsAdapter: ActorsAdapter
 
     private lateinit var actorsViewModel: ActorsViewModel
@@ -33,11 +32,15 @@ class ActorsFragment : Fragment() {
         actorsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        actorsViewModel.popularActorsLiveData.observe(viewLifecycleOwner, Observer{
+
+        })
         return root
     }
 
     private fun init(root:View){
-        actorsAdapter = ActorsAdapter(actorsList, object:DetailedMovieListener{
+        actorsAdapter = ActorsAdapter(actorsList, object: DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
 
             }

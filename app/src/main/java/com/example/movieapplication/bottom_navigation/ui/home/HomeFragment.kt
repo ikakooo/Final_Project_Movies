@@ -14,8 +14,8 @@ import com.example.movieapplication.bottom_navigation.ui.home.adapters.PopularAd
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopRatedAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.UpcomingAdapter
-import com.example.movieapplication.detailed_view.DetailedMovieActivity
-import com.example.movieapplication.detailed_view.DetailedMovieListener
+import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
+import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.models.movie
 import kotlinx.android.synthetic.main.fragment_home.view.*
 

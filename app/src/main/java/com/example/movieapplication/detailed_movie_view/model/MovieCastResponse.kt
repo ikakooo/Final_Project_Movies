@@ -1,4 +1,4 @@
-package com.example.movieapplication.detailed_view.model
+package com.example.movieapplication.detailed_movie_view.model
 
 
 data class MovieCastResponse(

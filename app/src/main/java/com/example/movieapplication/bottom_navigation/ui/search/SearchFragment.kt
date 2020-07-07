@@ -15,8 +15,8 @@ import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
 import com.example.movieapplication.bottom_navigation.ui.search.models.ByNameSearchResultModel
 import com.example.movieapplication.bottom_navigation.ui.search.models.SearchResultModelResultList
-import com.example.movieapplication.detailed_view.DetailedMovieActivity
-import com.example.movieapplication.detailed_view.DetailedMovieListener
+import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
+import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByNameBridge
 import kotlinx.android.synthetic.main.fragment_search.view.*
