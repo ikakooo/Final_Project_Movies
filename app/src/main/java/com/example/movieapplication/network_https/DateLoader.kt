@@ -188,20 +188,20 @@ object DateLoader {
     fun getPopularActors(
         page: String,
         key: String,
-        callbackFutureCallback: FutureCallbackActorsCallbackBridge
+        callbackFutureCallbackActors: FutureCallbackActorsBridge
     ) {
         val call = service.getPopularActors(key, page)
         call.enqueue(object : Callback<ActorsResponse> {
 
             override fun onFailure(call: Call<ActorsResponse>, t: Throwable) {
-                callbackFutureCallback.onFailure(t.message.toString())
+                callbackFutureCallbackActors.onFailure(t.message.toString())
             }
 
             override fun onResponse(
                 call: Call<ActorsResponse>,
                 response: Response<ActorsResponse>
             ) {
-                response.body()?.let { callbackFutureCallback.onResponseActor(it) }
+                response.body()?.let { callbackFutureCallbackActors.onResponseActor(it) }
             }
 
         })
