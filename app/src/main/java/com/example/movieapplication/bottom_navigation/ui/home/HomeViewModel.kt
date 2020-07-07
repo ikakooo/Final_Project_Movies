@@ -12,16 +12,16 @@ class HomeViewModel : ViewModel() {
 
 
     private val _topTodayMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsTopToday("1")
+        getPostsTopToday()
     }
     private val _popularMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsPopular("1")
+        getPostsPopular()
     }
     private val _topRatedMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsTopRated("1")
+        getPostsTopRated()
     }
     private val _upComingMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsUpComing("1")
+        getPostsUpComing()
     }
 
     val topTodayMoviesLiveData: LiveData<MutableList<Movies>> = _topTodayMoviesLiveData
@@ -30,9 +30,9 @@ class HomeViewModel : ViewModel() {
     val upComingMoviesLiveData: LiveData<MutableList<Movies>> = _upComingMoviesLiveData
 
 
-    private fun getPostsTopToday(page: String) {
+    private fun getPostsTopToday() {
         DateLoader.getRequestTopToday(
-            HomeFragment.API_KEY, page,
+            HomeFragment.API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
@@ -45,10 +45,10 @@ class HomeViewModel : ViewModel() {
     }
 
 
-    private fun getPostsPopular(page: String) {
+    private fun getPostsPopular() {
 
         DateLoader.getRequestPopular(
-            HomeFragment.API_KEY, page,
+            HomeFragment.API_KEY, "1",
 
             object :
                 FutureCallbackMoviesBridge {
@@ -62,9 +62,9 @@ class HomeViewModel : ViewModel() {
         )
     }
 
-    private fun getPostsTopRated(page: String) {
+    private fun getPostsTopRated() {
         DateLoader.getRequestTopRated(
-            HomeFragment.API_KEY, page,
+            HomeFragment.API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
@@ -77,9 +77,9 @@ class HomeViewModel : ViewModel() {
     }
 
 
-    private fun getPostsUpComing(page: String) {
+    private fun getPostsUpComing() {
         DateLoader.getRequestUpComing(
-            HomeFragment.API_KEY, page,
+            HomeFragment.API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {

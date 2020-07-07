@@ -42,9 +42,6 @@ class ActorsAdapter(private val actorsList: MutableList<ActorsResponse.Actor>, v
             itemView.setOnClickListener {
                 detailedMovieListener.detailedViewClick(adapterPosition)
             }
-
         }
-
     }
-
 }

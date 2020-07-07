@@ -52,7 +52,7 @@ class DetailedMovieActivity : AppCompatActivity() {
                    val loader = object : Thread(){
                        override fun run() {
                            try {
-                               Thread.sleep(200)
+                               sleep(200)
                                d("fjsdfksdf",youtubeVideoID.toString())
                                youTubePlayer.loadVideo(youtubeVideoID.toString(), 0f)
 
@@ -103,7 +103,7 @@ class DetailedMovieActivity : AppCompatActivity() {
             override fun onResponseCastByID(response: MovieCastResponse) {
                   d("dfsdfsdf",response.toString())
                 val size = response.cast?.size.toString().toInt()
-                (0 until size).forEach{ it->
+                (0 until size).forEach{
                     castList.add(MovieCastResponse.MovieCast(
                         response.cast?.get(it)?.cast_id.toString().toInt(),
                         response.cast?.get(it)?.name.toString(),
