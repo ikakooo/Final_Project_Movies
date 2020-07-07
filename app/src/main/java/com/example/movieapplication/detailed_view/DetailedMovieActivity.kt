@@ -2,7 +2,6 @@ package com.example.movieapplication.detailed_view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log.d
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,14 +17,13 @@ import com.example.movieapplication.network_https.FutureCallbackMovieTrailerByID
 import com.example.movieapplication.network_https.FutureCallbackMoviesSearchByIDBridge
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
 
 
 class DetailedMovieActivity : AppCompatActivity() {
     private var castList = mutableListOf<MovieCastResponse.MovieCast>()
     lateinit var castAdapter: CastAdapter
-    lateinit var youtubeVideoID: String
+    var youtubeVideoID: String? = null
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,18 +44,29 @@ class DetailedMovieActivity : AppCompatActivity() {
         castRecyclerView.adapter = castAdapter
 
         //Player
-       Handler().postDelayed({
+
            lifecycle.addObserver(youtube_player_view)
            youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                override fun onReady(youTubePlayer: YouTubePlayer) {
-                   val videoId = "ou7KSmfC3lA"
-                   d("fjsdfksdf",youtubeVideoID.toString())
-                   youTubePlayer.loadVideo(youtubeVideoID, 0f)
+
+                   val loader = object : Thread(){
+                       override fun run() {
+                           try {
+                               Thread.sleep(200)
+                               d("fjsdfksdf",youtubeVideoID.toString())
+                               youTubePlayer.loadVideo(youtubeVideoID.toString(), 0f)
+
+                           }catch (e: Exception){
+                               e.printStackTrace()
+                           }
+                       }
+                   }
+                   loader.start()
                }
            })
 
 
-       },3000)
+
 
 
 
@@ -112,9 +121,11 @@ class DetailedMovieActivity : AppCompatActivity() {
             override fun onResponseMovieTrailerByID(response: MovieTrailerModeByID) {
                 d("dfsdfhghffsdf",response.toString())
 
-                (0 until response.results.size).forEach{
-                    youtubeVideoID = if (response.results[it].size==1080) response.results[it].key
-                    else response.results[it].key
+               (0 until response.results.size).forEach {
+                   if (response.results[it].size==1080) {youtubeVideoID =  response.results[it].key
+                       return@onResponseMovieTrailerByID
+                   }
+                    else youtubeVideoID =  response.results[it].key
 
                 }
 
