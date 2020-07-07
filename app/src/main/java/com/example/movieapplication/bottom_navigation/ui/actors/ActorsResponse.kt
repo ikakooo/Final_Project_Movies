@@ -9,7 +9,5 @@ data class ActorsResponse(
                      var profile_path : String,
                      var popularity:Number,
                      var birthday:String,
-                     var biography:String) {
-
-    }
+                     var biography:String)
 }

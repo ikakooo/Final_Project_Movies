@@ -16,11 +16,6 @@ class ActorsViewModel : ViewModel() {
         getPopularActors("1")
     }
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "Actors"
-    }
-    val text: LiveData<String> = _text
-
     val popularActorsLiveData:LiveData<MutableList<ActorsResponse.Actor>> = _popularActorsLiveData
 
     private fun getPopularActors(page:String){
