@@ -1,5 +1,6 @@
 package com.example.movieapplication.bottom_navigation.ui.actors
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapplication.R
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import kotlinx.android.synthetic.main.fragment_actors.view.*
@@ -38,12 +39,18 @@ class ActorsFragment : Fragment() {
     private fun init(root:View){
         actorsAdapter = ActorsAdapter(actorsList, object: DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
-
+                val actor = actorsList[position]
+                val intent = Intent(context, DetailedActorsActivity::class.java)
+                intent.putExtra("name", actor.name)
+                intent.putExtra("id", actor.id)
+                intent.putExtra("path", actor.profile_path)
+                intent.putExtra("birthday", actor.birthday)
+                startActivity(intent)
             }
 
         })
 
-        root.actorsRecyclerView.layoutManager = LinearLayoutManager(context)
+        root.actorsRecyclerView.layoutManager = GridLayoutManager(context, 2)
         root.actorsRecyclerView.isNestedScrollingEnabled = true
         root.actorsRecyclerView.setHasFixedSize(false)
         root.actorsRecyclerView.adapter = actorsAdapter

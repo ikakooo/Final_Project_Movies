@@ -9,7 +9,7 @@ import com.example.movieapplication.R
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class CastAdapter(val castList: MutableList<MovieCastResponse.MovieCast>) :
+class CastAdapter(val castList: MutableList<MovieCastResponse.MovieCast>, val detailedMovieListener: DetailedMovieListener) :
     RecyclerView.Adapter<CastAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
@@ -40,6 +40,9 @@ class CastAdapter(val castList: MutableList<MovieCastResponse.MovieCast>) :
             itemView.title.text = model.name
             Glide.with(itemView.context).load(imgBaseURL + model.profile_path)
                 .into(itemView.moviesImageViewID)
+            itemView.setOnClickListener{
+                detailedMovieListener.detailedViewClick(adapterPosition)
+            }
         }
 
     }

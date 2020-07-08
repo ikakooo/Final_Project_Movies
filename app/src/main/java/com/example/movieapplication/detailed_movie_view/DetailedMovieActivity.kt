@@ -1,12 +1,14 @@
 package com.example.movieapplication.detailed_movie_view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
+import com.example.movieapplication.bottom_navigation.ui.actors.DetailedActorsActivity
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
@@ -39,7 +41,15 @@ class DetailedMovieActivity : AppCompatActivity() {
         getPostsDetailedMovie(movieID.toInt())
         getPostsDetailedCast(movieID.toInt())
         getPostsDetailedTrailer(movieID.toInt())
-        castAdapter = CastAdapter(castList)
+        castAdapter = CastAdapter(castList, object : DetailedMovieListener{
+            override fun detailedViewClick(position: Int) {
+                val castMember = castList[position]
+                val intent = Intent(applicationContext, DetailedActorsActivity::class.java)
+                intent.putExtra("name", castMember.name)
+                startActivity(intent)
+            }
+
+        })
         castRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         castRecyclerView.adapter = castAdapter
 
