@@ -32,6 +32,17 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp"
             android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/PopularityActorTitleID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>

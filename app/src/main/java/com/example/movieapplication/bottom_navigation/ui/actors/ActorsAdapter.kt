@@ -3,6 +3,7 @@ package com.example.movieapplication.bottom_navigation.ui.actors
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
@@ -38,6 +39,8 @@ class ActorsAdapter(private val actorsList: MutableList<ActorsResponse.Actor>, v
         fun onBind() {
             model = actorsList[adapterPosition]
             itemView.title.text = model.name
+            itemView.PopularityActorTitleID.isVisible = true
+            itemView.PopularityActorTitleID.text = model.popularity.toString()
             Glide.with(itemView.context).load(imgBaseURL + model.profile_path).into(itemView.moviesImageViewID)
             itemView.setOnClickListener {
                 detailedMovieListener.detailedViewClick(adapterPosition)
