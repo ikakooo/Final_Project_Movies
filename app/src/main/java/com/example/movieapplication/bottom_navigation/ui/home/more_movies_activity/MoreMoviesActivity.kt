@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_more_movies.*
 class MoreMoviesActivity : AppCompatActivity() {
     private var allMoviesList = mutableListOf<Movies>()
     private lateinit var allMoviesAdapter: MoreMoviesRecyclerviewAdapter
-
+    private var pagesCountForAddingItems = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_movies)
@@ -38,30 +38,18 @@ class MoreMoviesActivity : AppCompatActivity() {
                 } })
         MoreMoviesRecyclerviewID.layoutManager = GridLayoutManager(this, 2)
         MoreMoviesRecyclerviewID.adapter = allMoviesAdapter
+        dynamicHttpRequesting(pagesCountForAddingItems.toString())
+        pagesCountForAddingItems++
 
-        when (intent.extras!!.getString("ContentName", "AllTopToday")) {
-            "AllTopToday" -> {
-                getPostsTopToday()
-
-            }
-            "AllPopular" -> {
-                getPostsPopular()
-            }
-            "AllTopRated" -> {
-                getPostsTopRated()
-            }
-            "AllUpComing" -> {
-                getPostsUpComing()
-            }
-        }
 
         MoreMoviesRecyclerviewID.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    d("-----", "end")
-                    d("jfkefjerfjerk",newState.toString())
+                    dynamicHttpRequesting(pagesCountForAddingItems.toString())
+                    pagesCountForAddingItems++
+
                 }
             }
         })
@@ -69,12 +57,28 @@ class MoreMoviesActivity : AppCompatActivity() {
 
 
     }
+    private fun dynamicHttpRequesting(page:String){
+        when (intent.extras!!.getString("ContentName", "AllTopToday")) {
+            "AllTopToday" -> {
+                getPostsTopToday(page)
+
+            }
+            "AllPopular" -> {
+                getPostsPopular(page)
+            }
+            "AllTopRated" -> {
+                getPostsTopRated(page)
+            }
+            "AllUpComing" -> {
+                getPostsUpComing(page)
+            }
+        }
+    }
 
 
-
-    private fun getPostsTopToday() {
+    private fun getPostsTopToday(page:String) {
         DateLoader.getRequestTopToday(
-            HomeFragment.API_KEY, "1",
+            HomeFragment.API_KEY, page,
             object : FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     d("jfkefjerfjerk", response.results.toString())
@@ -84,10 +88,10 @@ class MoreMoviesActivity : AppCompatActivity() {
                 override fun onFailure(error: String) {
                 } })
     }
-    private fun getPostsPopular() {
+    private fun getPostsPopular(page:String) {
 
         DateLoader.getRequestPopular(
-            HomeFragment.API_KEY, "1",
+            HomeFragment.API_KEY, page,
 
             object :
                 FutureCallbackMoviesBridge {
@@ -101,9 +105,9 @@ class MoreMoviesActivity : AppCompatActivity() {
             }
         )
     }
-    private fun getPostsTopRated() {
+    private fun getPostsTopRated(page:String) {
         DateLoader.getRequestTopRated(
-            HomeFragment.API_KEY, "1",
+            HomeFragment.API_KEY, page,
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
@@ -115,9 +119,9 @@ class MoreMoviesActivity : AppCompatActivity() {
             }
         )
     }
-    private fun getPostsUpComing() {
+    private fun getPostsUpComing(page:String) {
         DateLoader.getRequestUpComing(
-            HomeFragment.API_KEY, "1",
+            HomeFragment.API_KEY, page,
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
