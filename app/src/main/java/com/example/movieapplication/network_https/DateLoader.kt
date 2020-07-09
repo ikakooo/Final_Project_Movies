@@ -66,6 +66,7 @@ object DateLoader {
             override fun onResponse(
                 call: Call<MainMovieModel>,
                 response: Response<MainMovieModel>
+
             ) {
                 response.body()?.let { callback.onResponse(it) }
                 Log.d("Popular", response.body().toString())

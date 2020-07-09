@@ -9,12 +9,14 @@
     app:cardCornerRadius="10dp"
     app:cardElevation="2dp">
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:ignore="UseCompoundDrawables">
-
-
+            android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/moviesImageViewID"
                 android:layout_width="match_parent"
@@ -44,7 +46,15 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/deleteFavourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_forward_24"
+                android:layout_gravity="bottom|end"/>
+        </FrameLayout>
+
+    </LinearLayout>
 
 
 

@@ -52,6 +52,7 @@ class HomeViewModel : ViewModel() {
 
                 override fun onResponse(response: MainMovieModel) {
                     _popularMoviesLiveData.value = response.results.toMutableList()
+
                 }
                 override fun onFailure(error: String) {
                 }

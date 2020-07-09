@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -20,6 +22,7 @@ import com.example.movieapplication.network_https.futurecallbacks.FutureCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
+import kotlinx.android.synthetic.main.items_layout.*
 
 
 class DetailedMovieActivity : AppCompatActivity() {
@@ -33,6 +36,9 @@ class DetailedMovieActivity : AppCompatActivity() {
         init()
     }
     private fun init(){
+
+
+
         var movieID = intent.getStringExtra("movieID")
         d("sdfdfdsf", movieID.toString())
         val originalTitle = intent.getStringExtra("name")
@@ -92,14 +98,16 @@ class DetailedMovieActivity : AppCompatActivity() {
                     d("fsfesefesfsf", response.toString())
                     titleDetailedTextViewID.text = response.overview
                     titleTV.text = response.original_title
-                    ratingTV.text = response.vote_average+"/10"
+                    ratingTV.rating = response.vote_average.toFloat()
                     (0 until response.genres.size).forEach{
                         val text = genreTVID.text.toString()
                         genreTVID.text = text + " " + response.genres[it].name
                     }
                     Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
                     Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path).into(detailedBackground)
+
                 }
+
                 override fun onFailure(error: String) {
                     d("detailedResponse", error)
                 }
@@ -111,7 +119,7 @@ class DetailedMovieActivity : AppCompatActivity() {
         DateLoader.getRequestedCastByID(id,HomeFragment.API_KEY,object :
             FutureCallbackCastBridge {
             override fun onResponseCastByID(response: MovieCastResponse) {
-                  d("dfsdfsdf",response.toString())
+                d("dfsdfsdf",response.toString())
                 val size = response.cast?.size.toString().toInt()
                 (0 until size).forEach{
                     castList.add(MovieCastResponse.MovieCast(
@@ -120,8 +128,10 @@ class DetailedMovieActivity : AppCompatActivity() {
                         response.cast?.get(it)?.profile_path.toString(), response.cast?.get(it)?.id.toString()))
 
                 }
+
                 castAdapter.notifyDataSetChanged()
                 d("jakja", castList.size.toString())
+
             }
             override fun onFailure(error: String) {
             }
