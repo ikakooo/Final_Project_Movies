@@ -29,7 +29,6 @@ class MoreMoviesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_movies)
         init()
-        d("fwfwefwergrreefdssdwef","intent.getStringExtra().toString()")
     }
 
 
@@ -44,9 +43,6 @@ class MoreMoviesActivity : AppCompatActivity() {
                 } })
         MoreMoviesRecyclerviewID.layoutManager = GridLayoutManager(this, 2)
         MoreMoviesRecyclerviewID.adapter = allMoviesAdapter
-
-
-        d("fwfwefwergrreefwef",intent.getStringExtra("ContentName").toString())
 
         when (intent.extras!!.getString("ContentName", "AllTopToday")) {
             "AllTopToday" -> {
@@ -63,9 +59,6 @@ class MoreMoviesActivity : AppCompatActivity() {
                 getPostsUpComing()
             }
         }
-
-d("fwfwefwefwef",intent.extras!!.getString("ContentName", "AllTopToday"))
-
     }
 
 
@@ -77,12 +70,11 @@ d("fwfwefwefwef",intent.extras!!.getString("ContentName", "AllTopToday"))
                 override fun onResponse(response: MainMovieModel) {
                     d("jfkefjerfjerk", response.results.toString())
                     allMoviesList.addAll( response.results.toMutableList())
+                    allMoviesAdapter.notifyDataSetChanged()
                 }
                 override fun onFailure(error: String) {
                 } })
     }
-
-
     private fun getPostsPopular() {
 
         DateLoader.getRequestPopular(
@@ -92,36 +84,36 @@ d("fwfwefwefwef",intent.extras!!.getString("ContentName", "AllTopToday"))
                 FutureCallbackMoviesBridge {
 
                 override fun onResponse(response: MainMovieModel) {
-                    allMoviesList = response.results.toMutableList()
+                    allMoviesList.addAll( response.results.toMutableList())
+                    allMoviesAdapter.notifyDataSetChanged()
                 }
                 override fun onFailure(error: String) {
                 }
             }
         )
     }
-
     private fun getPostsTopRated() {
         DateLoader.getRequestTopRated(
             HomeFragment.API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
-                    allMoviesList = response.results.toMutableList()
+                    allMoviesList.addAll( response.results.toMutableList())
+                    allMoviesAdapter.notifyDataSetChanged()
                 }
                 override fun onFailure(error: String) {
                 }
             }
         )
     }
-
-
     private fun getPostsUpComing() {
         DateLoader.getRequestUpComing(
             HomeFragment.API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
-                    allMoviesList = response.results.toMutableList()
+                    allMoviesList.addAll( response.results.toMutableList())
+                    allMoviesAdapter.notifyDataSetChanged()
                 }
 
                 override fun onFailure(error: String) {}
