@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".bottom_navigation.ui.home.more_movies_activity.MoreMoviesActivity"></activity>
         <activity android:name=".bottom_navigation.ui.actors.DetailedActorsActivity" />
         <activity android:name=".detailed_movie_view.DetailedMovieActivity" />
         <activity

@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
+import com.example.movieapplication.bottom_navigation.ui.actors.DetailedActorsActivity
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.PopularAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopRatedAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayAdapter
@@ -17,6 +19,8 @@ import com.example.movieapplication.bottom_navigation.ui.home.adapters.UpcomingA
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.bottom_navigation.ui.home.models.Movies
+import com.example.movieapplication.bottom_navigation.ui.home.more_movies_activity.MoreMoviesActivity
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -50,7 +54,7 @@ class HomeFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
         init(root)
-
+        goToMoreMoviesOnClick(root)
 
         homeViewModel.topTodayMoviesLiveData.observe(viewLifecycleOwner, Observer {
             topTodayMoviesList.addAll(it)
@@ -141,14 +145,30 @@ class HomeFragment : Fragment() {
                 intent.putExtra("movieID", upcomingMovie.id)
                 startActivity(intent)
             }
-
         })
-        root.upcomingRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.upcomingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.upcomingRecyclerView.isNestedScrollingEnabled = false
         root.upcomingRecyclerView.setHasFixedSize(false)
         root.upcomingRecyclerView.adapter = upComingAdapter
 
 
     }
+
+
+    private fun goToMoreMoviesOnClick(root: View){
+       fun ImageView.customOnClickListener(ContentNameString:String){
+           setOnClickListener{
+               val intent = Intent(context, MoreMoviesActivity::class.java)
+               intent.putExtra("ContentName", ContentNameString)
+               startActivity(intent)
+           }
+
+       }
+        root.AllTopTodayButtonID.customOnClickListener("AllTopToday")
+        root.AllPopularButtonID.customOnClickListener("AllPopular")
+        root.AllTopRatedButtonID.customOnClickListener("AllTopRated")
+        root.AllUpComingButtonID.customOnClickListener("AllUpComing")
+    }
+
+
 }

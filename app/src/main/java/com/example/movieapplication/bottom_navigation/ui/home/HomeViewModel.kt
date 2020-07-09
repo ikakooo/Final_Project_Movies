@@ -33,15 +33,12 @@ class HomeViewModel : ViewModel() {
     private fun getPostsTopToday() {
         DateLoader.getRequestTopToday(
             HomeFragment.API_KEY, "1",
-            object :
-                FutureCallbackMoviesBridge {
+            object : FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _topTodayMoviesLiveData.value = response.results.toMutableList()
                 }
                 override fun onFailure(error: String) {
-                }
-            }
-        )
+                } })
     }
 
 
