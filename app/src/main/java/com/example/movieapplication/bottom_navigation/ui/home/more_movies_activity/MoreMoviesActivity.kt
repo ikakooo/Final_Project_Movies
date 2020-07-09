@@ -29,6 +29,7 @@ class MoreMoviesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_movies)
         init()
+        d("fwfwefwergrreefdssdwef","intent.getStringExtra().toString()")
     }
 
 
@@ -45,7 +46,7 @@ class MoreMoviesActivity : AppCompatActivity() {
         MoreMoviesRecyclerviewID.adapter = allMoviesAdapter
 
 
-
+        d("fwfwefwergrreefwef",intent.getStringExtra("ContentName").toString())
 
         when (intent.extras!!.getString("ContentName", "AllTopToday")) {
             "AllTopToday" -> {
