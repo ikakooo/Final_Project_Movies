@@ -1,25 +1,20 @@
 package com.example.movieapplication.bottom_navigation.ui.home.more_movies_activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.ui.actors.ActorsAdapter
-import com.example.movieapplication.bottom_navigation.ui.actors.DetailedActorsActivity
 import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
-import com.example.movieapplication.bottom_navigation.ui.home.adapters.TopTodayAdapter
 import com.example.movieapplication.bottom_navigation.ui.home.models.MainMovieModel
 import com.example.movieapplication.bottom_navigation.ui.home.models.Movies
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
-import kotlinx.android.synthetic.main.activity_detailed_movie.*
 import kotlinx.android.synthetic.main.activity_more_movies.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class MoreMoviesActivity : AppCompatActivity() {
     private var allMoviesList = mutableListOf<Movies>()
@@ -59,6 +54,20 @@ class MoreMoviesActivity : AppCompatActivity() {
                 getPostsUpComing()
             }
         }
+
+        MoreMoviesRecyclerviewID.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    d("-----", "end")
+                    d("jfkefjerfjerk",newState.toString())
+                }
+            }
+        })
+
+
+
     }
 
 
