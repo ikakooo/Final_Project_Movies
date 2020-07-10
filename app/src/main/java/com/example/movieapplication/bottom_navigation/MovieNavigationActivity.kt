@@ -33,7 +33,7 @@ class MovieNavigationActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-       // supportActionBar?.hide()
+        supportActionBar?.hide()
 
 
     }

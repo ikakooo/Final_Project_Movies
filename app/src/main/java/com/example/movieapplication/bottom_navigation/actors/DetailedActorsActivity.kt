@@ -9,6 +9,7 @@ class DetailedActorsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_actors)
+        supportActionBar?.hide()
         getActorDetails()
     }
     private fun getActorDetails(){

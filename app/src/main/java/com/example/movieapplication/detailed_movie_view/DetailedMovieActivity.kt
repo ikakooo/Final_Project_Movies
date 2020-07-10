@@ -30,6 +30,7 @@ class DetailedMovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_movie)
+        supportActionBar?.hide()
         init()
     }
     private fun init(){
