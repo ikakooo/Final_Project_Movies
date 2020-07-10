@@ -49,8 +49,7 @@ class DetailedMovieActivity : AppCompatActivity() {
             override fun detailedViewClick(position: Int) {
                 val castMember = castList[position]
                 val intent = Intent(applicationContext, DetailedActorsActivity::class.java)
-                intent.putExtra("name", castMember.name)
-                intent.putExtra("path", castMember.profile_path)
+                intent.putExtra("id", castMember.id)
                 startActivity(intent)
             }
 

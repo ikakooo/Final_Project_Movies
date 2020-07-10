@@ -2,6 +2,7 @@ package com.example.movieapplication.network_https
 
 
 import android.util.Log
+import android.util.Log.d
 import com.example.movieapplication.bottom_navigation.actors.ActorsResponse
 import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
@@ -207,6 +208,26 @@ object DateLoader {
 
         })
     }
+
+   fun getActorDetails(id: Int, key: String, callback:ActorDetailsCallback){
+      val call = service.getActorDetails(id, key)
+      call.enqueue(object :Callback<ActorsResponse.Actor>{
+          override fun onFailure(call: Call<ActorsResponse.Actor>, t: Throwable) {
+              callback.onFailure(t.message.toString())
+          }
+
+          override fun onResponse(
+              call: Call<ActorsResponse.Actor>,
+              response: Response<ActorsResponse.Actor>
+          ) {
+              response.body()?.let { callback.onResponseActorDetail(it)}
+              d("reslsklkslks", response.toString())
+          }
+
+      })
+   }
+
+
 
 
     fun getRequestedMovieTrailerByID(

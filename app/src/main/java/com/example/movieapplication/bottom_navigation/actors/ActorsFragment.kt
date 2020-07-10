@@ -43,10 +43,8 @@ class ActorsFragment : Fragment() {
                 val actor = actorsList[position]
 
                 val intent = Intent(context, DetailedActorsActivity::class.java)
-                intent.putExtra("name", actor.name)
+
                 intent.putExtra("id", actor.id)
-                intent.putExtra("path", actor.profile_path)
-                intent.putExtra("birthday", actor.birthday)
                 startActivity(intent)
             }
 
