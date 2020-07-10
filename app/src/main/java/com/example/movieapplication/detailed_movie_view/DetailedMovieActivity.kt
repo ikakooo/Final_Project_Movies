@@ -50,6 +50,7 @@ class DetailedMovieActivity : AppCompatActivity() {
                 val castMember = castList[position]
                 val intent = Intent(applicationContext, DetailedActorsActivity::class.java)
                 intent.putExtra("name", castMember.name)
+                intent.putExtra("path", castMember.profile_path)
                 startActivity(intent)
             }
 

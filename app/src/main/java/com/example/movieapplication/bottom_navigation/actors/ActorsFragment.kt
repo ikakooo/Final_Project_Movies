@@ -2,6 +2,7 @@ package com.example.movieapplication.bottom_navigation.actors
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class ActorsFragment : Fragment() {
         actorsAdapter = ActorsAdapter(actorsList, object: DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val actor = actorsList[position]
+
                 val intent = Intent(context, DetailedActorsActivity::class.java)
                 intent.putExtra("name", actor.name)
                 intent.putExtra("id", actor.id)

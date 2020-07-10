@@ -1,9 +1,9 @@
 package com.example.movieapplication.splash_screen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.MovieNavigationActivity
 
@@ -16,7 +16,7 @@ class SplashScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private var runnable= Runnable {
+    private var runnable = Runnable {
         setLoginActivity()
     }
     private var handler = Handler()
@@ -32,8 +32,6 @@ class SplashScreenActivity : AppCompatActivity() {
         handler.removeCallbacks(runnable)
 
     }
-
-
 
 
     private fun setLoginActivity() {

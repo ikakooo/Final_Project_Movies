@@ -13,4 +13,7 @@
     <string name="overview">Overview</string>
     <string name="cast">Cast</string>
     <string name="actors">Actors</string>
+    <string name="biography">Biography</string>
+    <string name="birthday">birthday</string>
+    <string name="_15_7">15.7</string>
 </resources>
