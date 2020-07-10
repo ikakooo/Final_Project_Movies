@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".bottom_navigation.ui.home.HomeFragment">
-
+    tools:context=".bottom_navigation.home.HomeFragment">
+    <include layout="@layout/toolbar_layout" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

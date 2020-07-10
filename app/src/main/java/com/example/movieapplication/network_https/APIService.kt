@@ -1,8 +1,8 @@
 package com.example.movieapplication.network_https
 
-import com.example.movieapplication.bottom_navigation.ui.actors.ActorsResponse
-import com.example.movieapplication.bottom_navigation.ui.home.models.MainMovieModel
-import com.example.movieapplication.bottom_navigation.ui.search.models.ByNameSearchResultModel
+import com.example.movieapplication.bottom_navigation.actors.ActorsResponse
+import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
+import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID

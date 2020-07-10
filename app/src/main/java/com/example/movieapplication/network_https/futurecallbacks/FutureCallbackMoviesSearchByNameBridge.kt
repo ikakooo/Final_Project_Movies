@@ -1,6 +1,6 @@
 package com.example.movieapplication.network_https.futurecallbacks
 
-import com.example.movieapplication.bottom_navigation.ui.search.models.ByNameSearchResultModel
+import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
 
 
 interface FutureCallbackMoviesSearchByNameBridge {

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.ui.MovieNavigationActivity
+import com.example.movieapplication.bottom_navigation.MovieNavigationActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

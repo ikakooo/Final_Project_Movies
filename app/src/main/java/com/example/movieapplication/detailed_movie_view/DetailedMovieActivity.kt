@@ -4,14 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
-import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.ui.actors.DetailedActorsActivity
-import com.example.movieapplication.bottom_navigation.ui.home.HomeFragment
+import com.example.movieapplication.bottom_navigation.actors.DetailedActorsActivity
+import com.example.movieapplication.bottom_navigation.home.HomeFragment
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
@@ -22,7 +20,6 @@ import com.example.movieapplication.network_https.futurecallbacks.FutureCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
-import kotlinx.android.synthetic.main.items_layout.*
 
 
 class DetailedMovieActivity : AppCompatActivity() {

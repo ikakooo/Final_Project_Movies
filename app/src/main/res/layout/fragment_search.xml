@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    tools:context=".bottom_navigation.ui.search.SearchFragment">
-
+    tools:context=".bottom_navigation.search.SearchFragment">
+    <include layout="@layout/toolbar_layout" />
     <EditText
         android:id="@+id/moviesSearchEditTextID"
         android:layout_width="match_parent"

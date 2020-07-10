@@ -1,6 +1,6 @@
 package com.example.movieapplication.network_https.futurecallbacks
 
-import com.example.movieapplication.bottom_navigation.ui.actors.ActorsResponse
+import com.example.movieapplication.bottom_navigation.actors.ActorsResponse
 
 interface FutureCallbackActorsBridge {
     fun onResponseActor(response: ActorsResponse)

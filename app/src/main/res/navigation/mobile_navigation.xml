@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.movieapplication.bottom_navigation.ui.home.HomeFragment"
+        android:name="com.example.movieapplication.bottom_navigation.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.movieapplication.bottom_navigation.ui.search.SearchFragment"
+        android:name="com.example.movieapplication.bottom_navigation.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.movieapplication.bottom_navigation.ui.actors.ActorsFragment"
+        android:name="com.example.movieapplication.bottom_navigation.actors.ActorsFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_actors" >
         <action
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.movieapplication.bottom_navigation.ui.favourites.FavouritesFragment"
+        android:name="com.example.movieapplication.bottom_navigation.favourites.FavouritesFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_favourites" />
 </navigation>

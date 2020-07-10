@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bottom_navigation.ui.home.more_movies_activity.MoreMoviesActivity"></activity>
-        <activity android:name=".bottom_navigation.ui.actors.DetailedActorsActivity" />
+        <activity android:name="com.example.movieapplication.bottom_navigation.home.more_movies_activity.MoreMoviesActivity" />
+        <activity android:name="com.example.movieapplication.bottom_navigation.actors.DetailedActorsActivity" />
         <activity android:name=".detailed_movie_view.DetailedMovieActivity" />
         <activity
-            android:name=".bottom_navigation.ui.MovieNavigationActivity"
+            android:name=".bottom_navigation.MovieNavigationActivity"
             android:label="@string/title_activity_movie_navigation" />
         <activity android:name=".splash_screen.SplashScreenActivity">
             <intent-filter>
