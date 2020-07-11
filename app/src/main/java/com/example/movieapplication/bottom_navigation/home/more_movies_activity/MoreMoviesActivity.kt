@@ -15,12 +15,14 @@ import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
 import kotlinx.android.synthetic.main.activity_more_movies.*
+import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class MoreMoviesActivity : AppCompatActivity() {
     private var allMoviesList = mutableListOf<Movies>()
     private lateinit var allMoviesAdapter: MoreMoviesRecyclerviewAdapter
     private var pagesCountForAddingItems = 1
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar!!.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_movies)
         init()
@@ -28,6 +30,7 @@ class MoreMoviesActivity : AppCompatActivity() {
 
 
     private fun init() {
+
         allMoviesAdapter = MoreMoviesRecyclerviewAdapter(allMoviesList, object : DetailedMovieListener {
                 override fun detailedViewClick(position: Int) {
                     val upcomingMovie = allMoviesList[position]
@@ -35,7 +38,7 @@ class MoreMoviesActivity : AppCompatActivity() {
                     intent.putExtra("name", upcomingMovie.original_title)
                     intent.putExtra("movieID", upcomingMovie.id)
                     startActivity(intent)
-                } })
+                }})
         MoreMoviesRecyclerviewID.layoutManager = GridLayoutManager(this, 2)
         MoreMoviesRecyclerviewID.adapter = allMoviesAdapter
         dynamicHttpRequesting(pagesCountForAddingItems.toString())

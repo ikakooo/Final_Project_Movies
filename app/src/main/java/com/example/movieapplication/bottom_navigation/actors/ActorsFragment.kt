@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapplication.R
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
+import kotlinx.android.synthetic.main.fragment_actors.*
 import kotlinx.android.synthetic.main.fragment_actors.view.*
 
 class ActorsFragment : Fragment() {
@@ -38,16 +39,18 @@ class ActorsFragment : Fragment() {
     }
 
     private fun init(root:View){
+
+        root.moreActors.setOnClickListener {
+            val intent = Intent(context, MoreActorsActivity::class.java)
+            startActivity(intent)
+        }
         actorsAdapter = ActorsAdapter(actorsList, object: DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val actor = actorsList[position]
-
                 val intent = Intent(context, DetailedActorsActivity::class.java)
-
                 intent.putExtra("id", actor.id)
                 startActivity(intent)
             }
-
         })
 
         root.actorsRecyclerView.layoutManager = GridLayoutManager(context, 2)

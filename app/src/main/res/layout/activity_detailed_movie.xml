@@ -11,11 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <FrameLayout
+        android:background="@drawable/image_overlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
+            android:background="@drawable/image_overlay"
             android:id="@+id/detailedBackground"
             android:layout_width="match_parent"
             android:layout_height="150dp"
