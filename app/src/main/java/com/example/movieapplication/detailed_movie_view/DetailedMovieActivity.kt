@@ -96,7 +96,7 @@ class DetailedMovieActivity : AppCompatActivity() {
                     d("fsfesefesfsf", response.toString())
                     titleDetailedTextViewID.text = response.overview
                     titleTV.text = response.original_title
-                    ratingTV.rating = response.vote_average.toFloat()
+                    ratingTV.text = response.vote_average
                     (0 until response.genres.size).forEach{
                         val text = genreTVID.text.toString()
                         genreTVID.text = text + " " + response.genres[it].name

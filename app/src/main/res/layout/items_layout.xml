@@ -24,16 +24,17 @@
 
             <TextView
                 android:id="@+id/title"
+                android:fontFamily="@font/bold_font"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:padding="5dp"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
             <TextView
+                android:fontFamily="@font/semi_bold_font"
                 android:id="@+id/PopularityActorTitleID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
