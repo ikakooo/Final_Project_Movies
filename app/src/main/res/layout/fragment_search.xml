@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:drawableEnd="@mipmap/round_search_black_24"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultRecyclerViewID"
