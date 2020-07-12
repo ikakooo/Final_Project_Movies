@@ -53,12 +53,12 @@ class ActorsFragment : Fragment() {
                     override fun detailedViewClick(position: Int) {
                         val actor = actorsList[position]
                         val intent = Intent(context, DetailedActorsActivity::class.java)
-                        intent.putExtra("putExtraID", actor.id)
-                        intent.putExtra("putExtraName", actor.name)
-                        intent.putExtra("putExtraProfile_path", actor.profile_path)
-                        intent.putExtra("putExtraPopularity", actor.popularity)
-                        intent.putExtra("putExtraBirthday", actor.birthday)
-                        intent.putExtra("putExtraBiography", actor.biography)
+                        intent.putExtra("id", actor.id)
+//                        intent.putExtra("putExtraName", actor.name)
+//                        intent.putExtra("putExtraProfile_path", actor.profile_path)
+//                        intent.putExtra("putExtraPopularity", actor.popularity)
+//                        intent.putExtra("putExtraBirthday", actor.birthday)
+//                        intent.putExtra("putExtraBiography", actor.biography)
                         startActivity(intent)
                     }
                 })

@@ -7,6 +7,7 @@ import com.example.movieapplication.bottom_navigation.actors.model.ActorsRespons
 import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
+import com.example.movieapplication.constants.Constants.BASE_URL_MOVIES
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
 import com.example.movieapplication.network_https.futurecallbacks.*
@@ -18,10 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object DateLoader {
-    private const val baseURLMovies = "https://api.themoviedb.org/"
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl(baseURLMovies)
+        .baseUrl(BASE_URL_MOVIES)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val service = retrofit.create(APIService::class.java)
@@ -46,7 +46,7 @@ object DateLoader {
                 response: Response<MainMovieModel>
             ) {
                 response.body()?.let { callback.onResponse(it) }
-                Log.d("topToday", response.body().toString())
+                d("topToday", response.body().toString())
             }
 
         })
@@ -70,7 +70,7 @@ object DateLoader {
 
             ) {
                 response.body()?.let { callback.onResponse(it) }
-                Log.d("Popular", response.body().toString())
+                d("Popular", response.body().toString())
             }
 
         })
@@ -93,7 +93,7 @@ object DateLoader {
                 response: Response<MainMovieModel>
             ) {
                 response.body()?.let { callback.onResponse(it) }
-                Log.d("topRated", response.body().toString())
+                d("topRated", response.body().toString())
             }
 
         })
@@ -115,7 +115,7 @@ object DateLoader {
                 response: Response<MainMovieModel>
             ) {
                 response.body()?.let { callback.onResponse(it) }
-                Log.d("topRated", response.body().toString())
+                d("topRated", response.body().toString())
             }
         })
     }
@@ -139,7 +139,7 @@ object DateLoader {
                 // //response.body()?.let { callback.onResponseSearchedByID(it) }
 
                 response.body()?.let { callbackByID.onResponseSearchedByID(it) }
-                Log.d("topRatedfbdfdava", response.body().toString())
+                d("topRatedfbdfdava", response.body().toString())
             }
         })
     }
@@ -160,7 +160,7 @@ object DateLoader {
                 response: Response<MovieCastResponse>
             ) {
                 response.body()?.let { callback.onResponseCastByID(it) }
-                Log.d("topRsffeatedfbdfdava", response.body().toString())
+                d("topRsffeatedfbdfdava", response.body().toString())
             }
         })
     }
@@ -182,7 +182,7 @@ object DateLoader {
                 response: Response<ByNameSearchResultModel>
             ) {
                 response.body()?.let { callback.onResponseSearchedByName(it) }
-                Log.d("topRated", response.body().toString())
+                d("topRated", response.body().toString())
             }
         })
     }
@@ -209,18 +209,18 @@ object DateLoader {
         })
     }
 
-   fun getActorDetails(id: Int, key: String, callback:ActorDetailsCallback){
+   fun getActorDetails(id: Int, key: String, callbackActorDetailsByIDBridge:FutureCallbackActorDetailsByIDBridge){
       val call = service.getActorDetails(id, key)
       call.enqueue(object :Callback<ActorsResponseModel.Actor>{
           override fun onFailure(call: Call<ActorsResponseModel.Actor>, t: Throwable) {
-              callback.onFailure(t.message.toString())
+              callbackActorDetailsByIDBridge.onFailure(t.message.toString())
           }
 
           override fun onResponse(
               call: Call<ActorsResponseModel.Actor>,
               responseModel: Response<ActorsResponseModel.Actor>
           ) {
-              responseModel.body()?.let { callback.onResponseActorDetail(it)}
+              responseModel.body()?.let { callbackActorDetailsByIDBridge.onResponseActorDetail(it)}
               d("reslsklkslks", responseModel.toString())
           }
 
