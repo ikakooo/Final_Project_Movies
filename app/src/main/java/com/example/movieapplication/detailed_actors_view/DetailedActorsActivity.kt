@@ -45,6 +45,7 @@ class DetailedActorsActivity : AppCompatActivity() {
     private  fun initView(){
         val profilePath = intent.getStringExtra("putExtraID")
         val name = intent.getStringExtra("putExtraName")
+        d("namenamename", name.toString())
         val popularity = intent.getStringExtra("putExtraPopularity")
         val birthday = intent.getStringExtra("putExtraBirthday")
         val biography = intent.getStringExtra("putExtraBiography")
