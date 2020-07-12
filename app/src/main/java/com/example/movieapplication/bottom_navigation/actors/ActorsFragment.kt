@@ -2,7 +2,6 @@ package com.example.movieapplication.bottom_navigation.actors
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapplication.R
+import com.example.movieapplication.bottom_navigation.actors.adapter.ActorsAdapter
+import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
+import com.example.movieapplication.bottom_navigation.actors.more_actors_activity.MoreActorsActivity
+import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
-import kotlinx.android.synthetic.main.fragment_actors.*
 import kotlinx.android.synthetic.main.fragment_actors.view.*
 
 class ActorsFragment : Fragment() {
-    private var actorsList = mutableListOf<ActorsResponse.Actor>()
+    private var actorsList = mutableListOf<ActorsResponseModel.Actor>()
     private lateinit var actorsAdapter: ActorsAdapter
 
     private lateinit var actorsViewModel: ActorsViewModel
@@ -31,7 +33,7 @@ class ActorsFragment : Fragment() {
         init(root)
 
 
-        actorsViewModel.popularActorsLiveData.observe(viewLifecycleOwner, Observer{
+        actorsViewModel.popularActorsLiveDataModel.observe(viewLifecycleOwner, Observer{
             actorsList.addAll(it)
             actorsAdapter.notifyDataSetChanged()
         })
@@ -44,14 +46,22 @@ class ActorsFragment : Fragment() {
             val intent = Intent(context, MoreActorsActivity::class.java)
             startActivity(intent)
         }
-        actorsAdapter = ActorsAdapter(actorsList, object: DetailedMovieListener {
-            override fun detailedViewClick(position: Int) {
-                val actor = actorsList[position]
-                val intent = Intent(context, DetailedActorsActivity::class.java)
-                intent.putExtra("id", actor.id)
-                startActivity(intent)
-            }
-        })
+        actorsAdapter =
+            ActorsAdapter(
+                actorsList,
+                object : DetailedMovieListener {
+                    override fun detailedViewClick(position: Int) {
+                        val actor = actorsList[position]
+                        val intent = Intent(context, DetailedActorsActivity::class.java)
+                        intent.putExtra("putExtraID", actor.id)
+                        intent.putExtra("putExtraName", actor.name)
+                        intent.putExtra("putExtraProfile_path", actor.profile_path)
+                        intent.putExtra("putExtraPopularity", actor.popularity)
+                        intent.putExtra("putExtraBirthday", actor.birthday)
+                        intent.putExtra("putExtraBiography", actor.biography)
+                        startActivity(intent)
+                    }
+                })
 
         root.actorsRecyclerView.layoutManager = GridLayoutManager(context, 2)
         root.actorsRecyclerView.isNestedScrollingEnabled = true

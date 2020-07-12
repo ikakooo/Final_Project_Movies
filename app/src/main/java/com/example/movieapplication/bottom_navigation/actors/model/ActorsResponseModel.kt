@@ -1,6 +1,6 @@
-package com.example.movieapplication.bottom_navigation.actors
+package com.example.movieapplication.bottom_navigation.actors.model
 
-data class ActorsResponse(
+data class ActorsResponseModel(
     val page: String,
     var results: ArrayList<Actor>
 ) {

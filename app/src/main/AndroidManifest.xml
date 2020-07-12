@@ -13,9 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bottom_navigation.actors.MoreActorsActivity" />
+        <activity android:name=".bottom_navigation.actors.more_actors_activity.MoreActorsActivity" />
         <activity android:name=".bottom_navigation.home.more_movies_activity.MoreMoviesActivity" />
-        <activity android:name=".bottom_navigation.actors.DetailedActorsActivity" />
+        <activity android:name=".detailed_actors_view.DetailedActorsActivity" />
         <activity android:name=".detailed_movie_view.DetailedMovieActivity" />
         <activity
             android:name=".bottom_navigation.MovieNavigationActivity"

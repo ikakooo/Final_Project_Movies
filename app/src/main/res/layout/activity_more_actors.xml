@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".bottom_navigation.actors.MoreActorsActivity">
+    tools:context=".bottom_navigation.actors.more_actors_activity.MoreActorsActivity">
     <include layout="@layout/toolbar_layout" />
     <FrameLayout
         android:layout_width="match_parent"

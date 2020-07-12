@@ -3,7 +3,7 @@ package com.example.movieapplication.network_https
 
 import android.util.Log
 import android.util.Log.d
-import com.example.movieapplication.bottom_navigation.actors.ActorsResponse
+import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
 import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
@@ -193,17 +193,17 @@ object DateLoader {
         callbackFutureCallbackActors: FutureCallbackActorsBridge
     ) {
         val call = service.getPopularActors(key, page)
-        call.enqueue(object : Callback<ActorsResponse> {
+        call.enqueue(object : Callback<ActorsResponseModel> {
 
-            override fun onFailure(call: Call<ActorsResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ActorsResponseModel>, t: Throwable) {
                 callbackFutureCallbackActors.onFailure(t.message.toString())
             }
 
             override fun onResponse(
-                call: Call<ActorsResponse>,
-                response: Response<ActorsResponse>
+                call: Call<ActorsResponseModel>,
+                responseModel: Response<ActorsResponseModel>
             ) {
-                response.body()?.let { callbackFutureCallbackActors.onResponseActor(it) }
+                responseModel.body()?.let { callbackFutureCallbackActors.onResponseActor(it) }
             }
 
         })
@@ -211,17 +211,17 @@ object DateLoader {
 
    fun getActorDetails(id: Int, key: String, callback:ActorDetailsCallback){
       val call = service.getActorDetails(id, key)
-      call.enqueue(object :Callback<ActorsResponse.Actor>{
-          override fun onFailure(call: Call<ActorsResponse.Actor>, t: Throwable) {
+      call.enqueue(object :Callback<ActorsResponseModel.Actor>{
+          override fun onFailure(call: Call<ActorsResponseModel.Actor>, t: Throwable) {
               callback.onFailure(t.message.toString())
           }
 
           override fun onResponse(
-              call: Call<ActorsResponse.Actor>,
-              response: Response<ActorsResponse.Actor>
+              call: Call<ActorsResponseModel.Actor>,
+              responseModel: Response<ActorsResponseModel.Actor>
           ) {
-              response.body()?.let { callback.onResponseActorDetail(it)}
-              d("reslsklkslks", response.toString())
+              responseModel.body()?.let { callback.onResponseActorDetail(it)}
+              d("reslsklkslks", responseModel.toString())
           }
 
       })

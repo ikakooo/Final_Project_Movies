@@ -1,4 +1,4 @@
-package com.example.movieapplication.bottom_navigation.actors
+package com.example.movieapplication.bottom_navigation.actors.more_actors_activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,15 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapplication.R
+import com.example.movieapplication.bottom_navigation.actors.adapter.ActorsAdapter
+import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
+import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.constants.Constants
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackActorsBridge
-import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
 import kotlinx.android.synthetic.main.activity_more_actors.*
 
 class MoreActorsActivity : AppCompatActivity() {
-    private var actorsList = mutableListOf<ActorsResponse.Actor>()
+    private var actorsList = mutableListOf<ActorsResponseModel.Actor>()
     private lateinit var actorsAdapter: ActorsAdapter
     private var pageCounter = 1
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,13 +28,20 @@ class MoreActorsActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        actorsAdapter = ActorsAdapter(actorsList, object : DetailedMovieListener {
-            override fun detailedViewClick(position: Int) {
-                val actor = actorsList[position]
-                val intent = Intent(this@MoreActorsActivity, DetailedActorsActivity::class.java)
-                intent.putExtra("id", actor.id)
-                startActivity(intent)
-            }})
+        actorsAdapter =
+            ActorsAdapter(
+                actorsList,
+                object : DetailedMovieListener {
+                    override fun detailedViewClick(position: Int) {
+                        val actor = actorsList[position]
+                        val intent = Intent(
+                            this@MoreActorsActivity,
+                            DetailedActorsActivity::class.java
+                        )
+                        intent.putExtra("id", actor.id)
+                        startActivity(intent)
+                    }
+                })
 
         moreActorsRecyclerview.layoutManager = GridLayoutManager(this, 2)
         moreActorsRecyclerview.adapter = actorsAdapter
@@ -55,9 +64,9 @@ class MoreActorsActivity : AppCompatActivity() {
 
     private fun getAllActors() {
         DateLoader.getPopularActors(pageCounter.toString(), Constants.API_KEY, object : FutureCallbackActorsBridge{
-            override fun onResponseActor(response: ActorsResponse) {
-                d("responsee", response.toString())
-                actorsList.addAll( response.results)
+            override fun onResponseActor(responseModel: ActorsResponseModel) {
+                d("responsee", responseModel.toString())
+                actorsList.addAll( responseModel.results)
                 actorsAdapter.notifyDataSetChanged()
             }
 

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.actors.DetailedActorsActivity
+import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.bottom_navigation.home.HomeFragment
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID

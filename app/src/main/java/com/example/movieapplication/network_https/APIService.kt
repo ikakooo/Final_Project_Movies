@@ -1,6 +1,6 @@
 package com.example.movieapplication.network_https
 
-import com.example.movieapplication.bottom_navigation.actors.ActorsResponse
+import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
 import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
@@ -70,11 +70,11 @@ interface APIService {
     fun getPopularActors(
         @Query("api_key") key : String,
         @Query("page") page : String
-    ) : Call<ActorsResponse>
+    ) : Call<ActorsResponseModel>
 
     @GET("3/person/{id}")
     fun getActorDetails(
         @Path("id") id: Int,
         @Query("api_key") key : String
-    ) : Call<ActorsResponse.Actor>
+    ) : Call<ActorsResponseModel.Actor>
 }
