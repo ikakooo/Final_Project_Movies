@@ -13,6 +13,8 @@ import com.example.movieapplication.bottom_navigation.home.HomeFragment
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
+import com.example.movieapplication.local_data_base.RoomFavouriteMovieModel
+import com.example.movieapplication.local_data_base.DatabaseBuilder.roomDB
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackCastBridge
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMovieTrailerByIDBridge
@@ -32,6 +34,13 @@ class DetailedMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detailed_movie)
         supportActionBar?.hide()
         init()
+
+        d("erfrerferf","vrereerer")
+
+        roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(RoomFavouriteMovieModel(movie_id = "55532",path ="33423232423424.gre"))
+        d("btAMrtbIfbfgbfgbTtbrOZ",roomDB.favoriteDaoConnection().getFavouriteMovies().toString())
+
+
     }
     private fun init(){
 

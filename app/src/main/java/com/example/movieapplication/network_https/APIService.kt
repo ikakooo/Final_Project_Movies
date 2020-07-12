@@ -74,7 +74,7 @@ interface APIService {
 
     @GET("3/person/{id}")
     fun getActorDetails(
-        @Path("id") id: Number,
+        @Path("id") id: Int,
         @Query("api_key") key : String
     ) : Call<ActorsResponse.Actor>
 }

@@ -29,12 +29,10 @@ class MoreActorsActivity : AppCompatActivity() {
         actorsAdapter = ActorsAdapter(actorsList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val actor = actorsList[position]
-                intent.putExtra("id", actor.id)
                 val intent = Intent(this@MoreActorsActivity, DetailedActorsActivity::class.java)
+                intent.putExtra("id", actor.id)
                 startActivity(intent)
-            }
-
-        })
+            }})
 
         moreActorsRecyclerview.layoutManager = GridLayoutManager(this, 2)
         moreActorsRecyclerview.adapter = actorsAdapter

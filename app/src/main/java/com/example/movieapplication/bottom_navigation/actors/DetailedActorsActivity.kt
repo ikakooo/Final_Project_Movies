@@ -28,8 +28,8 @@ class DetailedActorsActivity : AppCompatActivity() {
                 d("jjakjakjka", response.toString())
                 Glide.with(applicationContext).load(Constants.IMG_URL + response.profile_path).into(actorImage)
                 nameTV.text = response.name
-                val replaced = response.birthday.replace("-", "/")
-                birthdayTextView.text = replaced
+                ///val replaced = response.birthday.replace("-", "/")
+                birthdayTextView.text = response.birthday.toString()
                 actorPopularity.text = response.popularity.toString()
                 biographyTextView.text = response.biography
             }
