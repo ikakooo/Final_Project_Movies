@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.home.adapters.PopularAdapter
@@ -58,7 +59,7 @@ class FavouritesFragment : Fragment() {
                         startActivity(intent)
                     }
                 })
-        root.favouritesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.favouritesRecyclerView.layoutManager =  GridLayoutManager(context, 2)
         root.favouritesRecyclerView.isNestedScrollingEnabled = true
         root.favouritesRecyclerView.setHasFixedSize(false)
         root.favouritesRecyclerView.adapter = favouritesAdapter
