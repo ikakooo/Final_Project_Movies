@@ -2,6 +2,7 @@ package com.example.movieapplication.bottom_navigation.favourites
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,16 +47,22 @@ class FavouritesFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        favouritesAdapter.notifyDataSetChanged()
+        d("fwfewfewf","fwewfew")
+    }
+
     private fun init(root: View){
         favouritesAdapter =
             FavouritesAdapter(
                 favouritesMoviesList,
                 object : DetailedMovieListener {
                     override fun detailedViewClick(position: Int) {
-                        val topTodayMovie = favouritesMoviesList[position]
+                        val favouritesMovie = favouritesMoviesList[position]
                         val intent = Intent(context, DetailedMovieActivity::class.java)
-                        intent.putExtra("name", topTodayMovie.path)
-                        intent.putExtra("movieID", topTodayMovie.id)
+                        intent.putExtra("name", favouritesMovie.path)
+                        intent.putExtra("movieID", favouritesMovie.movie_id)
                         startActivity(intent)
                     }
                 })

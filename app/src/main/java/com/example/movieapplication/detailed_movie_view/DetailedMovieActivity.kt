@@ -87,22 +87,6 @@ class DetailedMovieActivity : AppCompatActivity() {
                 loader.start()
             }
         })
-
-
-
-
-
-        addToFavourites.setOnClickListener {
-            roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(
-                RoomFavouriteMovieModel(
-                    0,
-                    movieID,
-                    "",
-                    originalTitle!!
-                )
-            )
-
-        }
     }
 
     private fun getPostsDetailedMovie(id: Int) {
@@ -124,34 +108,28 @@ class DetailedMovieActivity : AppCompatActivity() {
                         .into(moviesDetailedImageViewID)
                     Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path)
                         .into(detailedBackground)
+                    /// არის თუ არა დამატებული ფავორიტებში ///////////////////////////////////
+                    val favorite = roomDB.favoriteDaoConnection().isFavourite(response.id)
+                    isFavourite = if(favorite == null) {
+                        addToFavourites.setImageResource(R.mipmap.round_favorite_border_black_24)
+                        false
+                    } else {
+                        addToFavourites.setImageResource(R.mipmap.round_favorite_white_24)
+                        true
+                    }
+                    /////////////////////////////////////////////////////////////////////////////
                     // ფავორიტებში დამატება / წაშლა
                     addToFavourites.setOnClickListener {
-                        if (isFavourite) {
-                            roomDB.favoriteDaoConnection().deleteFavouriteMovie(response.id)
+                        isFavourite = if (isFavourite) { roomDB.favoriteDaoConnection().deleteFavouriteMovie(response.id)
                             addToFavourites.setImageResource(R.mipmap.round_favorite_border_black_24)
-                            isFavourite = false
-                            d(
-                                "btAMrtbIfbfgbfgbTtbrOZ",
-                                roomDB.favoriteDaoConnection().getFavouriteMovies().toString()
-                            )
+                            false
                         } else {
-                            roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(
-                                RoomFavouriteMovieModel(
-                                    movie_id = response.id,
-                                    path = response.poster_path,
-                                    title = response.original_title
-                                )
-                            )
+                            roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(RoomFavouriteMovieModel(movie_id = response.id, path = response.poster_path, title = response.original_title))
                             addToFavourites.setImageResource(R.mipmap.round_favorite_white_24)
-                            d(
-                                "btAMrtbIfbfgbfgbTtbrOZ",
-                                roomDB.favoriteDaoConnection().getFavouriteMovies().toString()
-                            )
-                            isFavourite = true
+                            true
                         }
                     }
                 }
-
                 override fun onFailure(error: String) {
                     d("detailedResponse", error)
                 }

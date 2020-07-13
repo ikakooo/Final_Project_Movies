@@ -30,13 +30,12 @@
 
             <ImageView
                 android:id="@+id/addToFavourites"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="end"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="180dp"
                 android:layout_marginEnd="10dp"
-                android:src="@mipmap/round_favorite_border_black_36"
                 android:contentDescription="@string/todo" />
 
             <LinearLayout
