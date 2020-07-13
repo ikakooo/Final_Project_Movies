@@ -9,18 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.home.adapters.PopularAdapter
-import com.example.movieapplication.bottom_navigation.home.adapters.TopTodayAdapter
-import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
+import com.example.movieapplication.local_data_base.DatabaseBuilder
 import com.example.movieapplication.local_data_base.RoomFavouriteMovieModel
-import kotlinx.android.synthetic.main.fragment_favourites.view.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_favourites.*
 
 class FavouritesFragment : Fragment() {
     private var favouritesMoviesList = mutableListOf<RoomFavouriteMovieModel>()
@@ -32,31 +27,38 @@ class FavouritesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        favouritesViewModel = ViewModelProvider(this).get(FavouritesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_favourites, container, false)
 
+        favouritesViewModel = ViewModelProvider(this).get(FavouritesViewModel::class.java)
 
-        init(root)
-
-        favouritesViewModel.favouritesMoviesLiveData.observe(viewLifecycleOwner, Observer {
-
-            favouritesMoviesList.addAll(it)
-            favouritesAdapter.notifyDataSetChanged()
-        })
+//        favouritesViewModel.favouritesMoviesLiveData.observe(viewLifecycleOwner, Observer {
+//
+//            favouritesAdapter.notifyDataSetChanged()
+//        })
 
         return root
     }
-
     override fun onResume() {
         super.onResume()
+            init()
+//        favouritesViewModel.favouritesMoviesLiveData.observe(viewLifecycleOwner, Observer {
+//            favouritesMoviesList.clear()
+//            favouritesMoviesList.addAll(it)
+//            favouritesMoviesList.clear()
+//            favouritesAdapter.notifyDataSetChanged()
+//        })
+        favouritesMoviesList.clear()
+        val dB = DatabaseBuilder.roomDB.favoriteDaoConnection().getFavouriteMovies().toMutableList()
+        (0 until dB.size).forEach {
+            favouritesMoviesList.add(RoomFavouriteMovieModel(dB[it].id?.toLong(),dB[it].movie_id.toString(),dB[it].path.toString(),dB[it].title.toString()))
+        }
         favouritesAdapter.notifyDataSetChanged()
         d("fwfewfewf","fwewfew")
     }
 
-    private fun init(root: View){
-        favouritesAdapter =
-            FavouritesAdapter(
-                favouritesMoviesList,
+    private fun init(){
+
+        favouritesAdapter = FavouritesAdapter(favouritesMoviesList,
                 object : DetailedMovieListener {
                     override fun detailedViewClick(position: Int) {
                         val favouritesMovie = favouritesMoviesList[position]
@@ -66,9 +68,9 @@ class FavouritesFragment : Fragment() {
                         startActivity(intent)
                     }
                 })
-        root.favouritesRecyclerView.layoutManager =  GridLayoutManager(context, 2)
-        root.favouritesRecyclerView.isNestedScrollingEnabled = true
-        root.favouritesRecyclerView.setHasFixedSize(false)
-        root.favouritesRecyclerView.adapter = favouritesAdapter
+        favouritesRecyclerView.layoutManager =  GridLayoutManager(context, 2)
+        favouritesRecyclerView.isNestedScrollingEnabled = true
+        favouritesRecyclerView.setHasFixedSize(false)
+        favouritesRecyclerView.adapter = favouritesAdapter
     }
 }
