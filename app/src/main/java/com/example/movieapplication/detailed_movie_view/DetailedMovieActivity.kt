@@ -28,6 +28,7 @@ class DetailedMovieActivity : AppCompatActivity() {
     private var castList = mutableListOf<MovieCastResponse.MovieCast>()
     lateinit var castAdapter: CastAdapter
     var youtubeVideoID: String? = null
+    private var isFavourite = false
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +38,8 @@ class DetailedMovieActivity : AppCompatActivity() {
 
         d("erfrerferf","vrereerer")
 
-        roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(RoomFavouriteMovieModel(movie_id = "55532",path ="33423232423424.gre"))
-        d("btAMrtbIfbfgbfgbTtbrOZ",roomDB.favoriteDaoConnection().getFavouriteMovies().toString())
+
+
 
 
     }
@@ -112,7 +113,21 @@ class DetailedMovieActivity : AppCompatActivity() {
                     }
                     Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
                     Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path).into(detailedBackground)
+                    // ფავორიტებში დამატება / წაშლა
+                    addToFavourites.setOnClickListener {
+                        if (isFavourite){
+                            roomDB.favoriteDaoConnection().deleteFavouriteMovie(response.id)
+                            addToFavourites.setImageResource(R.mipmap.round_favorite_border_black_24)
+                            isFavourite= false
+                            d("btAMrtbIfbfgbfgbTtbrOZ",roomDB.favoriteDaoConnection().getFavouriteMovies().toString())
+                        }else{
+                            roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(RoomFavouriteMovieModel(movie_id = response.id.toString(),path = response.poster_path))
+                            addToFavourites.setImageResource(R.mipmap.round_favorite_white_24)
+                            d("btAMrtbIfbfgbfgbTtbrOZ",roomDB.favoriteDaoConnection().getFavouriteMovies().toString())
 
+                            isFavourite= true
+                        }
+                    }
                 }
 
                 override fun onFailure(error: String) {

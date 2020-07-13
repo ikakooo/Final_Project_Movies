@@ -1,5 +1,6 @@
 package com.example.movieapplication.bottom_navigation.home
 
+import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,6 +37,7 @@ class HomeViewModel : ViewModel() {
             object : FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _topTodayMoviesLiveData.value = response.results.toMutableList()
+                    d("cfdvdfvfdv",response.results.toMutableList().toString())
                 }
                 override fun onFailure(error: String) {
                 } })
