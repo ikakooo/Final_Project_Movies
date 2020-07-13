@@ -43,7 +43,7 @@ class FavouritesAdapter(private val favourites: MutableList<RoomFavouriteMovieMo
 
         fun onBind() {
             model = favourites[adapterPosition]
-            itemView.title.text = "model.original_title"
+            itemView.title.text = model.title
             Glide.with(itemView.context).load(BASE_IMG_URL + model.path).into(itemView.moviesImageViewID)
             itemView.setOnClickListener {
                 detailedMovieListener.detailedViewClick(adapterPosition)

@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class RoomFavouriteMovieModel (
     @PrimaryKey(autoGenerate = true) val id : Long?=null,
     @ColumnInfo(name = "movie_id") var movie_id : String,
-    @ColumnInfo(name = "path") var path:String
+    @ColumnInfo(name = "path") var path:String,
+    @ColumnInfo(name = "original_title") var title:String
 )

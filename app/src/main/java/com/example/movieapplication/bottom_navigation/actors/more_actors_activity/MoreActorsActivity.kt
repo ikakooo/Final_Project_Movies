@@ -39,6 +39,7 @@ class MoreActorsActivity : AppCompatActivity() {
                             DetailedActorsActivity::class.java
                         )
                         intent.putExtra("id", actor.id)
+
                         startActivity(intent)
                     }
                 })

@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.bottom_navigation.home.HomeFragment
+import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
-import com.example.movieapplication.local_data_base.RoomFavouriteMovieModel
 import com.example.movieapplication.local_data_base.DatabaseBuilder.roomDB
+import com.example.movieapplication.local_data_base.RoomFavouriteMovieModel
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackCastBridge
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMovieTrailerByIDBridge
@@ -35,27 +35,25 @@ class DetailedMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detailed_movie)
         supportActionBar?.hide()
         init()
-
-        d("erfrerferf","vrereerer")
-
-
-
+        d("erfrerferf", "vrereerer")
 
 
     }
-    private fun init(){
 
 
+    private fun init() {
 
         var movieID = intent.getStringExtra("movieID")
         d("sdfdfdsf", movieID.toString())
         val originalTitle = intent.getStringExtra("name")
         titleTV.text = originalTitle
-        if (movieID == null) { movieID="531454" }
+        if (movieID == null) {
+            movieID = "531454"
+        }
         getPostsDetailedMovie(movieID.toInt())
         getPostsDetailedCast(movieID.toInt())
         getPostsDetailedTrailer(movieID.toInt())
-        castAdapter = CastAdapter(castList, object : DetailedMovieListener{
+        castAdapter = CastAdapter(castList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val castMember = castList[position]
                 val intent = Intent(applicationContext, DetailedActorsActivity::class.java)
@@ -64,36 +62,47 @@ class DetailedMovieActivity : AppCompatActivity() {
             }
 
         })
-        castRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        castRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         castRecyclerView.adapter = castAdapter
 
         //Player
 
-           lifecycle.addObserver(youtube_player_view)
-           youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-               override fun onReady(youTubePlayer: YouTubePlayer) {
+        lifecycle.addObserver(youtube_player_view)
+        youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
 
-                   val loader = object : Thread(){
-                       override fun run() {
-                           try {
-                               sleep(200)
-                               d("fjsdfksdf",youtubeVideoID.toString())
-                               youTubePlayer.loadVideo(youtubeVideoID.toString(), 0f)
+                val loader = object : Thread() {
+                    override fun run() {
+                        try {
+                            sleep(200)
+                            d("fjsdfksdf", youtubeVideoID.toString())
+                            youTubePlayer.loadVideo(youtubeVideoID.toString(), 0f)
 
-                           }catch (e: Exception){
-                               e.printStackTrace()
-                           }
-                       }
-                   }
-                   loader.start()
-               }
-           })
-
-
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+                loader.start()
+            }
+        })
 
 
 
 
+
+        addToFavourites.setOnClickListener {
+            roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(
+                RoomFavouriteMovieModel(
+                    0,
+                    movieID,
+                    "",
+                    originalTitle!!
+                )
+            )
+
+        }
     }
 
     private fun getPostsDetailedMovie(id: Int) {
@@ -107,25 +116,38 @@ class DetailedMovieActivity : AppCompatActivity() {
                     titleDetailedTextViewID.text = response.overview
                     titleTV.text = response.original_title
                     ratingTV.text = response.vote_average
-                    (0 until response.genres.size).forEach{
+                    (0 until response.genres.size).forEach {
                         val text = genreTVID.text.toString()
                         genreTVID.text = text + " " + response.genres[it].name
                     }
-                    Glide.with(applicationContext).load(imgBaseURL + response.poster_path).into(moviesDetailedImageViewID)
-                    Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path).into(detailedBackground)
+                    Glide.with(applicationContext).load(imgBaseURL + response.poster_path)
+                        .into(moviesDetailedImageViewID)
+                    Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path)
+                        .into(detailedBackground)
                     // ფავორიტებში დამატება / წაშლა
                     addToFavourites.setOnClickListener {
-                        if (isFavourite){
+                        if (isFavourite) {
                             roomDB.favoriteDaoConnection().deleteFavouriteMovie(response.id)
                             addToFavourites.setImageResource(R.mipmap.round_favorite_border_black_24)
-                            isFavourite= false
-                            d("btAMrtbIfbfgbfgbTtbrOZ",roomDB.favoriteDaoConnection().getFavouriteMovies().toString())
-                        }else{
-                            roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(RoomFavouriteMovieModel(movie_id = response.id.toString(),path = response.poster_path))
+                            isFavourite = false
+                            d(
+                                "btAMrtbIfbfgbfgbTtbrOZ",
+                                roomDB.favoriteDaoConnection().getFavouriteMovies().toString()
+                            )
+                        } else {
+                            roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(
+                                RoomFavouriteMovieModel(
+                                    movie_id = response.id,
+                                    path = response.poster_path,
+                                    title = response.original_title
+                                )
+                            )
                             addToFavourites.setImageResource(R.mipmap.round_favorite_white_24)
-                            d("btAMrtbIfbfgbfgbTtbrOZ",roomDB.favoriteDaoConnection().getFavouriteMovies().toString())
-
-                            isFavourite= true
+                            d(
+                                "btAMrtbIfbfgbfgbTtbrOZ",
+                                roomDB.favoriteDaoConnection().getFavouriteMovies().toString()
+                            )
+                            isFavourite = true
                         }
                     }
                 }
@@ -137,17 +159,22 @@ class DetailedMovieActivity : AppCompatActivity() {
         )
     }
 
-    private  fun getPostsDetailedCast(id: Int){
-        DateLoader.getRequestedCastByID(id,HomeFragment.API_KEY,object :
+
+    private fun getPostsDetailedCast(id: Int) {
+        DateLoader.getRequestedCastByID(id, HomeFragment.API_KEY, object :
             FutureCallbackCastBridge {
             override fun onResponseCastByID(response: MovieCastResponse) {
-                d("dfsdfsdf",response.toString())
+                d("dfsdfsdf", response.toString())
                 val size = response.cast?.size.toString().toInt()
-                (0 until size).forEach{
-                    castList.add(MovieCastResponse.MovieCast(
-                        response.cast?.get(it)?.cast_id.toString().toInt(),
-                        response.cast?.get(it)?.name.toString(),
-                        response.cast?.get(it)?.profile_path.toString(), response.cast?.get(it)?.id.toString()))
+                (0 until size).forEach {
+                    castList.add(
+                        MovieCastResponse.MovieCast(
+                            response.cast?.get(it)?.cast_id.toString().toInt(),
+                            response.cast?.get(it)?.name.toString(),
+                            response.cast?.get(it)?.profile_path.toString(),
+                            response.cast?.get(it)?.id.toString()
+                        )
+                    )
 
                 }
 
@@ -155,22 +182,23 @@ class DetailedMovieActivity : AppCompatActivity() {
                 d("jakja", castList.size.toString())
 
             }
+
             override fun onFailure(error: String) {
             }
         })
     }
 
-    private  fun getPostsDetailedTrailer(id: Int){
-        DateLoader.getRequestedMovieTrailerByID(id,HomeFragment.API_KEY,object :
+    private fun getPostsDetailedTrailer(id: Int) {
+        DateLoader.getRequestedMovieTrailerByID(id, HomeFragment.API_KEY, object :
             FutureCallbackMovieTrailerByIDBridge {
             override fun onResponseMovieTrailerByID(response: MovieTrailerModeByID) {
-                d("dfsdfhghffsdf",response.toString())
+                d("dfsdfhghffsdf", response.toString())
 
-               (0 until response.results.size).forEach {
-                   if (response.results[it].size==1080) {youtubeVideoID =  response.results[it].key
-                       return@onResponseMovieTrailerByID
-                   }
-                    else youtubeVideoID =  response.results[it].key
+                (0 until response.results.size).forEach {
+                    if (response.results[it].size == 1080) {
+                        youtubeVideoID = response.results[it].key
+                        return@onResponseMovieTrailerByID
+                    } else youtubeVideoID = response.results[it].key
 
                 }
 
