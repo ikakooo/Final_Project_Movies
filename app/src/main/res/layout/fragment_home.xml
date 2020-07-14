@@ -39,7 +39,7 @@
                     android:layout_marginTop="10sp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/top_today"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
 
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
-                    android:src="@mipmap/baseline_arrow_forward_black_24"
+                    android:src="@drawable/ic_arrow"
                     android:paddingEnd="20sp"
                     android:layout_gravity="end"
                     android:textColor="@android:color/darker_gray"
@@ -83,7 +83,7 @@
                     android:layout_marginTop="10sp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/popular"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
-                    android:src="@mipmap/baseline_arrow_forward_black_24"
+                    android:src="@drawable/ic_arrow"
                     android:paddingEnd="20sp"
                     android:layout_gravity="end"
                     android:textColor="@android:color/darker_gray"
@@ -125,7 +125,7 @@
                     android:layout_marginTop="10sp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/top_rated"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
-                    android:src="@mipmap/baseline_arrow_forward_black_24"
+                    android:src="@drawable/ic_arrow"
                     android:paddingEnd="20sp"
                     android:layout_gravity="end"
                     android:textColor="@android:color/darker_gray"
@@ -166,7 +166,7 @@
                     android:layout_marginTop="10sp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/upcoming"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
-                    android:src="@mipmap/baseline_arrow_forward_black_24"
+                    android:src="@drawable/ic_arrow"
                     android:paddingEnd="20sp"
                     android:layout_gravity="end"
                     android:textColor="@android:color/darker_gray"

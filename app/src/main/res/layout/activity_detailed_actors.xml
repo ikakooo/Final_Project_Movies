@@ -11,7 +11,7 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#29576D">
+    android:background="@drawable/image_overlay">
 
         <androidx.cardview.widget.CardView
             android:layout_gravity="center_vertical"

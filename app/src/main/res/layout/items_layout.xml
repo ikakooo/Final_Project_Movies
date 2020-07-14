@@ -28,15 +28,7 @@
                 android:src="@mipmap/ic_launcher" />
         </androidx.cardview.widget.CardView>
 
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:neomorph_corner_radius="10dp"
-            app:neomorph_elevation="5dp"
-            app:neomorph_highlight_color="@color/colorAccent"
-            app:neomorph_shadow_color="@color/black"
-            app:neomorph_shadow_type="outer"
-            app:neomorph_view_type="rectangular">
+
 
             <TextView
                 android:id="@+id/title"
@@ -46,12 +38,9 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:padding="5dp"
-
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
-
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
         <TextView
             android:id="@+id/PopularityActorTitleID"

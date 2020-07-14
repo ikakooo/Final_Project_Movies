@@ -110,22 +110,22 @@ class DetailedMovieActivity : AppCompatActivity() {
                     /// არის თუ არა დამატებული ფავორიტებში ///////////////////////////////////
                     val favorite = roomDB.favoriteDaoConnection().isFavourite(response.id)
                     isFavourite = if(favorite == null) {
-                        addToFavourites.setImageResource(R.mipmap.round_favorite_border_black_24)
+                        addToFavourites.setImageResource(R.drawable.ic_heart_unchecked)
                         false
                     } else {
-                        addToFavourites.setImageResource(R.mipmap.round_favorite_white_24)
+                        addToFavourites.setImageResource(R.drawable.ic_heart_checked)
                         true
                     }
                     /////////////////////////////////////////////////////////////////////////////
                     // ფავორიტებში დამატება / წაშლა
                     addToFavourites.setOnClickListener {
                         isFavourite = if (isFavourite) { roomDB.favoriteDaoConnection().deleteFavouriteMovie(response.id)
-                            addToFavourites.setImageResource(R.mipmap.round_favorite_border_black_24)
+                            addToFavourites.setImageResource(R.drawable.ic_heart_unchecked)
 
                             false
                         } else {
                             roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(RoomFavouriteMovieModel(movie_id = response.id, path = response.poster_path, title = response.original_title))
-                            addToFavourites.setImageResource(R.mipmap.round_favorite_white_24)
+                            addToFavourites.setImageResource(R.drawable.ic_heart_checked)
                             true
                         }
                     }
