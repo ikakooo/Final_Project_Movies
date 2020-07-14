@@ -73,28 +73,31 @@
                 />
         </LinearLayout>
 </FrameLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
                 android:text="@string/biography"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
             <TextView
                 android:id="@+id/biographyTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 

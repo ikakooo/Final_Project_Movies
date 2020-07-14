@@ -31,7 +31,7 @@
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:padding="5dp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/colorAccent"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
