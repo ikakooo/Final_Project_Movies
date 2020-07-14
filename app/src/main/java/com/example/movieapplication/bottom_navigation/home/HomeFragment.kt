@@ -16,11 +16,10 @@ import com.example.movieapplication.bottom_navigation.home.adapters.PopularAdapt
 import com.example.movieapplication.bottom_navigation.home.adapters.TopRatedAdapter
 import com.example.movieapplication.bottom_navigation.home.adapters.TopTodayAdapter
 import com.example.movieapplication.bottom_navigation.home.adapters.UpcomingAdapter
-import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
-import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.bottom_navigation.home.more_movies_activity.MoreMoviesActivity
-import kotlinx.android.synthetic.main.activity_movie_navigation.*
+import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
+import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -76,7 +75,7 @@ class HomeFragment : Fragment() {
         homeViewModel.upComingMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
             upComingMoviesList.addAll(it)
-            root.progressBarID.isVisible = false
+            root.progressBarVisibilityID.isVisible = false
             upComingAdapter.notifyDataSetChanged()
 
         })
@@ -101,12 +100,13 @@ class HomeFragment : Fragment() {
                     }
 
                 })
-        root.topTodayRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.topTodayRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.isNestedScrollingEnabled = true
         root.topTodayRecyclerView.setHasFixedSize(false)
         root.topTodayRecyclerView.adapter = topTodayAdapter
 /////////////////////////////////////////////////////////////////////////////////////////////////
-        topRatedAdapter = TopRatedAdapter(topRatedMoviesList, object : DetailedMovieListener{
+        topRatedAdapter = TopRatedAdapter(topRatedMoviesList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val topRatedMovie = topRatedMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
         root.topRatedRecyclerView.setHasFixedSize(false)
         root.topRatedRecyclerView.adapter = topRatedAdapter
 ///////////////////////////////////////////////////////////////////////////////////////////
-        popularAdapter = PopularAdapter(popularMoviesList, object : DetailedMovieListener{
+        popularAdapter = PopularAdapter(popularMoviesList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val popularMovie = popularMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
         root.popularRecyclerView.setHasFixedSize(false)
         root.popularRecyclerView.adapter = popularAdapter
 ////////////////////////////////////////////////////////////////////////////
-        upComingAdapter = UpcomingAdapter(upComingMoviesList, object : DetailedMovieListener{
+        upComingAdapter = UpcomingAdapter(upComingMoviesList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val upcomingMovie = upComingMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
@@ -147,7 +147,8 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         })
-        root.upcomingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        root.upcomingRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.upcomingRecyclerView.isNestedScrollingEnabled = false
         root.upcomingRecyclerView.setHasFixedSize(false)
         root.upcomingRecyclerView.adapter = upComingAdapter
@@ -156,15 +157,15 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun goToMoreMoviesOnClick(root: View){
-       fun ImageView.customOnClickListener(ContentNameString:String){
-           setOnClickListener{
-               val intent = Intent(context, MoreMoviesActivity::class.java)
-               intent.putExtra("ContentName", ContentNameString)
-               startActivity(intent)
-           }
+    private fun goToMoreMoviesOnClick(root: View) {
+        fun ImageView.customOnClickListener(ContentNameString: String) {
+            setOnClickListener {
+                val intent = Intent(context, MoreMoviesActivity::class.java)
+                intent.putExtra("ContentName", ContentNameString)
+                startActivity(intent)
+            }
 
-       }
+        }
         root.AllTopTodayButtonID.customOnClickListener("AllTopToday")
         root.AllPopularButtonID.customOnClickListener("AllPopular")
         root.AllTopRatedButtonID.customOnClickListener("AllTopRated")
