@@ -101,7 +101,6 @@
                         android:padding="10dp"
                         android:id="@+id/genreTVID"
                         android:layout_width="match_parent"
-                        android:text="@string/app_name"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/semi_bold_font"
                         android:textColor="@color/white"

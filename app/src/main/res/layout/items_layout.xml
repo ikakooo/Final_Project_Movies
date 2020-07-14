@@ -7,6 +7,7 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,55 +16,59 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
+            app:cardElevation="5dp">
 
             <ImageView
                 android:id="@+id/moviesImageViewID"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/ic_launcher" />
-
+                android:src="@mipmap/ic_launcher" />
         </androidx.cardview.widget.CardView>
 
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="5dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="2dp">
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bold_font"
-        android:gravity="center"
-        android:padding="5dp"
-        android:maxLines="1"
-        android:background="#89FFDE03"
-        android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:neomorph_corner_radius="10dp"
+            app:neomorph_elevation="5dp"
+            app:neomorph_highlight_color="@color/colorAccent"
+            app:neomorph_shadow_color="@color/black"
+            app:neomorph_shadow_type="outer"
+            app:neomorph_view_type="rectangular">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold_font"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="5dp"
+
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
 
 
-</androidx.cardview.widget.CardView>
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
         <TextView
             android:id="@+id/PopularityActorTitleID"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableStart="@mipmap/star"
+            android:drawablePadding="5dp"
             android:fontFamily="@font/semi_bold_font"
             android:gravity="start"
-           android:padding="5dp"
-            android:drawablePadding="10dp"
-            android:paddingStart="20dp"
             android:maxLines="1"
-            android:drawableStart="@mipmap/star"
+            android:padding="5dp"
             android:textColor="#FFDE03"
             android:textSize="15sp"
             android:textStyle="bold"
-            tools:ignore="RtlSymmetry"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
 
     </LinearLayout>
 
