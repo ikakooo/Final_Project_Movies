@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
@@ -107,6 +108,7 @@ class DetailedMovieActivity : AppCompatActivity() {
                         .into(moviesDetailedImageViewID)
                     Glide.with(applicationContext).load(imgBaseURL + response.backdrop_path)
                         .into(detailedBackground)
+                    progressBarVisibilityID.isVisible = false
                     /// არის თუ არა დამატებული ფავორიტებში ///////////////////////////////////
                     val favorite = roomDB.favoriteDaoConnection().isFavourite(response.id)
                     isFavourite = if(favorite == null) {
@@ -136,6 +138,7 @@ class DetailedMovieActivity : AppCompatActivity() {
             }
         )
     }
+
 
 
     private fun getPostsDetailedCast(id: Int) {

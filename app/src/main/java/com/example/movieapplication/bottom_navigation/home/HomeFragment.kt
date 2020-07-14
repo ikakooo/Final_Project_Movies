@@ -163,6 +163,7 @@ class HomeFragment : Fragment() {
                 val intent = Intent(context, MoreMoviesActivity::class.java)
                 intent.putExtra("ContentName", ContentNameString)
                 startActivity(intent)
+
             }
 
         }

@@ -46,12 +46,6 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
-            <ImageView
-                android:id="@+id/deleteFavourite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_arrow_forward_24"
-                android:layout_gravity="bottom|end"/>
         </FrameLayout>
 
     </LinearLayout>

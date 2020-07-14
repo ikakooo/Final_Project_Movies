@@ -3,6 +3,7 @@ package com.example.movieapplication.detailed_actors_view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
@@ -11,6 +12,7 @@ import com.example.movieapplication.constants.Constants
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackActorDetailsByIDBridge
 import kotlinx.android.synthetic.main.activity_detailed_actors.*
+import kotlinx.android.synthetic.main.activity_detailed_movie.*
 
 class DetailedActorsActivity : AppCompatActivity() {
 //    private val putExtrActor = intent.getStringExtra("putExtrActor")
@@ -39,7 +41,9 @@ class DetailedActorsActivity : AppCompatActivity() {
                 birthdayTextView.text = responseModel.birthday.toString()
                 actorPopularity.text = responseModel.popularity.toString()
                 biographyTextView.text = responseModel.biography
+
             }
+
 
             override fun onFailure(error: String) {
                d("errorString", error)
