@@ -23,7 +23,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.android.synthetic.main.activity_detailed_movie.*
 
-
 class DetailedMovieActivity : AppCompatActivity() {
     private var castList = mutableListOf<MovieCastResponse.MovieCast>()
     lateinit var castAdapter: CastAdapter
@@ -122,6 +121,7 @@ class DetailedMovieActivity : AppCompatActivity() {
                     addToFavourites.setOnClickListener {
                         isFavourite = if (isFavourite) { roomDB.favoriteDaoConnection().deleteFavouriteMovie(response.id)
                             addToFavourites.setImageResource(R.mipmap.round_favorite_border_black_24)
+
                             false
                         } else {
                             roomDB.favoriteDaoConnection().insertRoomFavouriteMovieModel(RoomFavouriteMovieModel(movie_id = response.id, path = response.poster_path, title = response.original_title))
