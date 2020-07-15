@@ -5,11 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapplication.AppRoot
-import com.example.movieapplication.network_https.DateLoader
+import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
 import com.example.movieapplication.bottom_navigation.home.models.Movies
-import com.example.movieapplication.tools.CustomTools
 import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 
 class HomeViewModel : ViewModel() {
@@ -55,7 +54,7 @@ class HomeViewModel : ViewModel() {
 
     private fun getPostsTopToday() {
 
-        DateLoader.getRequestTopToday(
+        DataLoader.getRequestTopToday(
             HomeFragment.API_KEY, "1",
             object : FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
@@ -69,7 +68,7 @@ class HomeViewModel : ViewModel() {
 
     private fun getPostsPopular() {
 
-        DateLoader.getRequestPopular(
+        DataLoader.getRequestPopular(
             HomeFragment.API_KEY, "1",
 
             object :
@@ -86,7 +85,7 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun getPostsTopRated() {
-        DateLoader.getRequestTopRated(
+        DataLoader.getRequestTopRated(
             HomeFragment.API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
@@ -101,7 +100,7 @@ class HomeViewModel : ViewModel() {
 
 
     private fun getPostsUpComing() {
-        DateLoader.getRequestUpComing(
+        DataLoader.getRequestUpComing(
             HomeFragment.API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {

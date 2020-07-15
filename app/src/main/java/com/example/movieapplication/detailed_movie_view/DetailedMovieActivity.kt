@@ -16,7 +16,7 @@ import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultM
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
 import com.example.movieapplication.local_data_base.DatabaseBuilder.roomDB
 import com.example.movieapplication.local_data_base.RoomFavouriteMovieModel
-import com.example.movieapplication.network_https.DateLoader
+import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackCastBridge
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMovieTrailerByIDBridge
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesSearchByIDBridge
@@ -90,7 +90,7 @@ class DetailedMovieActivity : AppCompatActivity() {
     }
 
     private fun getPostsDetailedMovie(id: Int) {
-        DateLoader.getRequestedMovieByID(
+        DataLoader.getRequestedMovieByID(
             id, HomeFragment.API_KEY,
             object :
                 FutureCallbackMoviesSearchByIDBridge {
@@ -142,7 +142,7 @@ class DetailedMovieActivity : AppCompatActivity() {
 
 
     private fun getPostsDetailedCast(id: Int) {
-        DateLoader.getRequestedCastByID(id, HomeFragment.API_KEY, object :
+        DataLoader.getRequestedCastByID(id, HomeFragment.API_KEY, object :
             FutureCallbackCastBridge {
             override fun onResponseCastByID(response: MovieCastResponse) {
                 d("dfsdfsdf", response.toString())
@@ -170,7 +170,7 @@ class DetailedMovieActivity : AppCompatActivity() {
     }
 
     private fun getPostsDetailedTrailer(id: Int) {
-        DateLoader.getRequestedMovieTrailerByID(id, HomeFragment.API_KEY, object :
+        DataLoader.getRequestedMovieTrailerByID(id, HomeFragment.API_KEY, object :
             FutureCallbackMovieTrailerByIDBridge {
             override fun onResponseMovieTrailerByID(response: MovieTrailerModeByID) {
                 d("dfsdfhghffsdf", response.toString())

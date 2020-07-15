@@ -3,9 +3,11 @@ package com.example.movieapplication.splash_screen
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.MovieNavigationActivity
+import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -14,6 +16,8 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         supportActionBar?.hide()
+        animate()
+
     }
 
     private var runnable = Runnable {
@@ -41,5 +45,10 @@ class SplashScreenActivity : AppCompatActivity() {
         startActivity(intent)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
+    }
+
+    private fun animate(){
+        val rotate = AnimationUtils.loadAnimation(this, R.anim.rotate_animation)
+        imageView.animation = rotate
     }
 }

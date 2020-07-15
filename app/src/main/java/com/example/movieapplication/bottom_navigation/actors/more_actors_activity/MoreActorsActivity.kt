@@ -12,7 +12,7 @@ import com.example.movieapplication.bottom_navigation.actors.model.ActorsRespons
 import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.constants.Constants
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
-import com.example.movieapplication.network_https.DateLoader
+import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackActorsBridge
 import kotlinx.android.synthetic.main.activity_more_actors.*
 
@@ -64,7 +64,7 @@ class MoreActorsActivity : AppCompatActivity() {
     }
 
     private fun getAllActors() {
-        DateLoader.getPopularActors(pageCounter.toString(), Constants.API_KEY, object : FutureCallbackActorsBridge{
+        DataLoader.getPopularActors(pageCounter.toString(), Constants.API_KEY, object : FutureCallbackActorsBridge{
             override fun onResponseActor(responseModel: ActorsResponseModel) {
                 d("responsee", responseModel.toString())
                 actorsList.addAll( responseModel.results)

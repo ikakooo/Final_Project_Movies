@@ -12,11 +12,9 @@ import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
 import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
-import com.example.movieapplication.network_https.DateLoader
+import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
 import kotlinx.android.synthetic.main.activity_more_movies.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class MoreMoviesActivity : AppCompatActivity() {
     private var allMoviesList = mutableListOf<Movies>()
@@ -84,7 +82,7 @@ class MoreMoviesActivity : AppCompatActivity() {
 
 
     private fun getPostsTopToday(page:String) {
-        DateLoader.getRequestTopToday(
+        DataLoader.getRequestTopToday(
             HomeFragment.API_KEY, page,
             object : FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
@@ -97,7 +95,7 @@ class MoreMoviesActivity : AppCompatActivity() {
     }
     private fun getPostsPopular(page:String) {
 
-        DateLoader.getRequestPopular(
+        DataLoader.getRequestPopular(
             HomeFragment.API_KEY, page,
 
             object :
@@ -113,7 +111,7 @@ class MoreMoviesActivity : AppCompatActivity() {
         )
     }
     private fun getPostsTopRated(page:String) {
-        DateLoader.getRequestTopRated(
+        DataLoader.getRequestTopRated(
             HomeFragment.API_KEY, page,
             object :
                 FutureCallbackMoviesBridge {
@@ -127,7 +125,7 @@ class MoreMoviesActivity : AppCompatActivity() {
         )
     }
     private fun getPostsUpComing(page:String) {
-        DateLoader.getRequestUpComing(
+        DataLoader.getRequestUpComing(
             HomeFragment.API_KEY, page,
             object :
                 FutureCallbackMoviesBridge {

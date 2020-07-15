@@ -18,7 +18,7 @@ import com.example.movieapplication.bottom_navigation.search.models.SearchResult
 import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelResultList
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
-import com.example.movieapplication.network_https.DateLoader
+import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesSearchByNameBridge
 import com.example.movieapplication.tools.CustomTools
 import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
@@ -91,7 +91,7 @@ class SearchFragment : Fragment() {
     private fun getPostsMoviesSearchByName(movieNameString: String) {
 
 
-        DateLoader.getRequestSearchedMoviesByName(
+        DataLoader.getRequestSearchedMoviesByName(
             HomeFragment.API_KEY, movieNameString,
             object :
                 FutureCallbackMoviesSearchByNameBridge {
