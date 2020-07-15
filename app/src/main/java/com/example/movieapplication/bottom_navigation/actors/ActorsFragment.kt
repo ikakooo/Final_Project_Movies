@@ -35,16 +35,6 @@ class ActorsFragment : Fragment() {
         actorsViewModel = ViewModelProvider(this).get(ActorsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_actors, container, false)
         init(root)
-
-        if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
-            context?.let {
-                CustomTools.errorDialog(
-                    it,
-                    "No Internet Connection",
-                    "Please Connect The Internet"
-                )
-            }
-        }
         actorsViewModel.popularActorsLiveDataModel.observe(viewLifecycleOwner, Observer{
             actorsList.addAll(it)
             root.progressBarVisibilityID.isVisible = false

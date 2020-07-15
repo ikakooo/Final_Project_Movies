@@ -1,10 +1,8 @@
 package com.example.movieapplication.bottom_navigation
 
 import android.os.Bundle
-import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -13,7 +11,6 @@ import com.example.movieapplication.AppRoot
 import com.example.movieapplication.R
 import com.example.movieapplication.tools.CustomTools
 import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
-import kotlinx.android.synthetic.main.activity_movie_navigation.*
 
 class MovieNavigationActivity : AppCompatActivity() {
 
@@ -40,6 +37,8 @@ class MovieNavigationActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         supportActionBar?.hide()
-
+        if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
+                CustomTools.networkErrorDialog(this)
+        }
     }
 }

@@ -73,15 +73,6 @@ class SearchFragment : Fragment() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 getPostsMoviesSearchByName(p0.toString())
-                if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
-                    context?.let {
-                        CustomTools.errorDialog(
-                            it,
-                            "No Internet Connection",
-                            "Please Connect The Internet"
-                        )
-                    }
-                }
             }
 
         })

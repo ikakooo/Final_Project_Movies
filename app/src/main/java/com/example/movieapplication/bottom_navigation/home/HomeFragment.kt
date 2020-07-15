@@ -58,15 +58,7 @@ class HomeFragment : Fragment() {
 
         init(root)
         goToMoreMoviesOnClick(root)
-        if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
-            context?.let {
-                CustomTools.errorDialog(
-                    it,
-                    "No Internet Connection",
-                    "Please Connect The Internet"
-                )
-            }
-        }
+
         homeViewModel.topTodayMoviesLiveData.observe(viewLifecycleOwner, Observer {
             topTodayMoviesList.addAll(it)
             topTodayAdapter.notifyDataSetChanged()
