@@ -14,10 +14,11 @@ import kotlinx.android.synthetic.main.error_dialog_layout.*
 
 object CustomTools {
 
+        @Suppress("DEPRECATION")
         @JvmStatic
         fun Context.isConnectedToNetwork(): Boolean {
             val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-            return connectivityManager?.activeNetworkInfo?.isConnectedOrConnecting ?: false
+            return connectivityManager?.activeNetworkInfo?.isConnectedOrConnecting == true
         }
 
     fun errorDialog(context: Context, title: String, description: String) {
