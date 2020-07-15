@@ -15,6 +15,7 @@ import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
 import kotlinx.android.synthetic.main.activity_more_movies.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class MoreMoviesActivity : AppCompatActivity() {
@@ -40,7 +41,10 @@ class MoreMoviesActivity : AppCompatActivity() {
                     startActivity(intent)
                 }})
         MoreMoviesRecyclerviewID.layoutManager = GridLayoutManager(this, 2)
+        MoreMoviesRecyclerviewID.isNestedScrollingEnabled = true
+        MoreMoviesRecyclerviewID.setHasFixedSize(false)
         MoreMoviesRecyclerviewID.adapter = allMoviesAdapter
+
         dynamicHttpRequesting(pagesCountForAddingItems.toString())
         pagesCountForAddingItems++
 

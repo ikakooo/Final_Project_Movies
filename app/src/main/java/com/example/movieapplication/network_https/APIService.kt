@@ -2,7 +2,7 @@ package com.example.movieapplication.network_https
 
 import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
-import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
+import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelByName
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
 import com.example.movieapplication.detailed_movie_view.model.MovieTrailerModeByID
@@ -57,7 +57,7 @@ interface APIService {
     fun getSearchedMoviesByName(
         @Query("api_key") key : String,
         @Query("query") query : String
-    ) : Call<ByNameSearchResultModel>
+    ) : Call<SearchResultModelByName>
 
     @GET("3/movie/{id}/videos")
     fun getMovieTrailerByID(

@@ -35,12 +35,12 @@ class DetailedActorsActivity : AppCompatActivity() {
         DateLoader.getActorDetails(id, HomeFragment.API_KEY, object : FutureCallbackActorDetailsByIDBridge{
             override fun onResponseActorDetail(responseModel: ActorsResponseModel.Actor) {
                 d("jjakjakjka", responseModel.toString())
-                Glide.with(applicationContext).load(Constants.BASE_IMG_URL + responseModel.profile_path).into(actorImage)
-                nameTV.text = responseModel.name
-                ///val replaced = response.birthday.replace("-", "/")
-                birthdayTextView.text = responseModel.birthday.toString()
+                Glide.with(applicationContext).load(Constants.BASE_IMG_URL + responseModel.profile_path.toString()).into(actorImage)
+                nameTV.text = responseModel.name.toString()
+                val replaced = responseModel.birthday.toString().replace("-", "/")
+                birthdayTextView.text = replaced
                 actorPopularity.text = responseModel.popularity.toString()
-                biographyTextView.text = responseModel.biography
+                biographyTextView.text = responseModel.biography.toString()
 
             }
 

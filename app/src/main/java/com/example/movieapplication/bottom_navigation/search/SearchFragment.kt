@@ -11,14 +11,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.movieapplication.AppRoot
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.home.HomeFragment
-import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
+import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelByName
 import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelResultList
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesSearchByNameBridge
+import com.example.movieapplication.tools.CustomTools
+import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment() {
@@ -70,6 +73,15 @@ class SearchFragment : Fragment() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 getPostsMoviesSearchByName(p0.toString())
+                if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
+                    context?.let {
+                        CustomTools.errorDialog(
+                            it,
+                            "No Internet Connection",
+                            "Please Connect The Internet"
+                        )
+                    }
+                }
             }
 
         })
@@ -83,7 +95,7 @@ class SearchFragment : Fragment() {
             HomeFragment.API_KEY, movieNameString,
             object :
                 FutureCallbackMoviesSearchByNameBridge {
-                override fun onResponseSearchedByName(response: ByNameSearchResultModel) {
+                override fun onResponseSearchedByName(response: SearchResultModelByName) {
                     d("sffdjsdsdfdfgfsdfs", response.toString())
                     searchResultByNameMoviesList.clear()
                     (0 until (response.results?.size ?: 1)-1).forEach{

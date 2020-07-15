@@ -4,25 +4,47 @@ import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.movieapplication.AppRoot
 import com.example.movieapplication.network_https.DateLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
 import com.example.movieapplication.bottom_navigation.home.models.Movies
+import com.example.movieapplication.tools.CustomTools
+import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 
 class HomeViewModel : ViewModel() {
 
 
     private val _topTodayMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsTopToday()
+        if (AppRoot.instance.getContext().isConnectedToNetwork()){
+            getPostsTopToday()
+        }else{
+            d("cfvfdvvfvd","noooooooooooooooo")
+        }
+
+
     }
     private val _popularMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsPopular()
+
+        if (AppRoot.instance.getContext().isConnectedToNetwork()){
+            getPostsPopular()
+        }else{
+            d("cfvfdvvfvd","noooooooooooooooo")
+        }
     }
     private val _topRatedMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsTopRated()
+
+        if (AppRoot.instance.getContext().isConnectedToNetwork()){
+            getPostsTopRated()
+        }else{
+            d("cfvfdvvfvd","noooooooooooooooo")
+        }
     }
     private val _upComingMoviesLiveData = MutableLiveData<MutableList<Movies>>().apply {
-        getPostsUpComing()
+
+        if (AppRoot.instance.getContext().isConnectedToNetwork()){
+            getPostsUpComing()
+        }
     }
 
     val topTodayMoviesLiveData: LiveData<MutableList<Movies>> = _topTodayMoviesLiveData
@@ -32,6 +54,7 @@ class HomeViewModel : ViewModel() {
 
 
     private fun getPostsTopToday() {
+
         DateLoader.getRequestTopToday(
             HomeFragment.API_KEY, "1",
             object : FutureCallbackMoviesBridge {
@@ -84,7 +107,6 @@ class HomeViewModel : ViewModel() {
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _upComingMoviesLiveData.value = response.results.toMutableList()
-
                 }
 
                 override fun onFailure(error: String) {}

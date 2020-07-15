@@ -20,4 +20,6 @@
     <string name="title_actors">Actors</string>
     <string name="title_favourites">Favourites</string>
     <string name="top_20_actors">Top 20 Actors</string>
+    <string name="incorrect_request">Incorrect Request</string>
+    <string name="try_again">Try Again</string>
 </resources>

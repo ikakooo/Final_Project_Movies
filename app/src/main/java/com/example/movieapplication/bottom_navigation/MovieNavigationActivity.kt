@@ -9,7 +9,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.movieapplication.AppRoot
 import com.example.movieapplication.R
+import com.example.movieapplication.tools.CustomTools
+import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 import kotlinx.android.synthetic.main.activity_movie_navigation.*
 
 class MovieNavigationActivity : AppCompatActivity() {
@@ -37,7 +40,6 @@ class MovieNavigationActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         supportActionBar?.hide()
-
 
     }
 }

@@ -2,34 +2,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="top"
     android:background="@drawable/image_overlay"
+    android:gravity="top"
+    android:orientation="vertical"
     tools:context=".bottom_navigation.search.SearchFragment">
+
     <include layout="@layout/toolbar_layout" />
+
     <EditText
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:hint="@string/search_a_movie"
-        android:paddingStart="5dp"
-        android:textColorHint="@color/white"
-        android:textColor="@color/colorAccent"
-        android:paddingEnd="5dp"
         android:id="@+id/moviesSearchEditTextID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:textSize="20sp"
-        android:drawableEnd="@drawable/ic_search_24px"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:drawableEnd="@drawable/ic_search_24px"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/search_a_movie"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultRecyclerViewID"
-        android:layout_gravity="center"
-        android:padding="25dp"
-        android:foregroundGravity="center"
-        android:clipToPadding="false"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clipToPadding="false"
+        android:foregroundGravity="center"
+        android:padding="25dp" />
 
 
 </LinearLayout>

@@ -10,12 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.movieapplication.AppRoot
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.actors.adapter.ActorsAdapter
 import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
 import com.example.movieapplication.bottom_navigation.actors.more_actors_activity.MoreActorsActivity
 import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
+import com.example.movieapplication.tools.CustomTools
+import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 import kotlinx.android.synthetic.main.fragment_actors.view.*
 
 class ActorsFragment : Fragment() {
@@ -33,7 +36,15 @@ class ActorsFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_actors, container, false)
         init(root)
 
-
+        if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
+            context?.let {
+                CustomTools.errorDialog(
+                    it,
+                    "No Internet Connection",
+                    "Please Connect The Internet"
+                )
+            }
+        }
         actorsViewModel.popularActorsLiveDataModel.observe(viewLifecycleOwner, Observer{
             actorsList.addAll(it)
             root.progressBarVisibilityID.isVisible = false

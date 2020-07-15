@@ -4,7 +4,7 @@ package com.example.movieapplication.network_https
 import android.util.Log
 import android.util.Log.d
 import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
-import com.example.movieapplication.bottom_navigation.search.models.ByNameSearchResultModel
+import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelByName
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
 import com.example.movieapplication.constants.Constants.BASE_URL_MOVIES
@@ -172,14 +172,14 @@ object DateLoader {
         callback: FutureCallbackMoviesSearchByNameBridge
     ) {
         val call = service.getSearchedMoviesByName(key, movieNameString)
-        call.enqueue(object : Callback<ByNameSearchResultModel> {
-            override fun onFailure(call: Call<ByNameSearchResultModel>, t: Throwable) {
+        call.enqueue(object : Callback<SearchResultModelByName> {
+            override fun onFailure(call: Call<SearchResultModelByName>, t: Throwable) {
                 callback.onFailure(t.message.toString())
             }
 
             override fun onResponse(
-                call: Call<ByNameSearchResultModel>,
-                response: Response<ByNameSearchResultModel>
+                call: Call<SearchResultModelByName>,
+                response: Response<SearchResultModelByName>
             ) {
                 response.body()?.let { callback.onResponseSearchedByName(it) }
                 d("topRated", response.body().toString())

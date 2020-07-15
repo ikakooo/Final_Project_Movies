@@ -2,6 +2,7 @@ package com.example.movieapplication.bottom_navigation.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movieapplication.AppRoot
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.home.adapters.PopularAdapter
 import com.example.movieapplication.bottom_navigation.home.adapters.TopRatedAdapter
@@ -20,6 +22,8 @@ import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.bottom_navigation.home.more_movies_activity.MoreMoviesActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
+import com.example.movieapplication.tools.CustomTools
+import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -54,7 +58,15 @@ class HomeFragment : Fragment() {
 
         init(root)
         goToMoreMoviesOnClick(root)
-
+        if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
+            context?.let {
+                CustomTools.errorDialog(
+                    it,
+                    "No Internet Connection",
+                    "Please Connect The Internet"
+                )
+            }
+        }
         homeViewModel.topTodayMoviesLiveData.observe(viewLifecycleOwner, Observer {
             topTodayMoviesList.addAll(it)
             topTodayAdapter.notifyDataSetChanged()
@@ -81,7 +93,7 @@ class HomeFragment : Fragment() {
         })
 
         //progressBarID.isVisible = false
-
+       // if (CustomTools.PingGoogle())
         return root
     }
 
