@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.bottom_navigation.home.more_movies_activity.MoreMoviesActivity
+import kotlinx.android.synthetic.main.activity_movie_navigation.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -74,11 +76,12 @@ class HomeFragment : Fragment() {
         homeViewModel.upComingMoviesLiveData.observe(viewLifecycleOwner, Observer {
 
             upComingMoviesList.addAll(it)
+            root.progressBarID.isVisible = false
             upComingAdapter.notifyDataSetChanged()
 
         })
 
-
+        //progressBarID.isVisible = false
 
         return root
     }

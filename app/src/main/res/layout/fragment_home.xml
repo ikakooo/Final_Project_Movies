@@ -6,7 +6,21 @@
     android:orientation="vertical"
     tools:context=".bottom_navigation.home.HomeFragment">
     <include layout="@layout/toolbar_layout" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+
+    <ProgressBar
+        android:id="@+id/progressBarID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#00FFFFFF"
+        android:scaleX="0.40"
+        android:scaleY="0.40"
+        android:textColor="@color/colorAccent"
+        android:visibility="visible" />
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -195,6 +209,6 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
+    </FrameLayout>
 
 </LinearLayout>

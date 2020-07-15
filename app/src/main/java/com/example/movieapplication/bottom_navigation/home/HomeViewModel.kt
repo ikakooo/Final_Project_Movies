@@ -84,6 +84,7 @@ class HomeViewModel : ViewModel() {
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _upComingMoviesLiveData.value = response.results.toMutableList()
+
                 }
 
                 override fun onFailure(error: String) {}
