@@ -72,6 +72,7 @@ class DetailedMovieActivity : AppCompatActivity() {
         youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
 
+
                 val loader = object : Thread() {
                     override fun run() {
                         try {

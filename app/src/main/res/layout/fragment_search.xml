@@ -10,21 +10,24 @@
     <include layout="@layout/toolbar_layout" />
 
     <EditText
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:background="@drawable/edit_text_shape"
+        android:textAlignment="center"
         android:id="@+id/moviesSearchEditTextID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:drawableEnd="@drawable/ic_search_24px"
         android:ems="10"
-        android:gravity="center"
         android:hint="@string/search_a_movie"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/white"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="20sp"
+        tools:ignore="RtlCompat" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultRecyclerViewID"
