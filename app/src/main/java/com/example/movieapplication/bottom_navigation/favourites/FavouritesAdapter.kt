@@ -6,36 +6,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.constants.Constants.BASE_IMG_URL
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.local_data_base.RoomFavouriteMovieModel
-import kotlinx.android.synthetic.main.favourites_layout.view.*
 import kotlinx.android.synthetic.main.favourites_layout.view.moviesImageViewID
 import kotlinx.android.synthetic.main.favourites_layout.view.title
-import kotlinx.android.synthetic.main.items_layout.view.*
-
 
 class FavouritesAdapter(private val favourites: MutableList<RoomFavouriteMovieModel>, val detailedMovieListener: DetailedMovieListener) :
     RecyclerView.Adapter<FavouritesAdapter.ViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return favourites.size
-    }
+    override fun getItemCount(): Int = favourites.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
+    )
 
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
-        )
-    }
-
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        holder.onBind()
-
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.onBind()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
