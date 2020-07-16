@@ -18,26 +18,16 @@ class TopRatedAdapter(
 ) :
     RecyclerView.Adapter<TopRatedAdapter.ViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return topRatedMoviesList.size
-    }
+    override fun getItemCount(): Int = topRatedMoviesList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
-        )
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
+    )
 
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        holder.onBind()
-
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.onBind()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         private lateinit var model: Movies
 
         fun onBind() {
@@ -48,9 +38,6 @@ class TopRatedAdapter(
             itemView.setOnClickListener {
                 detailedMovieListener.detailedViewClick(adapterPosition)
             }
-
-
         }
-
     }
 }

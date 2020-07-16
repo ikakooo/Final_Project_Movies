@@ -28,24 +28,14 @@ class SearchFragment : Fragment() {
     private var searchResultByNameMoviesList = mutableListOf<SearchResultModelResultList>()
     private lateinit var searchResultByNameAdapter: SearchResultRecyclerViewAdapter
 
-    private lateinit var searchViewModel: SearchViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_search, container, false)
         init(root)
-
-//        searchViewModel.searchResultByNameMoviesLiveData.observe(viewLifecycleOwner, Observer {
-//
-////            searchResultByNameMoviesList.addAll(it)
-////            searchResultByNameAdapter.notifyDataSetChanged()
-//
-//        })
-
         return root
     }
 

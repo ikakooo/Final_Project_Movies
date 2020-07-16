@@ -49,7 +49,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     }
 
-    private fun animate(){
+    private fun animate() {
         val rotate = AnimationUtils.loadAnimation(this, R.anim.rotate_animation)
         imageView.animation = rotate
     }

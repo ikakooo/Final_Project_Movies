@@ -13,49 +13,39 @@ import com.example.movieapplication.network_https.futurecallbacks.FutureCallback
 import kotlinx.android.synthetic.main.activity_detailed_actors.*
 
 class DetailedActorsActivity : AppCompatActivity() {
-//    private val putExtrActor = intent.getStringExtra("putExtrActor")
-//
-//    private val profilePath = intent.getStringExtra("putExtraID")
-//    private val name = intent.getStringExtra("putExtraName")
-//    private val popularity = intent.getStringExtra("putExtraPopularity")
-//    private val birthday = intent.getStringExtra("putExtraBirthday")
-//    private val biography = intent.getStringExtra("putExtraBiography")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_actors)
         supportActionBar?.hide()
         getActorDetails()
-        //initView()
 
     }
-    private fun getActorDetails(){
+
+    private fun getActorDetails() {
         val id = intent.getStringExtra("id")!!.toInt()
-        DataLoader.getActorDetails(id, HomeFragment.API_KEY, object : FutureCallbackActorDetailsByIDBridge{
-            override fun onResponseActorDetail(responseModel: ActorsResponseModel.Actor) {
-                d("jjakjakjka", responseModel.toString())
-                Glide.with(applicationContext).load(Constants.BASE_IMG_URL + responseModel.profile_path.toString()).into(actorImage)
-                nameTV.text = responseModel.name.toString()
-                val replaced = responseModel.birthday.toString().replace("-", "/")
-                birthdayTextView.text = replaced
-                actorPopularity.text = responseModel.popularity.toString()
-                biographyTextView.text = responseModel.biography.toString()
+        DataLoader.getActorDetails(
+            id,
+            HomeFragment.API_KEY,
+            object : FutureCallbackActorDetailsByIDBridge {
+                override fun onResponseActorDetail(responseModel: ActorsResponseModel.Actor) {
+                    d("jjakjakjka", responseModel.toString())
+                    Glide.with(applicationContext)
+                        .load(Constants.BASE_IMG_URL + responseModel.profile_path.toString())
+                        .into(actorImage)
+                    nameTV.text = responseModel.name.toString()
+                    val replaced = responseModel.birthday.toString().replace("-", "/")
+                    birthdayTextView.text = replaced
+                    actorPopularity.text = responseModel.popularity.toString()
+                    biographyTextView.text = responseModel.biography.toString()
 
-            }
+                }
 
 
-            override fun onFailure(error: String) {
-               d("errorString", error)
-            }
-        })
-    }
-
-    private  fun initView(){
-//        Glide.with(applicationContext).load(Constants.BASE_IMG_URL + profilePath.toString()).into(actorImage)
-//        nameTV.text = name.toString()
-//        ///val replaced = response.birthday.replace("-", "/")
-//        birthdayTextView.text = birthday.toString()
-//        actorPopularity.text = popularity.toString()
-//        biographyTextView.text = biography.toString()
+                override fun onFailure(error: String) {
+                    d("errorString", error)
+                }
+            })
     }
 
 

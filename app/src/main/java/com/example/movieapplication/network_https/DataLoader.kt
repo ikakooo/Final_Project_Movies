@@ -1,7 +1,6 @@
 package com.example.movieapplication.network_https
 
 
-import android.util.Log
 import android.util.Log.d
 import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
 import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelByName
@@ -25,9 +24,6 @@ object DataLoader {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val service = retrofit.create(APIService::class.java)
-
-
-
 
 
     fun getRequestTopToday(
@@ -209,25 +205,28 @@ object DataLoader {
         })
     }
 
-   fun getActorDetails(id: Int, key: String, callbackActorDetailsByIDBridge:FutureCallbackActorDetailsByIDBridge){
-      val call = service.getActorDetails(id, key)
-      call.enqueue(object :Callback<ActorsResponseModel.Actor>{
-          override fun onFailure(call: Call<ActorsResponseModel.Actor>, t: Throwable) {
-              callbackActorDetailsByIDBridge.onFailure(t.message.toString())
-          }
+    fun getActorDetails(
+        id: Int,
+        key: String,
+        callbackActorDetailsByIDBridge: FutureCallbackActorDetailsByIDBridge
+    ) {
+        val call = service.getActorDetails(id, key)
+        call.enqueue(object : Callback<ActorsResponseModel.Actor> {
+            override fun onFailure(call: Call<ActorsResponseModel.Actor>, t: Throwable) {
+                callbackActorDetailsByIDBridge.onFailure(t.message.toString())
+            }
 
-          override fun onResponse(
-              call: Call<ActorsResponseModel.Actor>,
-              responseModel: Response<ActorsResponseModel.Actor>
-          ) {
-              responseModel.body()?.let { callbackActorDetailsByIDBridge.onResponseActorDetail(it)}
-              d("reslsklkslks", responseModel.toString())
-          }
+            override fun onResponse(
+                call: Call<ActorsResponseModel.Actor>,
+                responseModel: Response<ActorsResponseModel.Actor>
+            ) {
+                responseModel.body()
+                    ?.let { callbackActorDetailsByIDBridge.onResponseActorDetail(it) }
+                d("reslsklkslks", responseModel.toString())
+            }
 
-      })
-   }
-
-
+        })
+    }
 
 
     fun getRequestedMovieTrailerByID(
@@ -246,7 +245,7 @@ object DataLoader {
                 response: Response<MovieTrailerModeByID>
             ) {
                 response.body()?.let { callback.onResponseMovieTrailerByID(it) }
-                Log.d("topRsffeatedfbdfdava", response.body().toString())
+                d("ResponseBody", response.body().toString())
             }
         })
     }

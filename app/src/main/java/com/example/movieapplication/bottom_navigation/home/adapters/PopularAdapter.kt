@@ -11,35 +11,28 @@ import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.constants.Constants.BASE_IMG_URL
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class PopularAdapter(val popularMoviesList: MutableList<Movies>, val detailedMovieListener: DetailedMovieListener) :
+class PopularAdapter(
+    val popularMoviesList: MutableList<Movies>,
+    val detailedMovieListener: DetailedMovieListener
+) :
     RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return popularMoviesList.size
-    }
+    override fun getItemCount(): Int = popularMoviesList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
+    )
 
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
-        )
-    }
-
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        holder.onBind()
-
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.onBind()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         private lateinit var model: Movies
 
         fun onBind() {
             model = popularMoviesList[adapterPosition]
             itemView.title.text = model.original_title
-            Glide.with(itemView.context).load(BASE_IMG_URL + model.poster_path).into(itemView.moviesImageViewID)
+            Glide.with(itemView.context).load(BASE_IMG_URL + model.poster_path)
+                .into(itemView.moviesImageViewID)
             itemView.setOnClickListener {
                 detailedMovieListener.detailedViewClick(adapterPosition)
             }

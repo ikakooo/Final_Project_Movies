@@ -13,23 +13,13 @@ class CastAdapter(val castList: MutableList<MovieCastResponse.MovieCast>, val de
     RecyclerView.Adapter<CastAdapter.ViewHolder>() {
     val imgBaseURL = "https://image.tmdb.org/t/p/w780/"
 
-    override fun getItemCount(): Int {
-        return castList.size
-    }
+    override fun getItemCount(): Int = castList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
+    )
 
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
-        )
-    }
-
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        holder.onBind()
-
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.onBind()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
