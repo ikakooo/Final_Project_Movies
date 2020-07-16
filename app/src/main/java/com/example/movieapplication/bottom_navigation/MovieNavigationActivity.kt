@@ -1,16 +1,20 @@
 package com.example.movieapplication.bottom_navigation
 
+
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+
 import com.example.movieapplication.AppRoot
 import com.example.movieapplication.R
 import com.example.movieapplication.tools.CustomTools
 import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
+
 
 class MovieNavigationActivity : AppCompatActivity() {
 
@@ -38,7 +42,7 @@ class MovieNavigationActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         supportActionBar?.hide()
         if (!AppRoot.instance.getContext().isConnectedToNetwork()) {
-                CustomTools.networkErrorDialog(this)
+            CustomTools.networkErrorDialog(this)
         }
     }
 }

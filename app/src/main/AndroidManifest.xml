@@ -13,14 +13,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bottom_navigation.actors.more_actors_activity.MoreActorsActivity" />
-        <activity android:name=".bottom_navigation.home.more_movies_activity.MoreMoviesActivity" />
-        <activity android:name=".detailed_actors_view.DetailedActorsActivity" />
-        <activity android:name=".detailed_movie_view.DetailedMovieActivity" />
+        <activity
+            android:name=".bottom_navigation.actors.more_actors_activity.MoreActorsActivity"
+            android:configChanges="uiMode" />
+        <activity
+            android:name=".bottom_navigation.home.more_movies_activity.MoreMoviesActivity"
+            android:configChanges="uiMode" />
+        <activity
+            android:name=".detailed_actors_view.DetailedActorsActivity"
+            android:configChanges="uiMode" />
+        <activity
+            android:name=".detailed_movie_view.DetailedMovieActivity"
+            android:configChanges="uiMode" />
         <activity
             android:name=".bottom_navigation.MovieNavigationActivity"
+            android:configChanges="uiMode"
             android:label="@string/title_activity_movie_navigation" />
-        <activity android:name=".splash_screen.SplashScreenActivity">
+        <activity
+            android:name=".splash_screen.SplashScreenActivity"
+            android:configChanges="uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.movieapplication.splash_screen
 
 import android.content.Intent
@@ -28,7 +30,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        handler.postDelayed(runnable, 3000)
+        handler.postDelayed(runnable, 4000)
     }
 
     override fun onPause() {
