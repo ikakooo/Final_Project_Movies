@@ -6,8 +6,8 @@ import android.util.Log.d
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
-import com.example.movieapplication.bottom_navigation.home.HomeFragment
 import com.example.movieapplication.constants.Constants
+import com.example.movieapplication.constants.Constants.API_KEY
 import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackActorDetailsByIDBridge
 import kotlinx.android.synthetic.main.activity_detailed_actors.*
@@ -26,7 +26,7 @@ class DetailedActorsActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")!!.toInt()
         DataLoader.getActorDetails(
             id,
-            HomeFragment.API_KEY,
+            API_KEY,
             object : FutureCallbackActorDetailsByIDBridge {
                 override fun onResponseActorDetail(responseModel: ActorsResponseModel.Actor) {
                     d("jjakjakjka", responseModel.toString())

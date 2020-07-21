@@ -10,6 +10,7 @@ import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.home.HomeFragment
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
 import com.example.movieapplication.bottom_navigation.home.models.Movies
+import com.example.movieapplication.constants.Constants.API_KEY
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DataLoader
@@ -83,7 +84,7 @@ class MoreMoviesActivity : AppCompatActivity() {
 
     private fun getPostsTopToday(page:String) {
         DataLoader.getRequestTopToday(
-            HomeFragment.API_KEY, page,
+            API_KEY, page,
             object : FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     d("jfkefjerfjerk", response.results.toString())
@@ -96,7 +97,7 @@ class MoreMoviesActivity : AppCompatActivity() {
     private fun getPostsPopular(page:String) {
 
         DataLoader.getRequestPopular(
-            HomeFragment.API_KEY, page,
+            API_KEY, page,
 
             object :
                 FutureCallbackMoviesBridge {
@@ -112,7 +113,7 @@ class MoreMoviesActivity : AppCompatActivity() {
     }
     private fun getPostsTopRated(page:String) {
         DataLoader.getRequestTopRated(
-            HomeFragment.API_KEY, page,
+            API_KEY, page,
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
@@ -126,7 +127,7 @@ class MoreMoviesActivity : AppCompatActivity() {
     }
     private fun getPostsUpComing(page:String) {
         DataLoader.getRequestUpComing(
-            HomeFragment.API_KEY, page,
+            API_KEY, page,
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {

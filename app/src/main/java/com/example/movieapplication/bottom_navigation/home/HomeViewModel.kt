@@ -9,6 +9,7 @@ import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesBridge
 import com.example.movieapplication.bottom_navigation.home.models.MainMovieModel
 import com.example.movieapplication.bottom_navigation.home.models.Movies
+import com.example.movieapplication.constants.Constants.API_KEY
 import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 
 class HomeViewModel : ViewModel() {
@@ -55,7 +56,7 @@ class HomeViewModel : ViewModel() {
     private fun getPostsTopToday() {
 
         DataLoader.getRequestTopToday(
-            HomeFragment.API_KEY, "1",
+            API_KEY, "1",
             object : FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
                     _topTodayMoviesLiveData.value = response.results.toMutableList()
@@ -69,7 +70,7 @@ class HomeViewModel : ViewModel() {
     private fun getPostsPopular() {
 
         DataLoader.getRequestPopular(
-            HomeFragment.API_KEY, "1",
+            API_KEY, "1",
 
             object :
                 FutureCallbackMoviesBridge {
@@ -86,7 +87,7 @@ class HomeViewModel : ViewModel() {
 
     private fun getPostsTopRated() {
         DataLoader.getRequestTopRated(
-            HomeFragment.API_KEY, "1",
+            API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {
@@ -101,7 +102,7 @@ class HomeViewModel : ViewModel() {
 
     private fun getPostsUpComing() {
         DataLoader.getRequestUpComing(
-            HomeFragment.API_KEY, "1",
+            API_KEY, "1",
             object :
                 FutureCallbackMoviesBridge {
                 override fun onResponse(response: MainMovieModel) {

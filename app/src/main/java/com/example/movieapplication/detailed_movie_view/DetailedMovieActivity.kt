@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapplication.R
 import com.example.movieapplication.bottom_navigation.home.HomeFragment
+import com.example.movieapplication.constants.Constants.API_KEY
 import com.example.movieapplication.detailed_actors_view.DetailedActorsActivity
 import com.example.movieapplication.detailed_movie_view.model.MovieCastResponse
 import com.example.movieapplication.detailed_movie_view.model.MovieSearchResultModelByID
@@ -92,7 +93,7 @@ class DetailedMovieActivity : AppCompatActivity() {
 
     private fun getPostsDetailedMovie(id: Int) {
         DataLoader.getRequestedMovieByID(
-            id, HomeFragment.API_KEY,
+            id, API_KEY,
             object :
                 FutureCallbackMoviesSearchByIDBridge {
                 @SuppressLint("SetTextI18n")
@@ -143,7 +144,7 @@ class DetailedMovieActivity : AppCompatActivity() {
 
 
     private fun getPostsDetailedCast(id: Int) {
-        DataLoader.getRequestedCastByID(id, HomeFragment.API_KEY, object :
+        DataLoader.getRequestedCastByID(id, API_KEY, object :
             FutureCallbackCastBridge {
             override fun onResponseCastByID(response: MovieCastResponse) {
                 d("dfsdfsdf", response.toString())
@@ -171,7 +172,7 @@ class DetailedMovieActivity : AppCompatActivity() {
     }
 
     private fun getPostsDetailedTrailer(id: Int) {
-        DataLoader.getRequestedMovieTrailerByID(id, HomeFragment.API_KEY, object :
+        DataLoader.getRequestedMovieTrailerByID(id, API_KEY, object :
             FutureCallbackMovieTrailerByIDBridge {
             override fun onResponseMovieTrailerByID(response: MovieTrailerModeByID) {
                 d("dfsdfhghffsdf", response.toString())

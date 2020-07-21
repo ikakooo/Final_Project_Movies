@@ -9,19 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movieapplication.AppRoot
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.home.HomeFragment
 import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelByName
 import com.example.movieapplication.bottom_navigation.search.models.SearchResultModelResultList
+import com.example.movieapplication.constants.Constants.API_KEY
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieListener
 import com.example.movieapplication.network_https.DataLoader
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackMoviesSearchByNameBridge
-import com.example.movieapplication.tools.CustomTools
-import com.example.movieapplication.tools.CustomTools.isConnectedToNetwork
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : Fragment() {
@@ -73,7 +69,7 @@ class SearchFragment : Fragment() {
 
 
         DataLoader.getRequestSearchedMoviesByName(
-            HomeFragment.API_KEY, movieNameString,
+            API_KEY, movieNameString,
             object :
                 FutureCallbackMoviesSearchByNameBridge {
                 override fun onResponseSearchedByName(response: SearchResultModelByName) {

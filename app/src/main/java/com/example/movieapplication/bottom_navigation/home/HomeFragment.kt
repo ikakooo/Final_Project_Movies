@@ -38,9 +38,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
 
-    companion object {
-        const val API_KEY = "22c64b1eb2954257036c84ed667c4109"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

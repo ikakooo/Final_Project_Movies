@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieapplication.bottom_navigation.actors.model.ActorsResponseModel
 import com.example.movieapplication.bottom_navigation.home.HomeFragment
+import com.example.movieapplication.constants.Constants.API_KEY
 import com.example.movieapplication.network_https.futurecallbacks.FutureCallbackActorsBridge
 import com.example.movieapplication.network_https.DataLoader
 
@@ -21,7 +22,7 @@ class ActorsViewModel : ViewModel() {
     val popularActorsLiveDataModel:LiveData<MutableList<ActorsResponseModel.Actor>> = _popularActorsLiveData
 
     private fun getPopularActors(page:String){
-        DataLoader.getPopularActors(page, HomeFragment.API_KEY, object :
+        DataLoader.getPopularActors(page, API_KEY, object :
             FutureCallbackActorsBridge {
             override fun onResponseActor(responseModel: ActorsResponseModel) {
                 d("successResponse", responseModel.toString())
