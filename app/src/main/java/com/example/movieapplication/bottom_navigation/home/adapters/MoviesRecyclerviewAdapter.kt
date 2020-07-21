@@ -11,13 +11,13 @@ import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.constants.Constants.BASE_IMG_URL
 import kotlinx.android.synthetic.main.items_layout.view.*
 
-class PopularAdapter(
-    val popularMoviesList: MutableList<Movies>,
+class MoviesRecyclerviewAdapter(
+    val MoviesList: MutableList<Movies>,
     val detailedMovieListener: DetailedMovieListener
 ) :
-    RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
+    RecyclerView.Adapter<MoviesRecyclerviewAdapter.ViewHolder>() {
 
-    override fun getItemCount(): Int = popularMoviesList.size
+    override fun getItemCount(): Int = MoviesList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
@@ -29,14 +29,13 @@ class PopularAdapter(
         private lateinit var model: Movies
 
         fun onBind() {
-            model = popularMoviesList[adapterPosition]
+            model = MoviesList[adapterPosition]
             itemView.title.text = model.original_title
             Glide.with(itemView.context).load(BASE_IMG_URL + model.poster_path)
                 .into(itemView.moviesImageViewID)
             itemView.setOnClickListener {
                 detailedMovieListener.detailedViewClick(adapterPosition)
             }
-
         }
 
     }

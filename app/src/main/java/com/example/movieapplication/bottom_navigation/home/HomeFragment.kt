@@ -12,10 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieapplication.R
-import com.example.movieapplication.bottom_navigation.home.adapters.PopularAdapter
-import com.example.movieapplication.bottom_navigation.home.adapters.TopRatedAdapter
-import com.example.movieapplication.bottom_navigation.home.adapters.TopTodayAdapter
-import com.example.movieapplication.bottom_navigation.home.adapters.UpcomingAdapter
+import com.example.movieapplication.bottom_navigation.home.adapters.MoviesRecyclerviewAdapter
 import com.example.movieapplication.bottom_navigation.home.models.Movies
 import com.example.movieapplication.bottom_navigation.home.more_movies_activity.MoreMoviesActivity
 import com.example.movieapplication.detailed_movie_view.DetailedMovieActivity
@@ -25,16 +22,16 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 class HomeFragment : Fragment() {
 
     private var topTodayMoviesList = mutableListOf<Movies>()
-    private lateinit var topTodayAdapter: TopTodayAdapter
+    private lateinit var moviesRecyclerviewAdapter: MoviesRecyclerviewAdapter
 
     private var popularMoviesList = mutableListOf<Movies>()
-    private lateinit var popularAdapter: PopularAdapter
+    private lateinit var popularAdapter: MoviesRecyclerviewAdapter
 
     private var topRatedMoviesList = mutableListOf<Movies>()
-    private lateinit var topRatedAdapter: TopRatedAdapter
+    private lateinit var topRatedAdapter: MoviesRecyclerviewAdapter
 
     private var upComingMoviesList = mutableListOf<Movies>()
-    private lateinit var upComingAdapter: UpcomingAdapter
+    private lateinit var upComingAdapter: MoviesRecyclerviewAdapter
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -54,7 +51,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.topTodayMoviesLiveData.observe(viewLifecycleOwner, Observer {
             topTodayMoviesList.addAll(it)
-            topTodayAdapter.notifyDataSetChanged()
+            moviesRecyclerviewAdapter.notifyDataSetChanged()
         })
 
         homeViewModel.popularMoviesLiveData.observe(viewLifecycleOwner, Observer {
@@ -82,8 +79,8 @@ class HomeFragment : Fragment() {
 
     private fun init(root: View) {
         /////////////////////////////////////////////////////////
-        topTodayAdapter =
-            TopTodayAdapter(
+        moviesRecyclerviewAdapter =
+            MoviesRecyclerviewAdapter(
                 topTodayMoviesList,
                 object : DetailedMovieListener {
                     override fun detailedViewClick(position: Int) {
@@ -99,9 +96,9 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         root.topTodayRecyclerView.isNestedScrollingEnabled = true
         root.topTodayRecyclerView.setHasFixedSize(false)
-        root.topTodayRecyclerView.adapter = topTodayAdapter
+        root.topTodayRecyclerView.adapter = moviesRecyclerviewAdapter
 /////////////////////////////////////////////////////////////////////////////////////////////////
-        topRatedAdapter = TopRatedAdapter(topRatedMoviesList, object : DetailedMovieListener {
+        topRatedAdapter = MoviesRecyclerviewAdapter(topRatedMoviesList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val topRatedMovie = topRatedMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
@@ -117,7 +114,7 @@ class HomeFragment : Fragment() {
         root.topRatedRecyclerView.setHasFixedSize(false)
         root.topRatedRecyclerView.adapter = topRatedAdapter
 ///////////////////////////////////////////////////////////////////////////////////////////
-        popularAdapter = PopularAdapter(popularMoviesList, object : DetailedMovieListener {
+        popularAdapter = MoviesRecyclerviewAdapter(popularMoviesList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val popularMovie = popularMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
@@ -133,7 +130,7 @@ class HomeFragment : Fragment() {
         root.popularRecyclerView.setHasFixedSize(false)
         root.popularRecyclerView.adapter = popularAdapter
 ////////////////////////////////////////////////////////////////////////////
-        upComingAdapter = UpcomingAdapter(upComingMoviesList, object : DetailedMovieListener {
+        upComingAdapter = MoviesRecyclerviewAdapter(upComingMoviesList, object : DetailedMovieListener {
             override fun detailedViewClick(position: Int) {
                 val upcomingMovie = upComingMoviesList[position]
                 val intent = Intent(context, DetailedMovieActivity::class.java)
